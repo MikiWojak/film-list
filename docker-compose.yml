@@ -9,6 +9,7 @@ services:
       - "8080:80"
     volumes:
       - .:/app/
+    # Dependencies between containers
     links:
       - php
     networks:
@@ -28,7 +29,7 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
     volumes:
-      - .:/app
+      - .:/app/
     networks:
       - pg-network
 
