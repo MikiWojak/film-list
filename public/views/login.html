@@ -30,11 +30,31 @@
                 <h1 class="logo__text">Film Rate</h1>
             </div>
 
-            <form class="flex-column-center-center">
-                <input type="email" placeholder="email" />
-                <input type="password" placeholder="password" />
+            <form class="flex-column-center-center form">
+                <div class="form__input">
+                    <label for="email">Email</label>
+                    <input
+                        id="email"
+                        placeholder="email"
+                        class="form__input__text"
+                    />
+                </div>
 
-                <button type="submit">Login</button>
+                <div class="form__input">
+                    <label for="password">Password</label>
+                    <input
+                        id="email"
+                        type="password"
+                        placeholder="password"
+                        class="form__input__text"
+                    />
+                </div>
+
+                <button type="submit" class="form__submit"> Login </button>
+
+                <span class="form_redirect">
+                    Don’t have an account? <a href="#">Sign up</a>
+                </span>
             </form>
         </div>
     </body>
