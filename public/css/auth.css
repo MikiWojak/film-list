@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    text-align: center;
+}
+
+.logo__image {
+    font-size: 15.625em;
+}
+
+.logo__text {
+    font-size: 2.5em;
+    letter-spacing: 5%;
+}
