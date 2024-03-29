@@ -1,0 +1,39 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5A189A;
+    padding: 1em;
+
+    box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.header__logo {
+    gap: 0.5em
+}
+
+.header__logo__image {
+    font-size: 32px;
+
+    @media only screen and (min-device-width: 768px) {
+        font-size: 40px;
+    }
+}
+
+.header__logo__text {
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: 5%;
+
+    @media only screen and (min-device-width: 768px) {
+        font-size: 32px;
+    }
+}
+
+.header__login__icon {
+    font-size: 40px;
+
+    @media only screen and (max-device-width: 767px) {
+        display: none;
+    }
+}
