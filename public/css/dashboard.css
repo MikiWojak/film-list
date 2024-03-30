@@ -1,10 +1,19 @@
 .container {
+    margin-top: calc(32px + 2em);
+
     padding: 1.5em;
 
     @media only screen and (min-device-width: 768px) {
         max-width: 1000px;
-        margin: 0 auto;
+        margin-top: calc(40px + 2em);
+        margin-left: auto;
+        margin-right: auto;
     }
+}
+
+.film {
+    display: flex;
+    flex-direction: column;
 }
 
 .film_list {
@@ -29,6 +38,8 @@
 }
 
 .film__bottom {
+    margin-top: auto;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
