@@ -44,3 +44,47 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.film__bottom__general-rate,
+.film__bottom__user-rate {
+    gap: 0.5em;
+}
+
+.search--desktop {
+    margin-bottom: 1.5em;
+    gap: 0.5em;
+
+    @media only screen and (max-device-width: 767px) {
+        display: none;
+    }
+}
+
+
+.search__form {
+    gap: 0.5em;
+}
+
+.search__form {
+    width: 50%;
+}
+
+.search__rated-btn,
+.search__form__submit {
+    background: transparent;
+    padding: 0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search__rated-btn > span,
+.search__form__submit > span {
+    font-size: 3em;
+} 
+
+.search__rated-btn > .star:hover {
+    color: #f4cf3e;
+}
+
+.search__form__submit:hover {
+    color: #dee2e6;
+}

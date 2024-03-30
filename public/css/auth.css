@@ -38,19 +38,6 @@
     width: 100%;
 }
 
-.form__input__text,
-.form__submit {
-    width: 100%;
-    padding: 1em;
-    box-sizing: border-box;
-    border-radius: 1em;
-}
-
-.form__input__text {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset,
-        rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
-}
-
 .form__submit {
     color: #fff;
     font-weight: 700;

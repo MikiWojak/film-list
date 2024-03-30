@@ -1,3 +1,16 @@
+.input__text,
+.form__submit {
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 1em;
+}
+
+.input__text {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset,
+        rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
+}
+
 .header {
     width: calc(100% - 2em);
     display: flex;
