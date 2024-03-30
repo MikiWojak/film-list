@@ -64,3 +64,26 @@
 .star {
     color: #F7DD72;
 }
+
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    width: 100%;
+    height: calc(80px - 1em);
+    background-color: #fff;
+    padding-top: 1em;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    @media only screen and (min-device-width: 768px) {
+        display: none;
+    }
+}
+
+.tab-bar__option {
+    background-color: transparent;
+}
