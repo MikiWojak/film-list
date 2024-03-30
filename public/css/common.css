@@ -55,6 +55,11 @@
     }
 }
 
+.header__login {
+    color: #fff;
+    text-decoration: none;
+}
+
 .header__login__icon {
     font-size: 40px;
 
