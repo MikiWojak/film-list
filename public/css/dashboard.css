@@ -20,5 +20,16 @@
 
 .film__poster {
     width: 100%;
+    border-radius: 1em;
 }
 
+.film__title {
+    text-align: center;
+    font-size: 1em;
+}
+
+.film__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
