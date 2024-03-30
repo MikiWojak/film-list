@@ -1,12 +1,13 @@
 .container {
     margin-top: calc(32px + 2em);
 
-    padding: 1.5em;
+    padding: 1.5em 1em;
+    padding-bottom: calc(80px + 1.5em);
 
     @media only screen and (min-device-width: 768px) {
         max-width: 1000px;
         margin-top: calc(40px + 2em);
-        margin-bottom: 0;
+        padding-bottom: 1.5em;
         margin-left: auto;
         margin-right: auto;
     }
