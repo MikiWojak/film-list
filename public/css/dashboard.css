@@ -90,3 +90,39 @@
 .search__form__submit:hover {
     color: #dee2e6;
 }
+
+
+
+.title {
+    font-size: 32px;
+    text-align: center;
+}
+
+.film-info {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.film-info_poster {
+    display: block;
+    width: 100%;
+}
+
+.film-info_rate {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.tag_list {
+    gap: 0.5em;
+}
+
+.tag {
+    padding: 0.5em 1em;
+    border-radius: 100px;
+}
+
+.film_desctiption {
+    margin-top: 1em;
+}

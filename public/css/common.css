@@ -98,3 +98,13 @@
     color: #000;
     text-decoration: none;
 }
+
+.back {
+    color: #E0AAFF;
+    text-decoration: none;
+}
+
+
+.back:hover {
+    color: #7b2cbf;
+}
