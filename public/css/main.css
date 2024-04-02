@@ -2,6 +2,7 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
+    max-width: 100%;
     background-color: #343a40;
 
     color: #fff;
@@ -32,4 +33,9 @@ input {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+.film__bottom__general-rate,
+.film__bottom__user-rate {
+    gap: 0.5em;
 }
