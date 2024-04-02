@@ -21,11 +21,6 @@
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-.film__bottom__general-rate,
-.film__bottom__user-rate {
-    gap: 0.5em;
-}
-
 .input__text,
 .form__submit {
     width: 100%;
