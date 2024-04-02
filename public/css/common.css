@@ -105,13 +105,10 @@
 }
 
 .desktop-only {
-    display: none;
-    
-    @media only screen and (min-device-width: 768px) {
-        display: block;
+    @media only screen and (max-device-width: 767px) {
+        display: none;
     }
 }
-
 
 .back:hover {
     color: #7b2cbf;
