@@ -120,6 +120,7 @@
 .film-info__poster--img {
     display: block;
     width: 100%;
+    border-radius: 1em;
 }
 
 .film-info__details {
