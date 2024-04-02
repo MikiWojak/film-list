@@ -3,7 +3,7 @@ body {
     height: 100vh;
 }
 
-.container {
+.auth-container {
     display: flex;
     gap: 4em;
     flex-direction: column;
