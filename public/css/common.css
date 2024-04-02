@@ -76,7 +76,7 @@
 .header__logo__text {
     margin: 0;
     font-size: 24px;
-    letter-spacing: 5%;
+    letter-spacing: 0.05em;
 
     @media only screen and (min-device-width: 768px) {
         font-size: 32px;
