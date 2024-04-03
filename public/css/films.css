@@ -50,15 +50,6 @@
     -webkit-box-orient: vertical;
 }
 
-.film__title > a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.film__title > a:hover {
-    color: #dee2e6;
-}
-
 .film__bottom {
     height: 33.3%;
 
@@ -105,7 +96,6 @@
 .search__form__submit {
     background: transparent;
     padding: 0;
-    color: #fff;
     cursor: pointer;
 }
 
@@ -116,10 +106,6 @@
 
 .search__rated-btn > .star:hover {
     color: #f4cf3e;
-}
-
-.search__form__submit:hover {
-    color: #dee2e6;
 }
 
 
