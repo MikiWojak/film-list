@@ -34,6 +34,10 @@
     width: 100%;
     object-fit: cover;
     border-radius: 1em;
+
+    @media only screen and (min-device-width: 992px) {
+        height: 75%;
+    }
 }
 
 .film__title {
@@ -46,6 +50,15 @@
     -webkit-box-orient: vertical;
 }
 
+.film__title > a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.film__title > a:hover {
+    color: #dee2e6;
+}
+
 .film__bottom {
     height: 33.3%;
 
@@ -53,6 +66,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
+    @media only screen and (min-device-width: 992px) {
+        height: 25%;
+    }
 }
 
 .film__bottom__rate-section {
