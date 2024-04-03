@@ -2,12 +2,9 @@
     display: flex;
 
     margin-top: calc(32px + 2em);
-    padding: 1.5em 1em;
-    padding-bottom: calc(80px + 1.5em);
 
     @media only screen and (min-device-width: 768px) {
         margin-top: calc(40px + 2em);
-        padding-bottom: 1.5em;
     }
 }
 
@@ -23,10 +20,11 @@
     background-color: #7B2CBF;
 
     @media only screen and (min-device-width: 768px) {
+        height: calc(100vh - 40px - 2em);
         position: static;
         top: unset;
         left: unset;
-        width: 25px;
+        width: 20%;
     }
 }
 
@@ -50,8 +48,13 @@
     border-bottom: 1px solid #fff;
 }
 
+.navbar > ul > li > a:hover {
+    background-color: #5A189A;
+}
+
 .content {
     width: 100%;
+    padding: 1.5em 1em;
 }
 
 .content.navbar--enabled {
@@ -64,7 +67,7 @@
     }
 
     @media only screen and (min-device-width: 768px) {
-        width: 75%;
+        width: 80%;
     }
 }
 
