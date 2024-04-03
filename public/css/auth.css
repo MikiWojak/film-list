@@ -1,4 +1,9 @@
-.container {
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.auth-container {
     display: flex;
     gap: 4em;
     flex-direction: column;
@@ -28,7 +33,7 @@
 .logo__text {
     margin: 0;
     font-size: 2.5em;
-    letter-spacing: 5%;
+    letter-spacing: 0.05em;
 }
 
 .form {

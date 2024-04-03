@@ -19,7 +19,7 @@
 
         <link rel="stylesheet" type="text/css" href="public/css/main.css" />
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
-        <link rel="stylesheet" type="text/css" href="public/css/dashboard.css" />
+        <link rel="stylesheet" type="text/css" href="public/css/films.css" />
     </head>
     <body>
         <header class="header">
@@ -37,7 +37,7 @@
             </a>
         </header>
 
-        <div class="container">
+        <div class="film-container">
             <div class="flex-row-center-center search--desktop">
                 <button class="search__rated-btn">
                     <span class="material-symbols-outlined star">
@@ -49,7 +49,7 @@
                         type="text"
                         placeholder="Search"
                         class="input__text search__form__text">
-                    <button class="search__form__submit">
+                    <button class="search__form__submit white_link">
                         <span class="material-symbols-outlined">
                             search
                         </span>
@@ -57,191 +57,239 @@
                 </form>
             </div>
 
-            <div class="film_list">
-                <div class="flex film">
+            <main class="film_list">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/Saving_Private_Ryan.jpg" alt="Poster">
-
-                    <h2 class="film__title">Saving Private Ryan</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                Saving Private Ryan
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>8.9</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>8.9</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="flex film">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/Howls_Moving_Castle.jpg" alt="Poster">
-
-                    <h2 class="film__title">Howl’s Moving Castle</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                Howl’s Moving Castle
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>8.1</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>8.1</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="flex film">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/Monthy_Python_Holy_Grail.jpg" alt="Poster">
-
-                    <h2 class="film__title">Monty Python and the Holy Grail</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                Monty Python and the Holy Grail
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>8.6</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>8.6</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="flex film">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/Jestes_Bogiem.jpg" alt="Poster">
-
-                    <h2 class="film__title">Jesteś Bogiem</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                Jesteś Bogiem
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>7.3</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>7.3</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="flex film">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/LOTR_Part_1.jpg" alt="Poster">
-
-                    <h2 class="film__title">The Lord of the Rings: The Fellowship of the Ring</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                The Lord of the Rings: The Fellowship of the Ring
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>9.1</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>9.1</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="flex film">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/Chlopaki_Nie_Placza.jpg" alt="Poster">
-
-                    <h2 class="film__title">Chłopaki nie płaczą</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                Chłopaki nie płaczą
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>7.3</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>7.3</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="flex film">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/Macross_DYRL.jpg" alt="Poster">
-
-                    <h2 class="film__title">Macross: Do You Remember Love?</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                Macross: Do You Remember Love?
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>8.2</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>8.2</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="flex film">
+                <section class="flex film">
                     <img class="film__poster" src="public/img/Karbala.jpg" alt="Poster">
-
-                    <h2 class="film__title">Karbala</h2>
-
+                    
                     <div class="film__bottom">
-                        <div class="flex-row-center-center film__bottom__general-rate">
-                            <span class="material-symbols-outlined star">
-                                star_rate
-                            </span>
+                        <h2 class="film__title">
+                            <a href="/single-film" class="white_link">
+                                Karbala
+                            </a>
+                        </h2>
+                        
+                        <div class="film__bottom__rate-section">
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star_rate
+                                </span>
 
-                            <span>8.0</span>
-                        </div>
-                        <div class="flex-row-center-center  film__bottom__user-rate">
-                            <span class="material-symbols-outlined star">
-                                star
-                            </span>
+                                <span>8.0</span>
+                            </div>
+                            <div class="flex-row-center-center film__rate">
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                            <span>Rate</span>
+                                <span>Rate</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </section>
+            </main>
         </div>
 
         <div class="tab-bar">
