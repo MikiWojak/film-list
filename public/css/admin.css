@@ -1,0 +1,14 @@
+.admin-container {
+    display: flex;
+}
+
+.navbar {
+    width: 25%;
+
+    @media only screen and (min-device-width: 768px) {
+        
+    }
+}
+
+.content {
+}
