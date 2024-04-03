@@ -54,18 +54,28 @@
     }
 }
 
+.header_left {
+    gap: 0.5em;
+}
+
 .header__logo {
     gap: 0.5em;
     color: #fff;
     text-decoration: none;
 }
 
+.header_menu,
 .header__logo__image {
-    font-size: 32px;
+    font-size: 2em;
 
     @media only screen and (min-device-width: 768px) {
-        font-size: 40px;
+        font-size: 2.5em;
     }
+}
+
+.header_menu {
+    color: #fff;
+    cursor: pointer;
 }
 
 .header__logo__text {
@@ -84,7 +94,7 @@
 }
 
 .header__login__icon {
-    font-size: 40px;
+    font-size: 2.5em;
 
     @media only screen and (max-device-width: 767px) {
         display: none;
@@ -144,4 +154,10 @@
 
 .white_link:hover {
     color: #dee2e6;
+}
+
+.btn_reset {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
 }
