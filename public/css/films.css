@@ -71,7 +71,8 @@
 }
 
 .film__rate,
-.film__rate {
+.search__form,
+.tag_list {
     gap: 0.5em;
 }
 
@@ -82,10 +83,6 @@
     @media only screen and (max-device-width: 767px) {
         display: none;
     }
-}
-
-.search__form {
-    gap: 0.5em;
 }
 
 .search__form {
@@ -107,8 +104,6 @@
 .search__rated-btn > .star:hover {
     color: #f4cf3e;
 }
-
-
 
 .title {
     font-size: 32px;
@@ -157,10 +152,6 @@
         flex-direction: column;
         align-items: start;
     }
-}
-
-.tag_list {
-    gap: 0.5em;
 }
 
 .tag {
