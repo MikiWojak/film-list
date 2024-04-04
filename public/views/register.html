@@ -32,6 +32,15 @@
 
             <form class="flex-column-center-center form">
                 <div class="form__input">
+                    <label for="username">Username</label>
+                    <input
+                        id="username"
+                        placeholder="Username"
+                        class="input__text"
+                    />
+                </div>
+
+                <div class="form__input">
                     <label for="email">Email</label>
                     <input
                         id="email"
@@ -46,16 +55,26 @@
                     <input
                         id="email"
                         type="password"
-                        placeholder="Your password"
+                        placeholder="Password"
                         class="input__text"
                     />
                 </div>
 
-                <button type="submit" class="btn--reset btn btn--purple form__submit"> Login </button>
+                <div class="form__input">
+                    <label for="password">Confirm password</label>
+                    <input
+                        id="email"
+                        type="password"
+                        placeholder="Confirm password"
+                        class="input__text"
+                    />
+                </div>
+
+                <button type="submit" class="btn--reset btn btn--purple form__submit"> Register </button>
 
                 <!-- // @TODO Link to Register -->
                 <span class="form_redirect">
-                    Don’t have an account? <a href="/register">Register</a>
+                    Already have an account? <a href="/login">Login</a>
                 </span>
             </form>
         </div>
