@@ -176,37 +176,28 @@
     background-color: transparent;
 }
 
-.btn--purple {
+.btn {
     color: #fff;
     font-size: 1em;
     font-weight: 700;
     text-decoration: none;
-    background-color: #5a189a;
     cursor: pointer;
     padding: 1em;
     border-radius: 1em;
-
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.btn--purple {
+    background-color: #5a189a;
 }
 
 .btn--purple:hover {
     background-color: #3c096c;
 }
 
-/* @TODO Refactor buttons */
 .btn--green {
-    color: #fff;
-    font-size: 1em;
-    font-weight: 700;
-    text-decoration: none;
     background-color: #2B9348;
-    cursor: pointer;
-    padding: 1em;
-    border-radius: 1em;
-
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .btn--green:hover {
@@ -214,17 +205,7 @@
 }
 
 .btn--red {
-    color: #fff;
-    font-size: 1em;
-    font-weight: 700;
-    text-decoration: none;
     background-color: #C1121F;
-    cursor: pointer;
-    padding: 1em;
-    border-radius: 1em;
-
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .btn--red:hover {
