@@ -1,5 +1,6 @@
 .admin-container {
     display: flex;
+    justify-content: flex-end;
 
     margin-top: calc(32px + 2em);
 
@@ -80,8 +81,6 @@
     padding-bottom: calc(80px + 1.5em);
 
     @media only screen and (min-device-width: 768px) {
-        max-width: 1000px;
-        margin: 0 auto;
         padding-bottom: 1.5em;
     }
 }
@@ -95,9 +94,8 @@
     }
 
     @media only screen and (min-device-width: 768px) {
-        margin-left: calc(auto + 200px);
-        margin-right: auto;
-        width: 80%;
+        width: calc(80% - 2em);
+        padding: 1.5em 1em;
     }
 }
 
