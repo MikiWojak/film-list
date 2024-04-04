@@ -55,6 +55,10 @@ body {
         rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
+.form__submit:hover {
+    background-color: #3c096c;
+}
+
 .form_redirect a {
     color: #e0aaff;
     font-weight: 700;
