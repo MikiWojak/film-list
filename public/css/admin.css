@@ -74,6 +74,13 @@
     }
 }
 
+.content__inner--shrink {
+    @media only screen and (min-device-width: 768px) {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
 .list__header {
     display: flex;
     flex-direction: column;
@@ -167,4 +174,29 @@
 
 .table--desktop td button {
     color: #fff;
+}
+
+.createedit__header {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.createedit__form__bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    @media only screen and (min-device-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.createedit__form__bottom .btn--green,
+.createedit__form__bottom .btn--red {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
 }
