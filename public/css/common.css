@@ -21,6 +21,14 @@
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
+.form {
+    gap: 1em;
+}
+
+.form__input {
+    width: 100%;
+}
+
 .input__text,
 .form__submit {
     width: 100%;
@@ -179,4 +187,39 @@
 
 .btn--purple:hover {
     background-color: #3c096c;
+}
+
+/* @TODO Refactor buttons */
+.btn--green {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    background-color: #2B9348;
+    cursor: pointer;
+    padding: 1em;
+    border-radius: 1em;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.btn--green:hover {
+    background-color: darkgreen;
+}
+
+.btn--red {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    background-color: #C1121F;
+    cursor: pointer;
+    padding: 1em;
+    border-radius: 1em;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.btn--green:red {
+    background-color: darkred;
 }

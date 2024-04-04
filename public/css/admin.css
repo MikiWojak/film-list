@@ -74,6 +74,23 @@
     }
 }
 
+.content--shrink {
+    width: 100%;
+    padding: 1.5em 1em;
+    padding-bottom: calc(80px + 1.5em);
+
+    @media only screen and (min-device-width: 768px) {
+        max-width: 1000px;
+        padding-bottom: 1.5em;
+    }
+}
+
+.content--shrink.navbar--enabled {
+    @media only screen and (min-device-width: 768px) {
+        /* @TODO */
+    }
+}
+
 .list__header {
     display: flex;
     flex-direction: column;
@@ -167,4 +184,9 @@
 
 .table--desktop td button {
     color: #fff;
+}
+
+.createedit__header {
+    font-size: 1.5em;
+    text-align: center;
 }

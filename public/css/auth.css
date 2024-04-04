@@ -36,14 +36,6 @@ body {
     letter-spacing: 0.05em;
 }
 
-.form {
-    gap: 1em;
-}
-
-.form__input {
-    width: 100%;
-}
-
 .form__submit {
     text-transform: uppercase;
 }
