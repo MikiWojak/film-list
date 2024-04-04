@@ -27,6 +27,7 @@
     padding: 1em;
     box-sizing: border-box;
     border-radius: 1em;
+    font-size: 1em;
 }
 
 .input__text {
@@ -54,18 +55,28 @@
     }
 }
 
+.header_left {
+    gap: 0.5em;
+}
+
 .header__logo {
     gap: 0.5em;
     color: #fff;
     text-decoration: none;
 }
 
+.header_menu,
 .header__logo__image {
-    font-size: 32px;
+    font-size: 2em;
 
     @media only screen and (min-device-width: 768px) {
-        font-size: 40px;
+        font-size: 2.5em;
     }
+}
+
+.header_menu {
+    color: #fff;
+    cursor: pointer;
 }
 
 .header__logo__text {
@@ -84,7 +95,7 @@
 }
 
 .header__login__icon {
-    font-size: 40px;
+    font-size: 2.5em;
 
     @media only screen and (max-device-width: 767px) {
         display: none;
@@ -140,8 +151,32 @@
 .white_link {
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .white_link:hover {
     color: #dee2e6;
+}
+
+.btn--reset {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.btn--purple {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 700;
+    background-color: #5a189a;
+    cursor: pointer;
+    padding: 1em;
+    border-radius: 1em;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.btn--purple:hover {
+    background-color: #3c096c;
 }
