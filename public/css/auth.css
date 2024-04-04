@@ -20,18 +20,26 @@ body {
     }
 }
 
+.auth-container .header__logo {
+    @media only screen and (min-device-width: 768px) {
+        display: none;
+    }
+}
+
 .logo {
     text-align: center;
     color: #fff;
     text-decoration: none;
+
+    display: none;
+
+    @media only screen and (min-device-width: 768px) {
+        display: block;
+    }
 }
 
 .logo__image {
-    font-size: 12.5em;
-
-    @media only screen and (min-device-width: 768px) {
-        font-size: 15.625em;
-    }
+    font-size: 15.625em;
 }
 
 .logo__text {
