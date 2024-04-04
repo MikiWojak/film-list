@@ -29,6 +29,10 @@
     width: 100%;
 }
 
+.form__input input {
+    margin-top: 0.5em;
+}
+
 .input__text,
 .form__submit {
     width: 100%;
@@ -204,7 +208,7 @@
 }
 
 .btn--green:hover {
-    background-color: darkgreen;
+    background-color: #007f5f;
 }
 
 .btn--red {
@@ -220,6 +224,6 @@
         rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.btn--green:red {
-    background-color: darkred;
+.btn--red:hover {
+    background-color: #780000;
 }
