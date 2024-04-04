@@ -150,6 +150,7 @@
 .white_link {
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .white_link:hover {

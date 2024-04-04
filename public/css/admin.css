@@ -96,6 +96,10 @@
     color: #fff;
     gap: 0.5em;
     font-size: 1em;
+
+    @media only screen and (min-device-width: 768px) {
+        padding: 0.5em 1em;
+    }
 }
 
 .list--mobile {
@@ -132,8 +136,37 @@
 
 .table--desktop {
     display: none;
+    margin-top: 1em;
 
     @media only screen and (min-device-width: 768px) {
         display: block;
     }
+}
+
+.table--desktop table,
+.table--desktop th,
+.table--desktop td {
+    border: 1px solid #6C757D;
+}
+
+.table--desktop table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table--desktop th,
+.table--desktop td {
+    padding: 0.5em;
+}
+
+.table--desktop th {
+    background-color: #495057;
+}
+
+.table--desktop td {
+    text-align: center;
+}
+
+.table--desktop td button {
+    color: #fff;
 }
