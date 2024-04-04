@@ -83,57 +83,61 @@
             </nav>
 
             <!-- <main class="content"> -->
-            <main class="content navbar--enabled">
-                <a href="/admin-users" class="flex-row-start-center back">
-                    <span class="material-symbols-outlined">
-                        arrow_left_alt
-                    </span>
-                    <span>
-                        Back
-                    </span>
-                </a>
+            <div class="content navbar--enabled">
+                <div class="content__inner--shrink">
+                    <a href="/admin-users" class="flex-row-start-center back">
+                        <span class="material-symbols-outlined">
+                            arrow_left_alt
+                        </span>
+                        <span>
+                            Back
+                        </span>
+                    </a>
 
-                <h2 class="createedit__header">
-                    Create User
-                </h2>
+                    <main>
+                        <h2 class="createedit__header">
+                            Create User
+                        </h2>
 
-                <form class="flex-column-center-center form createedit__form">
-                    <div class="form__input">
-                        <label for="username">Username</label>
-                        <input
-                            id="username"
-                            placeholder="Username"
-                            class="input__text"
-                        />
-                    </div>
+                        <form class="flex-column-center-center form createedit__form">
+                            <div class="form__input">
+                                <label for="username">Username</label>
+                                <input
+                                    id="username"
+                                    placeholder="Username"
+                                    class="input__text"
+                                />
+                            </div>
 
-                    <div class="form__input">
-                        <label for="email">Email</label>
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="hello@company.com"
-                            class="input__text"
-                        />
-                    </div>
+                            <div class="form__input">
+                                <label for="email">Email</label>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="hello@company.com"
+                                    class="input__text"
+                                />
+                            </div>
 
-                    <div class="createedit__form__bottom">
-                        <button type="submit" class="btn--reset btn--green">
-                            <span class="material-symbols-outlined">
-                                save
-                            </span>
-                            <span>Save</span>
-                        </button>
+                            <div class="createedit__form__bottom">
+                                <button type="submit" class="btn--reset btn--green">
+                                    <span class="material-symbols-outlined">
+                                        save
+                                    </span>
+                                    <span>Save</span>
+                                </button>
 
-                        <button class="btn--reset btn--red">
-                            <span class="material-symbols-outlined">
-                                delete
-                            </span>
-                            <span>Delete</span>
-                        </button>
-                    </div>
-                </form>
-            </main>
+                                <button class="btn--reset btn--red">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                    <span>Delete</span>
+                                </button>
+                            </div>
+                        </form>
+                    </main>
+                </div>  
+            </div>
         </div>
 
         <div class="tab-bar">
