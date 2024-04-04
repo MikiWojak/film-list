@@ -1,6 +1,5 @@
 .admin-container {
     display: flex;
-    justify-content: flex-end;
 
     margin-top: calc(32px + 2em);
 
@@ -72,30 +71,6 @@
     @media only screen and (min-device-width: 768px) {
         margin-left: 20%;
         width: 80%;
-    }
-}
-
-.content--shrink {
-    width: 100%;
-    padding: 1.5em 1em;
-    padding-bottom: calc(80px + 1.5em);
-
-    @media only screen and (min-device-width: 768px) {
-        padding-bottom: 1.5em;
-    }
-}
-
-.content--shrink.navbar--enabled {
-    width: 100%;
-
-    @media only screen and (max-device-width: 767px) {
-        height: calc(100vh - 32px - 2em - 80px - 3em);
-        overflow: hidden;
-    }
-
-    @media only screen and (min-device-width: 768px) {
-        width: calc(80% - 2em);
-        padding: 1.5em 1em;
     }
 }
 
