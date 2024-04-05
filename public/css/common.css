@@ -211,3 +211,18 @@
 .btn--red:hover {
     background-color: #780000;
 }
+
+.btn--blue {
+    background-color: #0096c7;
+}
+
+.btn--blue:hover {
+    background-color: #0077b6;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1em;
+}
