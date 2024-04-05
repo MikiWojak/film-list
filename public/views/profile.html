@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin - Create User</title>
+        <title>Profile</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -84,58 +84,24 @@
 
             <!-- <main class="content"> -->
             <div class="content navbar--enabled">
-                <div class="content__inner--shrink">
-                    <a href="/admin-users" class="flex-row-start-center back">
-                        <span class="material-symbols-outlined">
-                            arrow_left_alt
-                        </span>
-                        <span>
-                            Back
-                        </span>
+                <div class="content__inner--shrink profile">
+                    <h2>Hello, Johndoe</h2>
+
+                    <a href="/admin-users" class="btn--reset btn btn--blue">
+                        <span>Admin Panel</span>
                     </a>
 
-                    <main>
-                        <h2 class="createedit__header">
-                            Create User
-                        </h2>
+                    <a href="#" class="btn--reset btn btn--purple">
+                        <span>Change Personal Data</span>
+                    </a>
 
-                        <form class="flex-column-center-center form createedit__form">
-                            <div class="form__input">
-                                <label for="username">Username</label>
-                                <input
-                                    id="username"
-                                    placeholder="Username"
-                                    class="input__text"
-                                />
-                            </div>
+                    <a href="#" class="btn--reset btn btn--purple">
+                        <span>Change Password</span>
+                    </a>
 
-                            <div class="form__input">
-                                <label for="email">Email</label>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="hello@company.com"
-                                    class="input__text"
-                                />
-                            </div>
-
-                            <div class="createedit__form__bottom">
-                                <button type="submit" class="btn--reset btn btn--green">
-                                    <span class="material-symbols-outlined">
-                                        save
-                                    </span>
-                                    <span>Save</span>
-                                </button>
-
-                                <button class="btn--reset btn btn--red">
-                                    <span class="material-symbols-outlined">
-                                        delete
-                                    </span>
-                                    <span>Delete</span>
-                                </button>
-                            </div>
-                        </form>
-                    </main>
+                    <a href="#" class="btn--reset btn btn--red">
+                        <span>Logout</span>
+                    </a>
                 </div>  
             </div>
         </div>
