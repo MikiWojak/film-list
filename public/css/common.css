@@ -228,13 +228,19 @@
 }
 
 .checkbox-container {
+    display: block;
     position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     width: 100%;
 }
 
 .checkbox-label {
     padding-left: 35px;
     line-height: 25px;
+    cursor: pointer;
 }
 
 .checkbox-label input {
