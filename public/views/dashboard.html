@@ -60,14 +60,14 @@
             </div>
 
             <main class="film_list">
-                <?php foreach($items as $key=>$value): ?>
+                <?php foreach($films as $key=>$film): ?>
                     <section class="flex film">
                         <img class="film__poster" src="public/img/Saving_Private_Ryan.jpg" alt="Poster">
                         
                         <div class="film__bottom">
                             <h2 class="film__title">
                                 <a href="/single-film" class="white_link">
-                                    <?= $value ?>
+                                    <?= $film->getTitle(); ?>
                                 </a>
                             </h2>
                             
