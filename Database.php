@@ -17,8 +17,8 @@ class Database {
     {
         $this->username = "docker";
         $this->password = "docker";
-        $this->host = "localhost";
-        $this->port = "5433"; // Added port field
+        $this->host = "db";
+        $this->port = "5432"; // Added port field
         $this->database = "db";
         
         $this->connect(); // Automatically connect when instance is created
