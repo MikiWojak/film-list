@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
+        <title><?= $title ?></title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,6 +60,37 @@
             </div>
 
             <main class="film_list">
+                <?php foreach($items as $key=>$value): ?>
+                    <section class="flex film">
+                        <img class="film__poster" src="public/img/Saving_Private_Ryan.jpg" alt="Poster">
+                        
+                        <div class="film__bottom">
+                            <h2 class="film__title">
+                                <a href="/single-film" class="white_link">
+                                    <?= $value ?>
+                                </a>
+                            </h2>
+                            
+                            <div class="film__bottom__rate-section">
+                                <div class="flex-row-center-center film__rate">
+                                    <span class="material-symbols-outlined star">
+                                        star_rate
+                                    </span>
+
+                                    <span>8.9</span>
+                                </div>
+                                <div class="flex-row-center-center film__rate">
+                                    <span class="material-symbols-outlined star">
+                                        star
+                                    </span>
+
+                                    <span>Rate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                <?php endforeach; ?>
+
                 <section class="flex film">
                     <img class="film__poster" src="public/img/Saving_Private_Ryan.jpg" alt="Poster">
                     
