@@ -3,6 +3,7 @@
 // @TODO Refactor router
 require_once 'src/controllers/AppController.php';
 require_once 'src/models/Film.php';
+require_once 'Database.php'; // @TODO Create Singleton
 
 $controller = new AppController();
 
@@ -16,7 +17,16 @@ $action = $action == null ? 'login' : $action;
 // Objects?
 switch($action) {
     case "dashboard":
+        $db = new Database();
+
+        // $stmt = $this->database->connect()->prepare('
+        //     SELECT * FROM FILMS
+        // ');
+
+        // @TODO Get data from DB
+
         // @TMP
+        // @TODO More films
         $film01 = new Film(
             "Psy",
             "https://i.pinimg.com/474x/d9/03/67/d9036710e387d04fb5c74d37159972a9.jpg",

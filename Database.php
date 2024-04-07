@@ -3,35 +3,58 @@
 require_once "config.php";
 
 class Database {
+    private static $instance = null;
+    private $conn; // Store the PDO connection object
+    
+    // @TODO Get from .env
     private $username;
     private $password;
     private $host;
+    private $port;
     private $database;
 
-    public function __construct()
+    private function __construct()
     {
-        $this->username = USERNAME;
-        $this->password = PASSWORD;
-        $this->host = HOST;
-        $this->database = DATABASE;
+        $this->username = "docker";
+        $this->password = "docker";
+        $this->host = "localhost";
+        $this->port = "5433"; // Added port field
+        $this->database = "db";
+        
+        $this->connect(); // Automatically connect when instance is created
     }
 
-    public function connect()
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
+    }
+
+    private function connect()
     {
         try {
-            $conn = new PDO(
-                "pgsql:host=$this->host;port=5432;dbname=$this->database",
+            $this->conn = new PDO(
+                "pgsql:host=$this->host;port=$this->port;dbname=$this->database", // Updated connection string
                 $this->username,
                 $this->password,
-                ["sslmode"  => "prefer"]
+                ["sslmode"  => "prefer"] // Not necessary, will leave it
             );
 
             // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(PDOException $e) {
+            // @TODO Show error page
             die("Connection failed: " . $e->getMessage());
         }
     }
+
+    public function disconnect() {
+        $this->conn = null; // Close the database connection
+    }
+
+    private function __clone() {}
+    private function __wakeup() {}
 }
