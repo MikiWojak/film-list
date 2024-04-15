@@ -46,8 +46,8 @@ class DefaultController extends AppController {
         ];
 
         $this->render('dashboard', [
-                "films" => $films,
-                "title" => "Films"
+            "films" => $films,
+            "title" => "Films"
         ]);
     }
 }
