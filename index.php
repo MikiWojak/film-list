@@ -1,9 +1,9 @@
 <?php
 
 // @TODO Refactor router
-require_once 'src/controllers/AppController.php';
-require_once 'src/models/Film.php';
-require_once 'Database.php'; // @TODO Create Singleton
+require_once "src/controllers/AppController.php";
+require_once "src/models/Film.php";
+require_once "Database.php"; // @TODO Create Singleton
 
 $controller = new AppController();
 
@@ -14,10 +14,9 @@ $action = explode("/", $path)[0];
 $action = $action == null ? 'login' : $action;
 
 // @TODO Refactor
-// Objects?
-switch($action) {
+switch ($action) {
     case "dashboard":
-        $db = new Database();
+        $db = Database::getInstance();
 
         // $stmt = $this->database->connect()->prepare('
         //     SELECT * FROM FILMS

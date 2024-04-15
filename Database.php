@@ -1,7 +1,5 @@
 <?php
 
-require_once "config.php";
-
 class Database {
     private static $instance = null;
     private $conn; // Store the PDO connection object
