@@ -18,8 +18,7 @@ class AppController {
         return $this->request === 'POST';
     }
 
-    // @NOTE Initially protected
-    public function render(string $template = null, array $variables = [])
+    protected function render(string $template = null, array $variables = [])
     {
         // @NOTE Initially .php
         $templatePath = 'public/views/'. $template.'.html';
