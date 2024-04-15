@@ -3,7 +3,7 @@
 // @TODO Refactor router
 require_once "src/controllers/AppController.php";
 require_once "src/models/Film.php";
-require_once "Database.php"; // @TODO Create Singleton
+require_once "Database.php";
 
 $controller = new AppController();
 

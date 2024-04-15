@@ -2,7 +2,8 @@
 
 class Database {
     private static $instance = null;
-    private $conn; // Store the PDO connection object
+    // Store the PDO connection object
+    private $conn;
     
     // @TODO Get from .env
     private $username;
@@ -19,7 +20,9 @@ class Database {
         $this->port = "5432";
         $this->database = "db";
         
-        // $this->connect(); // Automatically connect when instance is created
+        // @TODO Try to restore
+        // Automatically connect when instance is created
+        // $this->connect();
     }
 
     public static function getInstance()
@@ -34,14 +37,15 @@ class Database {
     public function connect()
     {
         try {
+            // Connection string
             $this->conn = new PDO(
-                "pgsql:host=$this->host;port=$this->port;dbname=$this->database", // Updated connection string
+                "pgsql:host=$this->host;port=$this->port;dbname=$this->database",
                 $this->username,
                 $this->password,
-                ["sslmode"  => "prefer"] // Not necessary, will leave it
+                ["sslmode"  => "prefer"] // Not necessary, leave it anyway
             );
 
-            // set the PDO error mode to exception
+            // Set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             return $this->conn;
@@ -52,10 +56,12 @@ class Database {
         }
     }
 
+    // Close the database connection
     public function disconnect() {
-        $this->conn = null; // Close the database connection
+        $this->conn = null; 
     }
 
+    // @TODO What about these functions?
     // private function __clone() {}
     // private function __wakeup() {}
 }
