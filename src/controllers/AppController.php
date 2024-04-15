@@ -18,7 +18,6 @@ class AppController {
         return $this->request === 'POST';
     }
 
-    // @NOTE Initially protected
     protected function render(string $template = null, array $variables = [])
     {
         // @NOTE Initially .php
