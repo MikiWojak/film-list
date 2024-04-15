@@ -16,30 +16,24 @@ $action = $action == null ? 'login' : $action;
 // @TODO Refactor
 switch ($action) {
     case "dashboard":
+        $result = [];
         $db = Database::getInstance();
 
-        // $stmt = $this->database->connect()->prepare('
-        //     SELECT * FROM FILMS
-        // ');
+        $stmt = $db->connect()->prepare('
+            SELECT * FROM "Films"
+        ');
+        $stmt->execute();
+        $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // @TODO Get data from DB
-
-        // @TMP
-        // @TODO More films
-        $film01 = new Film(
-            "Psy",
-            "https://i.pinimg.com/474x/d9/03/67/d9036710e387d04fb5c74d37159972a9.jpg",
-            "Lorem ipsum"
-        );
-
-        var_dump($film01);
-
-        $films = [
-            $film01 
-        ];
+        foreach ($films as $film) {
+            $result[] = new Film(
+                $film['title'],
+                $film['posterUrl']
+            );
+        }
 
         $controller->render($action, [
-                "films" => $films,
+                "films" => $result,
                 "title" => "Films"
         ]);
 

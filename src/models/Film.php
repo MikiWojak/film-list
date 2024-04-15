@@ -3,7 +3,7 @@
 class Film {
     private $title;
     private $posterUrl;
-    private $desctiption;
+    // private $desctiption;
     // @TODO RateAvg
     // @TODO Director
     // @TODO Tags
@@ -11,11 +11,10 @@ class Film {
     public function __construct(
             string $title,
             string $posterUrl,
-            string $desctiption
     ) {
         $this->title = $title;
         $this->posterUrl = $posterUrl;
-        $this->desctiption = $desctiption;
+        // $this->desctiption = $desctiption;
     }
 
     // @TODO Add more getters
@@ -25,5 +24,9 @@ class Film {
 
     public function getTitle() {
         return $this->title;
+    }
+
+    public function getPosterUrl() {
+        return $this->posterUrl;
     }
 }

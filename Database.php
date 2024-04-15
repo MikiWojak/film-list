@@ -16,10 +16,10 @@ class Database {
         $this->username = "docker";
         $this->password = "docker";
         $this->host = "db";
-        $this->port = "5432"; // Added port field
+        $this->port = "5432";
         $this->database = "db";
         
-        $this->connect(); // Automatically connect when instance is created
+        // $this->connect(); // Automatically connect when instance is created
     }
 
     public static function getInstance()
@@ -27,10 +27,11 @@ class Database {
         if (self::$instance == null) {
             self::$instance = new Database();
         }
+
         return self::$instance;
     }
 
-    private function connect()
+    public function connect()
     {
         try {
             $this->conn = new PDO(
@@ -42,6 +43,8 @@ class Database {
 
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            return $this->conn;
         }
         catch(PDOException $e) {
             // @TODO Show error page
