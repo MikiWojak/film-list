@@ -3,10 +3,10 @@
 class Film {
     private $title;
     private $posterUrl;
-    // @TODO $desctiption;
-    // @TODO RateAvg
-    // @TODO Director
-    // @TODO Tags
+    // @TODO desctiption;
+    // @TODO rateAvg
+    // @TODO director
+    // @TODO tags
     
     public function __construct(
             string $title,
