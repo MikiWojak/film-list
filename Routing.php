@@ -23,6 +23,7 @@ class Routing {
         $controller = self::$routes[$action];
         // Object based on String
         $object = new $controller;
+        $action = $action ?: 'index';
 
         $object->$action();
     }
