@@ -4,7 +4,7 @@ require_once 'AppController.php';
 require_once 'src/models/Film.php';
 
 class DefaultController extends AppController {
-    public function login() {
+    public function index() {
        $this->render('login');
     }
 

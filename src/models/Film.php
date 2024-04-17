@@ -9,8 +9,8 @@ class Film {
     // @TODO tags
     
     public function __construct(
-            string $title,
-            string $posterUrl,
+        string $title,
+        string $posterUrl,
     ) {
         $this->title = $title;
         $this->posterUrl = $posterUrl;
