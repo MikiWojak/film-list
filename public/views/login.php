@@ -40,7 +40,6 @@
                         echo $message;
                     }
                 }
-
                 ?>
                 <div class="form__input">
                     <label for="email">Email</label>

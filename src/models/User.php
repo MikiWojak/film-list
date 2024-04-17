@@ -9,8 +9,8 @@ class User
     public function __construct(
         string $username,
         string $email,
-        string $password)
-    {
+        string $password
+    ) {
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
@@ -45,6 +45,4 @@ class User
     {
         $this->password = $password;
     }
-
-
 }
