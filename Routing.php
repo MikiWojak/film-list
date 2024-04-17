@@ -9,6 +9,10 @@ class Routing {
         self::$routes[$url] = $controller;
     }
 
+    public static function post($url, $controller) {
+        self::$routes[$url] = $controller;
+    }
+
     public static function run($url) {
         $action = explode("/", $url)[0];
 

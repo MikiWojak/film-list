@@ -31,6 +31,13 @@
             </a>
 
             <form class="flex-column-center-center form">
+                <?php if(isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+
+                ?>
                 <div class="form__input">
                     <label for="email">Email</label>
                     <input

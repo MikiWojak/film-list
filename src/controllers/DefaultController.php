@@ -5,7 +5,12 @@ require_once 'src/models/Film.php';
 
 class DefaultController extends AppController {
     public function login() {
-       $this->render('login');
+       $this->render('login', [
+           "messages" => [
+               "<div>Hello there</div>",
+               "<div>Lorem ipsum</div>"
+           ]
+       ]);
     }
 
     public function dashboard() {
