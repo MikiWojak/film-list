@@ -13,6 +13,10 @@ class SecurityController extends AppController
             'test'
         );
 
+        if(!$this->isPost()) {
+            return $this->render('login');
+        }
+
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -28,8 +32,8 @@ class SecurityController extends AppController
 //            "films" => [],
 //            "title" => "Films"
 //        ]);
-        $url = "http://$_SERVER[HTTP_HOST]";
 
+        $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/dashboard");
     }
 }
