@@ -30,7 +30,11 @@
                 <h1 class="logo__text">Film Rate</h1>
             </a>
 
-            <form class="flex-column-center-center form">
+            <form
+                action="login"
+                method="POST"
+                class="flex-column-center-center form"
+            >
                 <?php if(isset($messages)) {
                     foreach ($messages as $message) {
                         echo $message;
@@ -42,6 +46,7 @@
                     <label for="email">Email</label>
                     <input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="hello@company.com"
                         class="input__text"
@@ -52,6 +57,7 @@
                     <label for="password">Password</label>
                     <input
                         id="password"
+                        name="password"
                         type="password"
                         placeholder="Your password"
                         class="input__text"

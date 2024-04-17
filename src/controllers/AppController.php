@@ -20,7 +20,6 @@ class AppController {
 
     protected function render(string $template = null, array $variables = [])
     {
-        // @NOTE Initially .php
         $templatePath = 'public/views/'. $template.'.php';
         // @TODO 404 page
         $output = 'File not found';
