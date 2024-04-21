@@ -2,17 +2,18 @@
 
 class Film {
     private $title;
+    private $desctription;
     private $posterUrl;
-    // @TODO desctiption;
-    // @TODO rateAvg
     // @TODO director
     // @TODO tags
     
     public function __construct(
         string $title,
+        string $desctription,
         string $posterUrl,
     ) {
         $this->title = $title;
+        $this->desctription = $desctription;
         $this->posterUrl = $posterUrl;
     }
 
