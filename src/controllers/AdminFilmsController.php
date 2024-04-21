@@ -31,7 +31,13 @@ class AdminFilmsController extends AppController {
             // TODO create new film object and save it in database
             $film = new Film($_POST['title'], $_POST['description'], $_FILES['file']['name']);
 
-            return $this->render('admin-films', ['messages' => $this->message]);
+            // @TODO Redirect to Admin Films
+//            return $this->render('admin-films', ['messages' => $this->message]);
+
+            $this->render('dashboard', [
+                "films" => [$film],
+                "title" => "Films"
+            ]);
         }
 
         return $this->render('admin-films-createedit', ['messages' => $this->message]);

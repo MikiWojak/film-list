@@ -1,3 +1,4 @@
 # Images
 public/img/*
+public/uploads/*
 !public/img/poster_tmp.jpg
