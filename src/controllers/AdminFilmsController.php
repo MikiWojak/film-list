@@ -11,6 +11,10 @@ class AdminFilmsController extends AppController {
 
     private $message = [];
 
+    public function films() {
+        return $this->render('admin-films', ['messages' => $this->message]);
+    }
+
     public function addFilm()
     {
         if (
