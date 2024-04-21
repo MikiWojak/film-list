@@ -22,7 +22,6 @@ class AdminFilmsController extends AppController {
             is_uploaded_file($_FILES['file']['tmp_name']) &&
             $this->validate($_FILES['file'])
         ) {
-            // @TODO Fix problem with moving uploaded file
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
@@ -34,7 +33,7 @@ class AdminFilmsController extends AppController {
             // @TODO Redirect to Admin Films
 //            return $this->render('admin-films', ['messages' => $this->message]);
 
-            $this->render('dashboard', [
+            return $this->render('dashboard', [
                 "films" => [$film],
                 "title" => "Films"
             ]);

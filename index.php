@@ -15,6 +15,6 @@ Routing::get('', 'DefaultController');
 Routing::get('dashboard', 'DefaultController');
 Routing::post('login', 'SecurityController');
 Routing::post('addFilm', 'AdminFilmsController');
-Routing::post('films', 'AdminFilmsController');
+Routing::get('films', 'AdminFilmsController');
 
 Routing::run($path);

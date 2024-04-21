@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin - Create User</title>
+        <title>Admin - Create Film</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -85,7 +85,7 @@
             <!-- <main class="content"> -->
             <div class="content navbar--enabled">
                 <div class="content__inner--shrink">
-                    <a href="/admin-users" class="flex-row-start-center back">
+                    <a href="/admin-films" class="flex-row-start-center back">
                         <span class="material-symbols-outlined">
                             arrow_left_alt
                         </span>
@@ -127,7 +127,12 @@
 
                             <div class="form__input">
                                 <label for="description">Description</label>
-                                <textarea name="description" rows=5 placeholder="description" class="input__text"></textarea>
+                                <textarea
+                                    name="description"
+                                    rows=5
+                                    placeholder="Description"
+                                    class="input__text"
+                                ></textarea>
                             </div>
 
                             <div class="form__input">
