@@ -1,3 +1,7 @@
+# Code editors
+.idea/
+.vscode/
+
 # Images
 public/img/*
 public/uploads/*
