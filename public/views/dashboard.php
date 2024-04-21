@@ -62,7 +62,7 @@
             <main class="film_list">
                 <?php foreach($films as $key=>$film): ?>
                     <section class="flex film">
-                        <img class="film__poster" src="<?= $film->getPosterUrl(); ?>" alt="Poster">
+                        <img class="film__poster" src="public/uploads/<?= $film->getPosterUrl(); ?>" alt="Poster">
                         
                         <div class="film__bottom">
                             <h2 class="film__title">
