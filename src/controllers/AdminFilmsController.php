@@ -22,12 +22,13 @@ class AdminFilmsController extends AppController {
             is_uploaded_file($_FILES['file']['tmp_name']) &&
             $this->validate($_FILES['file'])
         ) {
+            // @TODO Fix problem with moving uploaded file
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            // TODO create new project object and save it in database
+            // TODO create new film object and save it in database
             $film = new Film($_POST['title'], $_POST['description'], $_FILES['file']['name']);
 
             return $this->render('admin-films', ['messages' => $this->message]);
