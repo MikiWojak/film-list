@@ -1,4 +1,10 @@
+# Code editors
+.idea/
+.vscode/
+
 # Images
 public/img/*
 public/uploads/*
 !public/img/poster_tmp.jpg
+
+config.php

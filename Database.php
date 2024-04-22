@@ -1,24 +1,26 @@
 <?php
 
+require_once 'config.php';
+
 class Database {
     private static $instance = null;
     // Store the PDO connection object
     private $conn;
     
     // @TODO Get from .env
-    private $username;
-    private $password;
     private $host;
     private $port;
     private $database;
+    private $username;
+    private $password;
 
     private function __construct()
     {
-        $this->username = "docker";
-        $this->password = "docker";
-        $this->host = "db";
-        $this->port = "5432";
-        $this->database = "db";
+        $this->host = HOST;
+        $this->port = PORT;
+        $this->database = DATABASE;
+        $this->username = USERNAME;
+        $this->password = PASSWORD;
         
         // @TODO Try to restore
         // Automatically connect when instance is created
@@ -48,6 +50,7 @@ class Database {
             // Set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            // @TODO Is it correct?
             return $this->conn;
         }
         catch(PDOException $e) {
