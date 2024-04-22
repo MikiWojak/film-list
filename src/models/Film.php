@@ -4,6 +4,7 @@ class Film {
     private $title;
     private $desctription;
     private $posterUrl;
+    // @TODO avgRate
     // @TODO director
     // @TODO tags
     
