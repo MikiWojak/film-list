@@ -4,7 +4,7 @@ require_once 'AppController.php';
 require_once __DIR__ .'/../models/Film.php';
 require_once __DIR__ .'/../repositories/FilmRepository.php';
 
-class AdminFilmsController extends AppController {
+class AdminFilmController extends AppController {
     const MAX_FILE_SIZE = 1024*1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
@@ -19,11 +19,11 @@ class AdminFilmsController extends AppController {
         $this->filmRepository = new FilmRepository();
     }
 
-    public function films() {
+    public function adminFilms() {
         return $this->render('admin-films', ['messages' => $this->message]);
     }
 
-    public function addFilm()
+    public function adminAddFilm()
     {
         if (
             $this->isPost() &&
@@ -42,8 +42,8 @@ class AdminFilmsController extends AppController {
             // @TODO Redirect to Admin Films
 //            return $this->render('admin-films', ['messages' => $this->message]);
 
-            return $this->render('dashboard', [
-                "films" => [$film],
+            return $this->render('films', [
+                "films" => $this->filmRepository->findAll(),
                 "title" => "Films"
             ]);
         }

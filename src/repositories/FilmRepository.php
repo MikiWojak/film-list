@@ -5,6 +5,28 @@ require_once __DIR__.'/../models/Film.php';
 
 class FilmRepository extends Repository
 {
+    public function findAll(): array
+    {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare(
+            'SELECT * FROM "Films"'
+        );
+        $stmt->execute();
+
+        $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($films as $film) {
+            $result[] = new Film(
+                $film['title'],
+                $film['description'],
+                $film['posterUrl'],
+            );
+        }
+
+        return $result;
+    }
+
     public function findById(int $id): ?Film
     {
         $stmt = $this->database->connect()->prepare(
