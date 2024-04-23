@@ -20,6 +20,8 @@
         <link rel="stylesheet" type="text/css" href="public/css/main.css" />
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
         <link rel="stylesheet" type="text/css" href="public/css/auth.css" />
+
+        <script type="text/javascript" src="./public/js/script.js" defer></script>
     </head>
     <body class="flex-row-center-center">
         <div class="auth-container">
@@ -35,6 +37,7 @@
                     <label for="username">Username</label>
                     <input
                         id="username"
+                        name="username"
                         placeholder="Username"
                         class="input__text"
                     />
@@ -44,6 +47,7 @@
                     <label for="email">Email</label>
                     <input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="hello@company.com"
                         class="input__text"
@@ -54,6 +58,7 @@
                     <label for="password">Password</label>
                     <input
                         id="password"
+                        name="password"
                         type="password"
                         placeholder="Password"
                         class="input__text"
@@ -61,9 +66,10 @@
                 </div>
 
                 <div class="form__input">
-                    <label for="confirmPassword">Confirm password</label>
+                    <label for="confirmedPassword">Confirm password</label>
                     <input
-                        id="confirmPassword"
+                        id="confirmedPassword"
+                        name="confirmedPassword"
                         type="password"
                         placeholder="Confirm password"
                         class="input__text"
