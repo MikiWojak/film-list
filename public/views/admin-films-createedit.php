@@ -100,7 +100,7 @@
                         </h2>
 
                         <form
-                                action="addFilm"
+                                action="adminAddFilm"
                                 method="POST"
                                 ENCTYPE="multipart/form-data"
                                 class="flex-column-center-center form createedit__form"

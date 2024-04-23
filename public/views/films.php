@@ -60,7 +60,7 @@
             </div>
 
             <main class="film_list">
-                <?php foreach($films as $key=>$film): ?>
+                <?php foreach($films as $film): ?>
                     <section class="flex film">
                         <img class="film__poster" src="public/uploads/<?= $film->getPosterUrl(); ?>" alt="Poster">
                         
@@ -77,7 +77,7 @@
                                         star_rate
                                     </span>
 
-                                    <span>8.9</span>
+                                    <span><?= $film->getAvgRate(); ?></span>
                                 </div>
                                 <div class="flex-row-center-center film__rate">
                                     <span class="material-symbols-outlined star">
