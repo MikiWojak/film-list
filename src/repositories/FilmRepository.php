@@ -21,6 +21,7 @@ class FilmRepository extends Repository
                 $film['title'],
                 $film['description'],
                 $film['posterUrl'],
+                $film['avgRate']
             );
         }
 
@@ -45,7 +46,8 @@ class FilmRepository extends Repository
         return new Film(
             $film['title'],
             $film['description'],
-            $film['posterUrl']
+            $film['posterUrl'],
+            $film['avgRate']
         );
     }
 

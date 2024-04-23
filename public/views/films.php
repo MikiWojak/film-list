@@ -77,7 +77,7 @@
                                         star_rate
                                     </span>
 
-                                    <span>8.9</span>
+                                    <span><?= $film->getAvgRate(); ?></span>
                                 </div>
                                 <div class="flex-row-center-center film__rate">
                                     <span class="material-symbols-outlined star">
