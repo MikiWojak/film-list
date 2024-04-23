@@ -28,6 +28,18 @@ class FilmRepository extends Repository
     }
 
     public function create(Film $film): void {
-        // @TODO
+        $date = new DateTime();
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO "Films" ("title", "description", "posterUrl", "createdAt")
+            VALUES (?, ?, ?, ?)
+        ');
+
+        $stmt->execute([
+            $film->getTitle(),
+            $film->getDesctription(),
+            $film->getPosterUrl(),
+            $date->format('Y-m-d'),
+        ]);
     }
 }

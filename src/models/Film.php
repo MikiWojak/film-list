@@ -22,6 +22,11 @@ class Film {
         return $this->title;
     }
 
+    public function getDesctription(): string
+    {
+        return $this->desctription;
+    }
+
     public function getPosterUrl() : string {
         return $this->posterUrl;
     }

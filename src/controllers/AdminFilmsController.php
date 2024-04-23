@@ -2,6 +2,7 @@
 
 require_once 'AppController.php';
 require_once __DIR__ .'/../models/Film.php';
+require_once __DIR__ .'/../repositories/FilmRepository.php';
 
 class AdminFilmsController extends AppController {
     const MAX_FILE_SIZE = 1024*1024;
@@ -9,6 +10,14 @@ class AdminFilmsController extends AppController {
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
     private $message = [];
+    private $filmRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->filmRepository = new FilmRepository();
+    }
 
     public function films() {
         return $this->render('admin-films', ['messages' => $this->message]);
@@ -26,8 +35,9 @@ class AdminFilmsController extends AppController {
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            // TODO create new film object and save it in database
             $film = new Film($_POST['title'], $_POST['description'], $_FILES['file']['name']);
+
+            $this->filmRepository->create($film);
 
             // @TODO Redirect to Admin Films
 //            return $this->render('admin-films', ['messages' => $this->message]);
