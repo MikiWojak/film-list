@@ -39,7 +39,7 @@ class FilmRepository extends Repository
             $film->getTitle(),
             $film->getDesctription(),
             $film->getPosterUrl(),
-            $date->format('Y-m-d'),
+            $date->format('Y-m-d H:i:s'),
         ]);
     }
 }
