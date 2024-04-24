@@ -35,7 +35,7 @@ class AdminFilmController extends AppController {
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
             );
 
-            $film = new Film($_POST['title'], $_POST['description'], $_FILES['file']['name']);
+            $film = new Film($_POST['title'], $_POST['description'], $_FILES['file']['name'], 0);
 
             $this->filmRepository->create($film);
 

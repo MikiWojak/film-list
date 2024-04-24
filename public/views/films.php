@@ -20,6 +20,8 @@
         <link rel="stylesheet" type="text/css" href="public/css/main.css" />
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
         <link rel="stylesheet" type="text/css" href="public/css/films.css" />
+
+        <script type="text/javascript" src="./public/js/search.js" defer></script>
     </head>
     <body>
         <header class="header">
@@ -46,8 +48,9 @@
                         star
                     </span>
                 </button>
-                <form class="flex-row-center-center search__form">
+                <div class="flex-row-center-center search__form">
                     <input
+                        id="search"
                         type="text"
                         placeholder="Search"
                         class="input__text search__form__text">
@@ -56,7 +59,7 @@
                             search
                         </span>
                     </button>
-                </form>
+                </div>
             </div>
 
             <main class="film_list">
@@ -66,7 +69,7 @@
                         
                         <div class="film__bottom">
                             <h2 class="film__title">
-                                <a href="/single-film" class="white_link">
+                                <a href="/single-film" class="white_link film__title--inner">
                                     <?= $film->getTitle(); ?>
                                 </a>
                             </h2>
@@ -77,7 +80,9 @@
                                         star_rate
                                     </span>
 
-                                    <span><?= $film->getAvgRate(); ?></span>
+                                    <span class="film__avg_rate--inner">
+                                        <?= $film->getAvgRate(); ?>
+                                    </span>
                                 </div>
                                 <div class="flex-row-center-center film__rate">
                                     <span class="material-symbols-outlined star">
@@ -117,3 +122,32 @@
         </div>
     </body>
 </html>
+
+<template id="film-template">
+    <section class="flex film">
+        <img class="film__poster" src="" alt="Poster"/>
+
+        <div class="film__bottom">
+            <h2 class="film__title">
+                <a href="/single-film" class="white_link film__title--inner"></a>
+            </h2>
+
+            <div class="film__bottom__rate-section">
+                <div class="flex-row-center-center film__rate">
+                    <span class="material-symbols-outlined star">
+                        star_rate
+                    </span>
+
+                    <span class="film__avg_rate--inner"></span>
+                </div>
+                <div class="flex-row-center-center film__rate">
+                    <span class="material-symbols-outlined star">
+                        star
+                    </span>
+
+                    <span>Rate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

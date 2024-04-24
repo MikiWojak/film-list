@@ -28,6 +28,18 @@ class FilmRepository extends Repository
         return $result;
     }
 
+    public function findAllByTitle(string $title): array {
+        $title = '%'.strtolower($title).'%';
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM "Films" WHERE LOWER("title") LIKE :title
+        ');
+        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function findById(int $id): ?Film
     {
         $stmt = $this->database->connect()->prepare(
