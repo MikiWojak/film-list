@@ -2,7 +2,7 @@ const search = document.querySelector('#search');
 const filmsContainer = document.querySelector('.film_list');
 
 search.addEventListener('keyup', async (event) => {
-    if (event.keyCode !== 13) {
+    if (event.key !== "Enter") {
         return;
     }
 
