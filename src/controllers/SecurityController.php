@@ -39,4 +39,8 @@ class SecurityController extends AppController
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/dashboard");
     }
+
+    public function register() {
+        return $this->render('register', ['messages' => []]);
+    }
 }
