@@ -1,27 +1,25 @@
 const search = document.querySelector('#search');
 const filmsContainer = document.querySelector('.film_list');
 
-search.addEventListener('keyup', (event) => {
+search.addEventListener('keyup', async (event) => {
     // @TODO Refactor
     if (event.keyCode === 13) {
         event.preventDefault();
 
         const data = { search: search.value };
 
-        // @TODO async / await
-        fetch("/search", {
+        const response = await fetch("/search", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-        }).then((response) => {
-            return response.json();
-        }).then((films) => {
-            filmsContainer.innerHTML = '';
-
-            loadFilms(films);
         });
+        const films = await response.json();
+
+        filmsContainer.innerHTML = '';
+
+        loadFilms(films);
     }
 })
 
