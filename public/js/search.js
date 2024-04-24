@@ -2,12 +2,15 @@ const search = document.querySelector('#search');
 const filmsContainer = document.querySelector('.film_list');
 
 search.addEventListener('keyup', async (event) => {
-    // @TODO Refactor
-    if (event.keyCode === 13) {
-        event.preventDefault();
+    if (event.keyCode !== 13) {
+        return;
+    }
 
-        const data = { search: search.value };
+    event.preventDefault();
 
+    const data = { search: event.target.value };
+
+    try {
         const response = await fetch("/search", {
             method: "POST",
             headers: {
@@ -15,11 +18,14 @@ search.addEventListener('keyup', async (event) => {
             },
             body: JSON.stringify(data),
         });
+
         const films = await response.json();
 
         filmsContainer.innerHTML = '';
 
         loadFilms(films);
+    } catch (error) {
+        console.error(error);
     }
 })
 
