@@ -20,8 +20,10 @@
         <link rel="stylesheet" type="text/css" href="public/css/main.css" />
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
         <link rel="stylesheet" type="text/css" href="public/css/films.css" />
+        <link rel="stylesheet" type="text/css" href="public/css/modal.css" />
 
         <script type="text/javascript" src="./public/js/search.js" defer></script>
+        <script type="text/javascript" src="./public/js/rate.js" defer></script>
     </head>
     <body>
         <header class="header">
@@ -84,13 +86,15 @@
                                         <?= $film->getAvgRate(); ?>
                                     </span>
                                 </div>
-                                <div class="flex-row-center-center film__rate">
+                                <button id="myBtn" class="flex-row-center-center film__rate">
                                     <span class="material-symbols-outlined star">
                                         star
                                     </span>
 
-                                    <span>Rate</span>
-                                </div>
+                                    <span class="film__my_rate--inner">
+                                        Rate
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </section>
@@ -120,6 +124,16 @@
                 </span>
             </a>
         </div>
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+
+        </div>
     </body>
 </html>
 
@@ -140,13 +154,15 @@
 
                     <span class="film__avg_rate--inner"></span>
                 </div>
-                <div class="flex-row-center-center film__rate">
+                <button id="myBtn" class="flex-row-center-center film__rate">
                     <span class="material-symbols-outlined star">
                         star
                     </span>
 
-                    <span>Rate</span>
-                </div>
+                    <span class="film__my_rate--inner">
+                        Rate
+                    </span>
+                </button>
             </div>
         </div>
     </section>
