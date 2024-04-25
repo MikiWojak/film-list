@@ -1,6 +1,7 @@
 <?php
 
 class Film {
+    private $id;
     private $title;
     private $desctription;
     private $posterUrl;
@@ -12,12 +13,15 @@ class Film {
         string $title,
         string $desctription,
         string $posterUrl,
-        float $avgRate
+        float $avgRate = 0,
+        int $id = null
     ) {
         $this->title = $title;
         $this->desctription = $desctription;
         $this->posterUrl = $posterUrl;
+
         $this->avgRate = $avgRate;
+        $this->id = $id;
     }
 
     public function getTitle() : string {
