@@ -134,6 +134,7 @@
 
                 <div>
                     <select name="rate" id="rate">
+                        <option disabled selected value>-- Select grade --</option>
                         <option value="10">(10) Masterpiece</option>
                         <option value="9">(9) Great</option>
                         <option value="8">(8) Very Good</option>
