@@ -86,7 +86,7 @@
                                         <?= $film->getAvgRate(); ?>
                                     </span>
                                 </div>
-                                <button id="myBtn" class="flex-row-center-center film__rate">
+                                <button id="rate-btn" class="flex-row-center-center film__rate">
                                     <span class="material-symbols-outlined star">
                                         star
                                     </span>
@@ -125,12 +125,31 @@
             </a>
         </div>
 
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
+        <div id="rate-modal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+                <span class="modal__close">&times;</span>
+
+                <h2>Rate film</h2>
+                <h1>"Poranek Kojota"</h1>
+
+                <div>
+                    <select name="rate" id="rate">
+                        <option value="10">(10) Masterpiece</option>
+                        <option value="9">(9) Great</option>
+                        <option value="8">(8) Very Good</option>
+                        <option value="7">(7) Good</option>
+                        <option value="6">(6) Fine</option>
+                        <option value="5">(5) Average</option>
+                        <option value="4">(4) Bad</option>
+                        <option value="3">(3) Very Bad</option>
+                        <option value="2">(2) Horrible</option>
+                        <option value="1">(1) Appalling</option>
+                    </select>
+                </div>
+
+                <div>
+                    <button>Rate</button>
+                </div>
             </div>
 
         </div>
@@ -154,7 +173,7 @@
 
                     <span class="film__avg_rate--inner"></span>
                 </div>
-                <button id="myBtn" class="flex-row-center-center film__rate">
+                <button id="rate-btn" class="flex-row-center-center film__rate">
                     <span class="material-symbols-outlined star">
                         star
                     </span>
