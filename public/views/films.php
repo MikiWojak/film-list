@@ -154,6 +154,8 @@
                     >
                         Rate
                     </button>
+
+                    <a href="#" class="modal__remove">Remove rate</a>
                 </form>
             </div>
         </div>
