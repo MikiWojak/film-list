@@ -37,6 +37,11 @@ class Film {
         return $this->posterUrl;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getAvgRate() : float
     {
         return $this->avgRate;

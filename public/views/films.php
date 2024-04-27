@@ -86,7 +86,12 @@
                                         <?= $film->getAvgRate(); ?>
                                     </span>
                                 </div>
-                                <button id="rate__btn" class="flex-row-center-center film__rate">
+                                <button
+                                    id="rate__btn"
+                                    class="flex-row-center-center film__rate"
+                                    data-id="<?= $film->getId(); ?>"
+                                    data-title="<?= $film->getTitle(); ?>"
+                                >
                                     <span class="material-symbols-outlined star">
                                         star
                                     </span>
@@ -131,8 +136,8 @@
                     <span class="modal__content__close">&times;</span>
                 </div>
 
-                <h2>Rate film</h2>
-                <h1>Poranek Kojota</h1>
+                <h2>Rate film (<span id="modal-film-id"></span>)</h2>
+                <h1 id="modal-film-title"></h1>
 
                 <form class="flex-column-center-center form">
                     <select name="rate" id="rate">
@@ -150,7 +155,7 @@
                     </select>
 
                     <button
-                            class="btn--reset btn btn--purple form__submit"
+                        class="btn--reset btn btn--purple form__submit"
                     >
                         Rate
                     </button>
@@ -179,7 +184,10 @@
 
                     <span class="film__avg_rate--inner"></span>
                 </div>
-                <button id="rate__btn" class="flex-row-center-center film__rate">
+                <button
+                    id="rate__btn"
+                    class="flex-row-center-center film__rate"
+                >
                     <span class="material-symbols-outlined star">
                         star
                     </span>
