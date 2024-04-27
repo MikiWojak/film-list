@@ -127,12 +127,14 @@
 
         <div id="rate-modal" class="modal">
             <div class="modal__content">
-                <span class="modal__content__close">&times;</span>
+                <div class="modal__content__header">
+                    <span class="modal__content__close">&times;</span>
+                </div>
 
                 <h2>Rate film</h2>
                 <h1>Poranek Kojota</h1>
 
-                <div>
+                <form class="flex-column-center-center form">
                     <select name="rate" id="rate">
                         <option disabled selected value>-- Rate film --</option>
                         <option value="10">(10) Masterpiece</option>
@@ -146,11 +148,13 @@
                         <option value="2">(2) Horrible</option>
                         <option value="1">(1) Appalling</option>
                     </select>
-                </div>
 
-                <div>
-                    <button>Rate</button>
-                </div>
+                    <button
+                            class="btn--reset btn btn--purple form__submit"
+                    >
+                        Rate
+                    </button>
+                </form>
             </div>
         </div>
     </body>

@@ -25,15 +25,15 @@
     }
 }
 
-.modal__content h1,
-.modal__content h2 {
-    text-align: center;
+.modal__content__header {
+    display: flex;
+    justify-content: end;
 }
 
 .modal__content__close {
     color: #fff;
     float: right;
-    font-size: 28px;
+    font-size: 2em;
     font-weight: bold;
 }
 
@@ -42,4 +42,27 @@
     color: #dee2e6;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal__content h1,
+.modal__content h2 {
+    margin: 0.5em 0;
+    text-align: center;
+}
+
+.modal__content h1 {
+    font-size: 1.5em;
+
+    @media only screen and (min-device-width: 576px) {
+        font-size: 2em;
+    }
+}
+
+.modal__content h2 {
+    font-size: 1em;
+    font-weight: 400;
+
+    @media only screen and (min-device-width: 576px) {
+        font-size: 1.5em;
+    }
 }
