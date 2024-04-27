@@ -71,3 +71,7 @@
     color: red;
     text-decoration: none;
 }
+
+.modal__remove:hover {
+    text-decoration: underline;
+}

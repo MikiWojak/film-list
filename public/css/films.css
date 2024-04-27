@@ -180,6 +180,6 @@ button.film__rate:hover > .star {
     color: #f4cf3e;
 }
 
-button.film__rate:hover >  {
+button.film__rate:hover > .film__my_rate--inner  {
     color: #dee2e6;
 }
