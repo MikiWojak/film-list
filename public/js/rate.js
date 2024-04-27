@@ -1,9 +1,9 @@
 const rateModal = document.getElementById("rate-modal");
 const rateBtn = document.getElementById("rate-btn");
-const modalCloseBtn = document.getElementsByClassName("modal__close")[0];
+const modalCloseBtn = document.getElementsByClassName("modal__content__close")[0];
 
 rateBtn.addEventListener("click", () => {
-    rateModal.style.display = "block";
+    rateModal.style.display = "flex";
 });
 
 modalCloseBtn.addEventListener("click", () => {

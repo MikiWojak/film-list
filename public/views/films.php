@@ -126,15 +126,15 @@
         </div>
 
         <div id="rate-modal" class="modal">
-            <div class="modal-content">
-                <span class="modal__close">&times;</span>
+            <div class="modal__content">
+                <span class="modal__content__close">&times;</span>
 
                 <h2>Rate film</h2>
-                <h1>"Poranek Kojota"</h1>
+                <h1>Poranek Kojota</h1>
 
                 <div>
                     <select name="rate" id="rate">
-                        <option disabled selected value>-- Select grade --</option>
+                        <option disabled selected value>-- Rate film --</option>
                         <option value="10">(10) Masterpiece</option>
                         <option value="9">(9) Great</option>
                         <option value="8">(8) Very Good</option>
@@ -152,7 +152,6 @@
                     <button>Rate</button>
                 </div>
             </div>
-
         </div>
     </body>
 </html>
