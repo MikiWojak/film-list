@@ -1,4 +1,5 @@
 const search = document.querySelector('#search');
+const searchSubmitBtn = document.querySelector('.search__form__submit');
 const filmsContainer = document.querySelector('.film_list');
 
 search.addEventListener('keyup', async (event) => {
@@ -8,7 +9,15 @@ search.addEventListener('keyup', async (event) => {
 
     event.preventDefault();
 
-    const data = { search: event.target.value };
+    await fetchFilms();
+})
+
+searchSubmitBtn.addEventListener('click', async (event) => {
+    await fetchFilms();
+})
+
+const fetchFilms = async (filter) => {
+    const data = { search: search.value };
 
     try {
         const response = await fetch("/search", {
@@ -27,7 +36,7 @@ search.addEventListener('keyup', async (event) => {
     } catch (error) {
         console.error(error);
     }
-})
+}
 
 const loadFilms = (films) => {
     films.forEach(film => {

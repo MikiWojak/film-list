@@ -1,17 +1,19 @@
-const rateModal = document.getElementById("rate-modal");
-const rateBtn = document.getElementById("rate-btn");
-const modalCloseBtn = document.getElementsByClassName("modal__content__close")[0];
+const rateModal = document.querySelector("#rate-modal");
+const rateButtons = document.querySelectorAll("#rate__btn");
+const modalCloseBtn = document.querySelector(".modal__content__close");
 
-rateBtn.addEventListener("click", () => {
-    rateModal.style.display = "flex";
-});
+rateButtons.forEach(rateButton => {
+    rateButton.addEventListener("click", () => {
+        rateModal.classList.add('enabled');
+    });
+})
 
 modalCloseBtn.addEventListener("click", () => {
-    rateModal.style.display = "none";
+    rateModal.classList.remove('enabled');
 });
 
 window.addEventListener("click", (event) => {
     if (event.target === rateModal) {
-        rateModal.style.display = "none";
+        rateModal.classList.remove('enabled');
     }
 });

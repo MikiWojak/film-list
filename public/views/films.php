@@ -86,7 +86,7 @@
                                         <?= $film->getAvgRate(); ?>
                                     </span>
                                 </div>
-                                <button id="rate-btn" class="flex-row-center-center film__rate">
+                                <button id="rate__btn" class="flex-row-center-center film__rate">
                                     <span class="material-symbols-outlined star">
                                         star
                                     </span>
@@ -179,7 +179,7 @@
 
                     <span class="film__avg_rate--inner"></span>
                 </div>
-                <button id="rate-btn" class="flex-row-center-center film__rate">
+                <button id="rate__btn" class="flex-row-center-center film__rate">
                     <span class="material-symbols-outlined star">
                         star
                     </span>
