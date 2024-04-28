@@ -1,3 +1,5 @@
+import { initRateTriggers } from './rate.js';
+
 const search = document.querySelector('#search');
 const searchSubmitBtn = document.querySelector('.search__form__submit');
 const filmsContainer = document.querySelector('.film_list');
@@ -42,6 +44,8 @@ const loadFilms = (films) => {
     films.forEach(film => {
         createFilm(film);
     })
+
+    initRateTriggers();
 }
 
 const createFilm = (film) => {
@@ -58,6 +62,9 @@ const createFilm = (film) => {
 
     const avgRateElement = clone.querySelector('.film__avg_rate--inner');
     avgRateElement.innerHTML = avgRate;
+
+    // @TODO Add attributes to rateBtn
+    // document.querySelectorAll("#rate__btn")
 
     filmsContainer.appendChild(clone);
 }
