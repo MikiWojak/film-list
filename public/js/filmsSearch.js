@@ -14,11 +14,11 @@ search.addEventListener('keyup', async (event) => {
     await fetchFilms();
 })
 
-searchSubmitBtn.addEventListener('click', async (event) => {
-    await fetchFilms();
-})
+searchSubmitBtn.addEventListener('click', (event) =>
+    fetchFilms()
+);
 
-const fetchFilms = async (filter) => {
+const fetchFilms = async () => {
     const data = { search: search.value };
 
     try {

@@ -1,8 +1,9 @@
-export function setupRateButtons () {
+export const setupRateButtons = () => {
     const rateModal = document.querySelector("#rate-modal");
     const rateButtons = document.querySelectorAll("#rate__btn");
 
     rateButtons.forEach(rateButton => {
+        // @TODO Arrow function
         rateButton.addEventListener("click", function () {
             const id = this.getAttribute("data-id");
             const title = this.getAttribute("data-title");
