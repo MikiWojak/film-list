@@ -1,4 +1,4 @@
-import { initRateTriggers } from './rate.js';
+import { setupRateButtons } from './rateButtonsSetup.js';
 
 const search = document.querySelector('#search');
 const searchSubmitBtn = document.querySelector('.search__form__submit');
@@ -43,7 +43,7 @@ const fetchFilms = async (filter) => {
 const loadFilms = (films) => {
     films.forEach(film => createFilm(film));
 
-    initRateTriggers();
+    setupRateButtons();
 }
 
 const createFilm = (film) => {

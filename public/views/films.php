@@ -22,8 +22,8 @@
         <link rel="stylesheet" type="text/css" href="public/css/films.css" />
         <link rel="stylesheet" type="text/css" href="public/css/modal.css" />
 
-        <script type="module" src="./public/js/search.js" defer></script>
-        <script type="module" src="./public/js/initRate.js" defer></script>
+        <script type="module" src="./public/js/filmsSearch.js" defer></script>
+        <script type="module" src="./public/js/initRateButtonsSetup.js" defer></script>
     </head>
     <body>
         <header class="header">

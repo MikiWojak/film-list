@@ -1,9 +1,9 @@
-import { initRateTriggers } from './rate.js';
+import { setupRateButtons } from './rateButtonsSetup.js';
 
 const rateModal = document.querySelector("#rate-modal");
 const modalCloseBtn = document.querySelector(".modal__content__close");
 
-initRateTriggers();
+setupRateButtons();
 
 modalCloseBtn.addEventListener("click", () => {
     rateModal.classList.remove('enabled');

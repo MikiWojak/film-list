@@ -1,4 +1,4 @@
-export function initRateTriggers () {
+export function setupRateButtons () {
     const rateModal = document.querySelector("#rate-modal");
     const rateButtons = document.querySelectorAll("#rate__btn");
 
