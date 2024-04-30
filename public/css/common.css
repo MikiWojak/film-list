@@ -301,3 +301,18 @@ textarea {
     box-shadow: 0 0 0.2em red;
     outline: none;
 }
+
+select {
+    display: block;
+    width: 100%;
+    border-radius: 1em;
+    padding: 1em;
+    font-size: 1em;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset,
+    rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
+}
+
+option {
+    padding: 0.25em 0.5em;
+}

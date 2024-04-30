@@ -21,7 +21,8 @@ class FilmRepository extends Repository
                 $film['title'],
                 $film['description'],
                 $film['posterUrl'],
-                $film['avgRate']
+                $film['avgRate'],
+                $film['id']
             );
         }
 
@@ -59,7 +60,8 @@ class FilmRepository extends Repository
             $film['title'],
             $film['description'],
             $film['posterUrl'],
-            $film['avgRate']
+            $film['avgRate'],
+            $film['id']
         );
     }
 

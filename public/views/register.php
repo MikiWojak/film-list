@@ -21,7 +21,7 @@
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
         <link rel="stylesheet" type="text/css" href="public/css/auth.css" />
 
-        <script type="text/javascript" src="./public/js/script.js" defer></script>
+        <script type="text/javascript" src="./public/js/registerValidation.js" defer></script>
     </head>
     <body class="flex-row-center-center">
         <div class="auth-container">
