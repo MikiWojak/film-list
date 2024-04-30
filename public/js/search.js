@@ -41,9 +41,7 @@ const fetchFilms = async (filter) => {
 }
 
 const loadFilms = (films) => {
-    films.forEach(film => {
-        createFilm(film);
-    })
+    films.forEach(film => createFilm(film));
 
     initRateTriggers();
 }
@@ -52,7 +50,7 @@ const createFilm = (film) => {
     const template = document.querySelector('#film-template');
     const clone = template.content.cloneNode(true);
 
-    const { title, posterUrl, avgRate } = film;
+    const { id, title, posterUrl, avgRate } = film;
 
     const posterElement = clone.querySelector('img');
     posterElement.src = `public/uploads/${posterUrl}`;
@@ -63,8 +61,9 @@ const createFilm = (film) => {
     const avgRateElement = clone.querySelector('.film__avg_rate--inner');
     avgRateElement.innerHTML = avgRate;
 
-    // @TODO Add attributes to rateBtn
-    // document.querySelectorAll("#rate__btn")
+    const rateBtnElement = clone.querySelector('#rate__btn');
+    rateBtnElement.setAttribute('data-id', id);
+    rateBtnElement.setAttribute('data-title', title);
 
     filmsContainer.appendChild(clone);
 }
