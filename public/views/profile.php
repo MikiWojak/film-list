@@ -25,46 +25,7 @@
         <?php include_once __DIR__.'/shared/header.php' ?>
 
         <div class="admin-container">
-            <!-- <nav class="navbar"> -->
-            <nav class="navbar navbar--enabled">
-                <ul>
-                    <li>
-                        <a href="/admin-users">
-                            <span class="material-symbols-outlined">
-                                account_circle
-                            </span>
-                            <span>Users</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                movie
-                            </span>
-                            <span>Films</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                label
-                            </span>
-                            <span>Tags</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                person
-                            </span>
-                            <span>Directors</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <!-- <main class="content"> -->
-            <div class="content navbar--enabled">
+            <div class="content">
                 <div class="content__inner--shrink profile">
                     <h2>Hello, Johndoe</h2>
 
