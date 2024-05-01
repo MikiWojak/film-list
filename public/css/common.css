@@ -48,8 +48,13 @@ textarea {
 }
 
 .input__text {
+    font-family: 'Roboto', sans-serif;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset,
         rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
+}
+
+input[type="file"].input__text {
+    box-shadow: none;
 }
 
 .header {

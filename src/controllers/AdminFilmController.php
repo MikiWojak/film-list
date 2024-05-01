@@ -27,15 +27,15 @@ class AdminFilmController extends AppController {
     {
         if (
             $this->isPost() &&
-            is_uploaded_file($_FILES['file']['tmp_name']) &&
-            $this->validate($_FILES['file'])
+            is_uploaded_file($_FILES['poster']['tmp_name']) &&
+            $this->validate($_FILES['poster'])
         ) {
             move_uploaded_file(
-                $_FILES['file']['tmp_name'],
-                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['file']['name']
+                $_FILES['poster']['tmp_name'],
+                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['poster']['name']
             );
 
-            $film = new Film($_POST['title'], $_FILES['file']['name']);
+            $film = new Film($_POST['title'], $_FILES['poster']['name']);
 
             $this->filmRepository->create($film);
 

@@ -71,9 +71,19 @@
                             </div>
 
                             <div class="form__input">
+                                <label for="poster">Poster</label>
+                                <input
+                                    id="poster"
+                                    name="poster"
+                                    type="file"
+                                    class="input__text"
+                                />
+                            </div>
+
+                            <div class="form__input">
                                 <label for="description">Description</label>
                                 <textarea
-                                    name="description"
+                                    id="description"
                                     rows=5
                                     placeholder="Description"
                                     class="input__text"
@@ -81,7 +91,23 @@
                             </div>
 
                             <div class="form__input">
-                                <input type="file" name="file"/>
+                                <label for="releaseDate">Release Date</label>
+                                <input
+                                    id="releaseDate"
+                                    name="releaseDate"
+                                    type="date"
+                                    class="input__text"
+                                />
+                            </div>
+
+                            <div class="form__input">
+                                <label for="director">Director</label>
+                                <select name="director" id="director">
+                                    <option disabled selected value>-- Select Director --</option>
+                                    <option value="1">Director One</option>
+                                    <option value="2">Director Two</option>
+                                    <option value="3">Director Three</option>
+                                </select>
                             </div>
 
                             <div class="createedit__form__bottom">
