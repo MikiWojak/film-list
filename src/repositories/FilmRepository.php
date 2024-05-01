@@ -19,7 +19,6 @@ class FilmRepository extends Repository
         foreach ($films as $film) {
             $result[] = new Film(
                 $film['title'],
-                $film['description'],
                 $film['posterUrl'],
                 $film['avgRate'],
                 $film['id']
@@ -41,7 +40,7 @@ class FilmRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function findById(int $id): ?Film
+    public function findById(string $id): ?Film
     {
         $stmt = $this->database->connect()->prepare(
             'SELECT * FROM "Films" WHERE id = :$id'
@@ -58,7 +57,6 @@ class FilmRepository extends Repository
 
         return new Film(
             $film['title'],
-            $film['description'],
             $film['posterUrl'],
             $film['avgRate'],
             $film['id']
@@ -66,18 +64,14 @@ class FilmRepository extends Repository
     }
 
     public function create(Film $film): void {
-        $date = new DateTime();
-
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO "Films" ("title", "description", "posterUrl", "createdAt")
-            VALUES (?, ?, ?, ?)
+            INSERT INTO "Films" ("title", "posterUrl")
+            VALUES (?, ?)
         ');
 
         $stmt->execute([
             $film->getTitle(),
-            $film->getDesctription(),
             $film->getPosterUrl(),
-            $date->format('Y-m-d H:i:s'),
         ]);
     }
 }
