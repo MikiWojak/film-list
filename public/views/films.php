@@ -26,22 +26,7 @@
         <script type="module" src="./public/js/initRateButtonsSetup.js" defer></script>
     </head>
     <body>
-        <header class="header">
-            <div class="flex-row-center-center header_left">
-                <a href="/dashboard" class="flex-row-center-center header__logo">
-                    <span class="material-symbols-outlined header__logo__image">
-                        movie
-                    </span>
-                    <h1 class="header__logo__text">Film Rate</h1>
-                </a>
-            </div>
-
-            <a href="/login" class="flex-row-center-center header__login">
-                <span class="material-symbols-outlined header__login__icon">
-                    login
-                </span>
-            </a>
-        </header>
+        <?php include_once __DIR__.'/shared/header.php' ?>
 
         <div class="film-container">
             <div class="flex-row-center-center search--desktop">
