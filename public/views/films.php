@@ -26,22 +26,7 @@
         <script type="module" src="./public/js/initRateButtonsSetup.js" defer></script>
     </head>
     <body>
-        <header class="header">
-            <div class="flex-row-center-center header_left">
-                <a href="/dashboard" class="flex-row-center-center header__logo">
-                    <span class="material-symbols-outlined header__logo__image">
-                        movie
-                    </span>
-                    <h1 class="header__logo__text">Film Rate</h1>
-                </a>
-            </div>
-
-            <a href="/login" class="flex-row-center-center header__login">
-                <span class="material-symbols-outlined header__login__icon">
-                    login
-                </span>
-            </a>
-        </header>
+        <?php include_once __DIR__.'/shared/header.php' ?>
 
         <div class="film-container">
             <div class="flex-row-center-center search--desktop">
@@ -65,138 +50,26 @@
             </div>
 
             <main class="film_list">
-                <?php foreach($films as $film): ?>
-                    <section class="flex film">
-                        <img class="film__poster" src="public/uploads/<?= $film->getPosterUrl(); ?>" alt="Poster">
-                        
-                        <div class="film__bottom">
-                            <h2 class="film__title">
-                                <a href="/single-film" class="white_link film__title--inner">
-                                    <?= $film->getTitle(); ?>
-                                </a>
-                            </h2>
-                            
-                            <div class="film__bottom__rate-section">
-                                <div class="flex-row-center-center film__rate">
-                                    <span class="material-symbols-outlined star">
-                                        star_rate
-                                    </span>
-
-                                    <span class="film__avg_rate--inner">
-                                        <?= $film->getAvgRate(); ?>
-                                    </span>
-                                </div>
-                                <button
-                                    id="rate__btn"
-                                    class="flex-row-center-center film__rate"
-                                    data-id="<?= $film->getId(); ?>"
-                                    data-title="<?= $film->getTitle(); ?>"
-                                >
-                                    <span class="material-symbols-outlined star">
-                                        star
-                                    </span>
-
-                                    <span class="film__my_rate--inner">
-                                        Rate
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </section>
-                <?php endforeach; ?>
+                <?php
+                foreach($films as $film) {
+                    include __DIR__.'/shared/filmTile.php';
+                }
+                ?>
             </main>
         </div>
 
-        <div class="tab-bar">
-            <a href="/dashboard" class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    home
-                </span>
-            </a>
-            <button class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    search
-                </span>
-            </button>
-            <button class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    star
-                </span>
-            </button>
-            <a href="/login" class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    login
-                </span>
-            </a>
-        </div>
+        <?php include_once __DIR__.'/shared/tabBar.php' ?>
 
-        <div id="rate-modal" class="modal">
-            <div class="modal__content">
-                <div class="modal__content__header">
-                    <span class="modal__content__close">&times;</span>
-                </div>
-
-                <h2>Rate film (<span id="modal-film-id"></span>)</h2>
-                <h1 id="modal-film-title"></h1>
-
-                <form class="flex-column-center-center form">
-                    <select name="rate" id="rate">
-                        <option disabled selected value>-- Rate film --</option>
-                        <option value="10">(10) Masterpiece</option>
-                        <option value="9">(9) Great</option>
-                        <option value="8">(8) Very Good</option>
-                        <option value="7">(7) Good</option>
-                        <option value="6">(6) Fine</option>
-                        <option value="5">(5) Average</option>
-                        <option value="4">(4) Bad</option>
-                        <option value="3">(3) Very Bad</option>
-                        <option value="2">(2) Horrible</option>
-                        <option value="1">(1) Appalling</option>
-                    </select>
-
-                    <button
-                        class="btn--reset btn btn--purple form__submit"
-                    >
-                        Rate
-                    </button>
-
-                    <a href="#" class="modal__remove">Remove rate</a>
-                </form>
-            </div>
-        </div>
+        <?php include_once __DIR__.'/shared/rateFilmModal.php' ?>
     </body>
 </html>
 
 <template id="film-template">
-    <section class="flex film">
-        <img class="film__poster" src="" alt="Poster"/>
+    <?php
+    if (isset($film)) {
+        unset($film);
+    }
 
-        <div class="film__bottom">
-            <h2 class="film__title">
-                <a href="/single-film" class="white_link film__title--inner"></a>
-            </h2>
-
-            <div class="film__bottom__rate-section">
-                <div class="flex-row-center-center film__rate">
-                    <span class="material-symbols-outlined star">
-                        star_rate
-                    </span>
-
-                    <span class="film__avg_rate--inner"></span>
-                </div>
-                <button
-                    id="rate__btn"
-                    class="flex-row-center-center film__rate"
-                >
-                    <span class="material-symbols-outlined star">
-                        star
-                    </span>
-
-                    <span class="film__my_rate--inner">
-                        Rate
-                    </span>
-                </button>
-            </div>
-        </div>
-    </section>
+    include __DIR__.'/shared/filmTile.php';
+    ?>
 </template>

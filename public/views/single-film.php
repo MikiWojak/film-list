@@ -22,22 +22,7 @@
         <link rel="stylesheet" type="text/css" href="public/css/films.css" />
     </head>
     <body>
-        <header class="header">
-            <div class="flex-row-center-center header_left">
-                <a href="/dashboard" class="flex-row-center-center header__logo">
-                    <span class="material-symbols-outlined header__logo__image">
-                        movie
-                    </span>
-                    <h1 class="header__logo__text">Film Rate</h1>
-                </a>
-            </div>
-
-            <a href="/login" class="flex-row-center-center header__login">
-                <span class="material-symbols-outlined header__login__icon">
-                    login
-                </span>
-            </a>
-        </header>
+        <?php include_once __DIR__.'/shared/header.php' ?>
 
         <div class="film-container">
             <a href="/dashboard" class="flex-row-start-center back">
@@ -124,27 +109,6 @@
             </main>
         </div>
 
-        <div class="tab-bar">
-            <a href="/dashboard" class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    home
-                </span>
-            </a>
-            <button class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    search
-                </span>
-            </button>
-            <button class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    star
-                </span>
-            </button>
-            <a href="/login" class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    login
-                </span>
-            </a>
-        </div>
+        <?php include_once __DIR__.'/shared/tabBar.php' ?>
     </body>
 </html>

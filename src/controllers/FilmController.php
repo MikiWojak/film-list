@@ -24,6 +24,11 @@ class FilmController extends AppController
         ]);
     }
 
+    // @TODO Implement
+    public function film() {
+        $this->render('single-film');
+    }
+
     public function search() {
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 

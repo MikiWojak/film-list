@@ -22,68 +22,13 @@
         <link rel="stylesheet" type="text/css" href="public/css/admin.css" />
     </head>
     <body>
-        <header class="header">
-            <div class="flex-row-center-center header_left">
-                <button class="material-symbols-outlined btn--reset header_menu">
-                    menu
-                </button>
-
-                <a href="/dashboard" class="flex-row-center-center header__logo">
-                    <span class="material-symbols-outlined header__logo__image">
-                        movie
-                    </span>
-                    <h1 class="header__logo__text">Film Rate</h1>
-                </a>
-            </div>
-
-            <a href="/profile" class="flex-row-center-center header__login">
-                <span class="material-symbols-outlined header__login__icon">
-                    account_circle
-                </span>
-            </a>
-        </header>
+        <?php include_once __DIR__.'/shared/header.php' ?>
 
         <div class="admin-container">
-            <!-- <nav class="navbar"> -->
-            <nav class="navbar navbar--enabled">
-                <ul>
-                    <li>
-                        <a href="/admin-users">
-                            <span class="material-symbols-outlined">
-                                account_circle
-                            </span>
-                            <span>Users</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                movie
-                            </span>
-                            <span>Films</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                label
-                            </span>
-                            <span>Tags</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">
-                                person
-                            </span>
-                            <span>Directors</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <?php include_once __DIR__.'/shared/admin/sidebar.php' ?>
 
             <!-- <main class="content"> -->
-            <main class="content navbar--enabled">
+            <main class="content sidebar--enabled">
                 <div class="list__header">
                     <h2>Films</h2>
 
@@ -216,27 +161,6 @@
             </main>
         </div>
 
-        <div class="tab-bar">
-            <a href="/dashboard" class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    home
-                </span>
-            </a>
-            <button class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    search
-                </span>
-            </button>
-            <button class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    star
-                </span>
-            </button>
-            <a href="/profile" class="tab-bar__option">
-                <span class="material-symbols-outlined">
-                    account_circle
-                </span>
-            </a>
-        </div>
+        <?php include_once __DIR__.'/shared/tabBar.php' ?>
     </body>
 </html>
