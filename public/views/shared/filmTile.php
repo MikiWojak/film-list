@@ -1,10 +1,16 @@
+<?php $isFilmSet = isset($film); ?>
+
 <section class="flex film">
-    <img class="film__poster" src="public/uploads/<?= $film->getPosterUrl(); ?>" alt="Poster">
+    <img
+        class="film__poster"
+        src="<?= $isFilmSet ? "public/uploads/{$film->getPosterUrl()}" : ""  ?>"
+        alt="Poster"
+    >
 
     <div class="film__bottom">
         <h2 class="film__title">
             <a href="/single-film" class="white_link film__title--inner">
-                <?= $film->getTitle(); ?>
+                <?= $isFilmSet ? $film->getTitle() : "" ?>
             </a>
         </h2>
 
@@ -15,14 +21,14 @@
                 </span>
 
                 <span class="film__avg_rate--inner">
-                    <?= $film->getAvgRate(); ?>
+                    <?= $isFilmSet ? $film->getAvgRate() : "" ?>
                 </span>
             </div>
             <button
                 id="rate__btn"
                 class="flex-row-center-center film__rate"
-                data-id="<?= $film->getId(); ?>"
-                data-title="<?= $film->getTitle(); ?>"
+                data-id="<?= $isFilmSet ? $film->getId() : "" ?>"
+                data-title="<?= $isFilmSet ? $film->getTitle() : "" ?>"
             >
                 <span class="material-symbols-outlined star">
                     star

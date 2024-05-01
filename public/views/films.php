@@ -63,35 +63,11 @@
 </html>
 
 <template id="film-template">
-    <section class="flex film">
-        <img class="film__poster" src="" alt="Poster"/>
+    <?php
+        if (isset($film)) {
+            unset($film);
+        }
 
-        <div class="film__bottom">
-            <h2 class="film__title">
-                <a href="/single-film" class="white_link film__title--inner"></a>
-            </h2>
-
-            <div class="film__bottom__rate-section">
-                <div class="flex-row-center-center film__rate">
-                    <span class="material-symbols-outlined star">
-                        star_rate
-                    </span>
-
-                    <span class="film__avg_rate--inner"></span>
-                </div>
-                <button
-                    id="rate__btn"
-                    class="flex-row-center-center film__rate"
-                >
-                    <span class="material-symbols-outlined star">
-                        star
-                    </span>
-
-                    <span class="film__my_rate--inner">
-                        Rate
-                    </span>
-                </button>
-            </div>
-        </div>
-    </section>
+        include __DIR__.'/shared/filmTile.php'
+    ?>
 </template>
