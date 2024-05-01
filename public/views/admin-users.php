@@ -28,7 +28,7 @@
             <?php include_once __DIR__.'/shared/admin/sidebar.php' ?>
 
             <!-- <main class="content"> -->
-            <main class="content navbar--enabled">
+            <main class="content sidebar--enabled">
                 <div class="list__header">
                     <h2>Users</h2>
 

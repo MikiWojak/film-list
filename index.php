@@ -29,5 +29,4 @@ Routing::post('adminAddFilm', 'AdminFilmController');
 Routing::get('adminUsers', 'AdminUserController');
 Routing::post('adminAddUser', 'AdminUserController');
 
-
 Routing::run($path);

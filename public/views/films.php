@@ -50,9 +50,11 @@
             </div>
 
             <main class="film_list">
-                <?php foreach($films as $film): ?>
-                    <?php include __DIR__.'/shared/filmTile.php' ?>
-                <?php endforeach; ?>
+                <?php
+                foreach($films as $film) {
+                    include __DIR__.'/shared/filmTile.php';
+                }
+                ?>
             </main>
         </div>
 
@@ -64,10 +66,10 @@
 
 <template id="film-template">
     <?php
-        if (isset($film)) {
-            unset($film);
-        }
+    if (isset($film)) {
+        unset($film);
+    }
 
-        include __DIR__.'/shared/filmTile.php'
+    include __DIR__.'/shared/filmTile.php';
     ?>
 </template>

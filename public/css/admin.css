@@ -9,7 +9,7 @@
 }
 
 /* @TODO Show / Hide Navbar logic (especially on mobile) */
-.navbar {
+.sidebar {
     display: none;
     width: 100%;
     position: fixed;
@@ -26,17 +26,17 @@
     }
 }
 
-.navbar.navbar--enabled {
+.sidebar.sidebar--enabled {
     display: block;
 }
 
-.navbar > ul {
+.sidebar > ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.navbar > ul > li > a {
+.sidebar > ul > li > a {
     color: #fff;
     text-decoration: none;
     display: flex;
@@ -46,7 +46,7 @@
     border-bottom: 1px solid #fff;
 }
 
-.navbar > ul > li > a:hover {
+.sidebar > ul > li > a:hover {
     background-color: #5A189A;
 }
 
@@ -60,7 +60,7 @@
     }
 }
 
-.content.navbar--enabled {
+.content.sidebar--enabled {
     width: 100%;
 
     @media only screen and (max-device-width: 767px) {

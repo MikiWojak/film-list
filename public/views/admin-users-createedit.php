@@ -28,7 +28,7 @@
             <?php include_once __DIR__.'/shared/admin/sidebar.php' ?>
 
             <!-- <main class="content"> -->
-            <div class="content navbar--enabled">
+            <div class="content sidebar--enabled">
                 <div class="content__inner--shrink">
                     <a href="/admin-users" class="flex-row-start-center back">
                         <span class="material-symbols-outlined">

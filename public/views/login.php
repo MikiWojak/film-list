@@ -35,7 +35,8 @@
                 method="POST"
                 class="flex-column-center-center form"
             >
-                <?php if(isset($messages)) {
+                <?php
+                if(isset($messages)) {
                     foreach ($messages as $message) {
                         echo $message;
                     }
