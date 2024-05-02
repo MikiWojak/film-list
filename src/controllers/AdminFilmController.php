@@ -38,12 +38,7 @@ class AdminFilmController extends AppController {
             if (!$director) {
                 $this->message = ['Director not found!'];
 
-                $directors = $this->directorRepository->findAll();
-
-                return $this->render(
-                    'admin-films-createedit',
-                    ['messages' => $this->message, 'directors' => $directors]
-                );
+                $this->showAddEditPage();
             }
 
             move_uploaded_file(
@@ -70,12 +65,7 @@ class AdminFilmController extends AppController {
             ]);
         }
 
-        $directors = $this->directorRepository->findAll();
-
-        return $this->render(
-            'admin-films-createedit',
-            ['messages' => $this->message, 'directors' => $directors]
-        );
+        $this->showAddEditPage();
     }
 
     private function validate(array $file): bool
@@ -93,5 +83,14 @@ class AdminFilmController extends AppController {
         }
 
         return true;
+    }
+
+    private function showAddEditPage() {
+        $directors = $this->directorRepository->findAll();
+
+        return $this->render(
+            'admin-films-createedit',
+            ['messages' => $this->message, 'directors' => $directors]
+        );
     }
 }
