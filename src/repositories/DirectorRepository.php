@@ -9,7 +9,8 @@ class DirectorRepository extends Repository
     {
         $result = [];
 
-        $stmt = $this->database->connect()->prepare('
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
             SELECT * FROM "Directors"
         ');
         $stmt->execute();
@@ -30,7 +31,8 @@ class DirectorRepository extends Repository
 
     public function findById(string $id): ?Director
     {
-        $stmt = $this->database->connect()->prepare('
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
             SELECT * FROM "Directors" WHERE id = :id
         ');
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);
@@ -52,7 +54,8 @@ class DirectorRepository extends Repository
     }
 
     public function create(Director $director): void {
-        $stmt = $this->database->connect()->prepare('
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
             INSERT INTO "Directors" ("firstName", "lastName")
             VALUES (?, ?)
         ');

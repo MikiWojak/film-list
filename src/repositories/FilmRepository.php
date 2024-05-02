@@ -9,7 +9,8 @@ class FilmRepository extends Repository
     {
         $result = [];
 
-        $stmt = $this->database->connect()->prepare('
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
             SELECT
                 "f"."id" "id",
                 "title",
@@ -53,7 +54,8 @@ class FilmRepository extends Repository
     public function findAllByTitle(string $title): array {
         $title = '%'.strtolower($title).'%';
 
-        $stmt = $this->database->connect()->prepare('
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
             SELECT
                 "f"."id" "id",
                 "title",
@@ -82,7 +84,8 @@ class FilmRepository extends Repository
 
     public function findById(string $id): ?Film
     {
-        $stmt = $this->database->connect()->prepare('
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
             SELECT * FROM "Films" WHERE id = :id
         ');
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);
@@ -106,36 +109,44 @@ class FilmRepository extends Repository
     }
 
     public function create(Film $film): void {
-        // @TODO Transaction
-        // @TODO Close connection!
-        $conn = $this->database->connect();
+        try {
+            $this->database->connect();
 
-        $stmt = $conn->prepare('
-            INSERT INTO "Films" ("title", "posterUrl")
-            VALUES (?, ?)
-            RETURNING "id"
-        ');
-        $stmt->execute([
-            $film->getTitle(),
-            $film->getPosterUrl(),
-        ]);
+            $this->database->getConnection()->beginTransaction();
 
-        $insertedFilm = $stmt->fetch(PDO::FETCH_ASSOC);
-        $filmId = $insertedFilm['id'];  // Assuming 'id' is the column name
+            $stmt = $this->database->getConnection()->prepare('
+                INSERT INTO "Films" ("title", "posterUrl")
+                VALUES (?, ?)
+                RETURNING "id"
+            ');
+            $stmt->execute([
+                $film->getTitle(),
+                $film->getPosterUrl(),
+            ]);
 
-        $stmt = $conn->prepare('
-            INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate", "directorId")
-            VALUES (?, ?, ?, ?)
-        ');
-        $stmt->execute([
-            $filmId,
-            $film->getDescription(),
-            $film->getReleaseDate(),
-            $film->getDirector()->getId()
-        ]);
+            $insertedFilm = $stmt->fetch(PDO::FETCH_ASSOC);
+            $filmId = $insertedFilm['id'];
 
-        $this->database->disconnect();
+            $stmt = $this->database->getConnection()->prepare('
+                INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate", "directorId")
+                VALUES (?, ?, ?, ?)
+            ');
+            $stmt->execute([
+                $filmId,
+                $film->getDescription(),
+                $film->getReleaseDate(),
+                $film->getDirector()->getId()
+            ]);
 
-        echo "Hello";
+            $this->database->getConnection()->commit();
+
+        } catch (Exception $e) {
+            $this->database->getConnection()->rollBack();
+
+            //@TODO handle
+//            echo "Transaction failed: " . $e->getMessage();
+        } finally {
+            $this->database->disconnect();
+        }
     }
 }
