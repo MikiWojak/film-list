@@ -84,6 +84,7 @@
                                 <label for="description">Description</label>
                                 <textarea
                                     id="description"
+                                    name="description"
                                     rows=5
                                     placeholder="Description"
                                     class="input__text"
@@ -102,11 +103,14 @@
 
                             <div class="form__input">
                                 <label for="director">Director</label>
-                                <select name="director" id="director">
+                                <select id="directorId" name="directorId">
                                     <option disabled selected value>-- Select Director --</option>
-                                    <option value="1">Director One</option>
-                                    <option value="2">Director Two</option>
-                                    <option value="3">Director Three</option>
+
+                                    <?php foreach ($directors as $director): ?>
+                                        <option value="<?= $director->getId() ?>">
+                                            <?= "{$director->getFirstName()} {$director->getLastName() }" ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
 

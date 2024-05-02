@@ -7,11 +7,12 @@ class UserRepository extends Repository
 {
     public  function findByEmail(string $email): ?User
     {
-        $stmt = $this->database->connect()->prepare(
-            'SELECT * FROM "Users" WHERE email = :email'
-        );
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM "Users" WHERE email = :email
+        ');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
+        $this->database->disconnect();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
