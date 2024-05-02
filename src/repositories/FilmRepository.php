@@ -132,6 +132,7 @@ class FilmRepository extends Repository
         );
     }
 
+    // @TODO Refactor
     public function create(Film $film): void {
         try {
             $this->database->connect();
@@ -167,8 +168,7 @@ class FilmRepository extends Repository
         } catch (Exception $e) {
             $this->database->getConnection()->rollBack();
 
-            //@TODO handle
-//            echo "Transaction failed: " . $e->getMessage();
+            throw $e;
         } finally {
             $this->database->disconnect();
         }

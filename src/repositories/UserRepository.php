@@ -5,7 +5,7 @@ require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository
 {
-    public  function findByEmail(string $email): ?User
+    public function findByEmail(string $email): ?User
     {
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
@@ -27,5 +27,24 @@ class UserRepository extends Repository
             $user['email'],
             $user['password']
         );
+    }
+
+    public function create(User $user) : void
+    {
+        // @TODO Add role
+
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+                INSERT INTO "Users" ("username", "email", "password")
+                VALUES (?, ?, ?)
+            ');
+        $stmt->execute([
+            $user->getUsername(),
+            $user->getEmail(),
+            $user->getPassword(),
+        ]);
+
+        $this->database->disconnect();
     }
 }

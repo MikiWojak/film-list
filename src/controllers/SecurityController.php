@@ -6,10 +6,17 @@ require_once  __DIR__.'/../repositories/UserRepository.php';
 
 class SecurityController extends AppController
 {
+    private $userRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->userRepository = new UserRepository();
+    }
+
     public function login()
     {
-        $userRepository = new UserRepository();
-
         if(!$this->isPost()) {
             return $this->render('login');
         }
@@ -17,7 +24,7 @@ class SecurityController extends AppController
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $user =  $userRepository->findByEmail($email);
+        $user =  $this->userRepository->findByEmail($email);
 
         if(!$user) {
             return $this->render('login', ['messages' => ['User not exists']]);
@@ -27,20 +34,55 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['User with this email does not exists']]);
         }
 
-        if ($user->getPassword() !== $password) {
+        if (password_verify($password, $user->getPassword())) {
             return $this->render('login', ['messages' => ['Wrong password']]);
         }
 
-//        return $this->render('dashboard', [
+//        return $this->render('films', [
 //            "films" => [],
 //            "title" => "Films"
 //        ]);
 
+        // @TODO Keep session / cookie
+
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/dashboard");
+        header("Location: {$url}/films");
     }
 
     public function register() {
-        return $this->render('register', ['messages' => []]);
+        if(!$this->isPost()) {
+            return $this->render('register');
+        }
+
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirmedPassword = $_POST['confirmedPassword'];
+
+        // @TODO Sanitize data
+        // @TODO Check if agreed with terms
+        // @TODO Check if username already exists
+        // @TODO Check if email already exists
+
+        if ($password !== $confirmedPassword) {
+            return $this->render('login', ['messages' => ['Passwords do not match']]);
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $user = new User(
+            $username,
+            $email,
+            $hashedPassword
+        );
+
+        $this->userRepository->create($user);
+
+        // @TODO Show Login
+        return $this->render('login', ['messages' => ['Registration complete']]);
+    }
+
+    public function logout() {
+        // @TODO
     }
 }
