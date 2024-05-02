@@ -11,18 +11,26 @@ class FilmRepository extends Repository
 
         $stmt = $this->database->connect()->prepare('
             SELECT
-            FROM "Films"
-            JOIN "FilmDetails"
-                ON "Films"."id" = "FilmDetails"."filmId"
-            JOIN "Directors" 
-                ON "FilmDetails"."directorId" = "Directors"."id"
+                "f"."id" "id",
+                "title",
+                "posterUrl",
+                "avgRate",
+                "description",
+                "releaseDate",
+                "d"."id" "directorId",
+                "firstName",
+                "lastName"
+            FROM "Films" f
+            JOIN "FilmDetails" fd
+                ON "f"."id" = "fd"."filmId"
+            JOIN "Directors" d 
+                ON "fd"."directorId" = "d"."id"
         ');
         $stmt->execute();
         $this->database->disconnect();
 
         $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // @TODO Adjust
         foreach ($films as $film) {
             $result[] = new Film(
                 $film['title'],
@@ -32,8 +40,10 @@ class FilmRepository extends Repository
                 new Director(
                     $film['firstName'],
                     $film['lastName'],
+                    $film['directorId'],
                 ),
                 $film['avgRate'],
+                $film['id'],
             );
         }
 
@@ -44,12 +54,21 @@ class FilmRepository extends Repository
         $title = '%'.strtolower($title).'%';
 
         $stmt = $this->database->connect()->prepare('
-            SELECT *
-            FROM "Films"
-            JOIN "FilmDetails"
-                ON "Films"."id" = "FilmDetails"."filmId"
-            JOIN "Directors"
-                ON "FilmDetails"."directorId" = "Directors"."id"
+            SELECT
+                "f"."id" "id",
+                "title",
+                "posterUrl",
+                "avgRate",
+                "description",
+                "releaseDate",
+                "d"."id" "directorId",
+                "firstName",
+                "lastName"
+            FROM "Films" f
+            JOIN "FilmDetails" fd
+                ON "f"."id" = "fd"."filmId"
+            JOIN "Directors" d 
+                ON "fd"."directorId" = "d"."id"
             WHERE
                 LOWER("title") LIKE :title OR
                 LOWER("description") LIKE :title
