@@ -82,11 +82,28 @@ class FilmRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // @TODO Utilize
     public function findById(string $id): ?Film
     {
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT * FROM "Films" WHERE id = :id
+            SELECT
+                "f"."id" "id",
+                "title",
+                "posterUrl",
+                "avgRate",
+                "description",
+                "releaseDate",
+                "d"."id" "directorId",
+                "firstName",
+                "lastName"
+            FROM "Films" f
+            JOIN "FilmDetails" fd
+                ON "f"."id" = "fd"."filmId"
+            JOIN "Directors" d 
+                ON "fd"."directorId" = "d"."id"
+            WHERE
+                id = :id
         ');
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);
         $stmt->execute();
@@ -103,8 +120,15 @@ class FilmRepository extends Repository
         return new Film(
             $film['title'],
             $film['posterUrl'],
+            $film['description'],
+            $film['releaseDate'],
+            new Director(
+                $film['firstName'],
+                $film['lastName'],
+                $film['directorId'],
+            ),
             $film['avgRate'],
-            $film['id']
+            $film['id'],
         );
     }
 

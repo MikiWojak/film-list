@@ -15,6 +15,8 @@ class Database {
 
     private function __construct()
     {
+        $this->conn = null;
+
         $this->host = HOST;
         $this->port = PORT;
         $this->database = DATABASE;
