@@ -28,18 +28,17 @@ class AdminFilmController extends AppController {
 
     public function adminAddFilm()
     {
-        $directors = $this->directorRepository->findAll();
-
         if (
             $this->isPost() &&
             is_uploaded_file($_FILES['poster']['tmp_name']) &&
             $this->validate($_FILES['poster'])
         ) {
-            // @TODO Find Director
             $director = $this->directorRepository->findById($_POST['directorId']);
 
             if (!$director) {
                 $this->message = ['Director not found!'];
+
+                $directors = $this->directorRepository->findAll();
 
                 return $this->render(
                     'admin-films-createedit',
@@ -70,6 +69,8 @@ class AdminFilmController extends AppController {
                 "title" => "Films"
             ]);
         }
+
+        $directors = $this->directorRepository->findAll();
 
         return $this->render(
             'admin-films-createedit',

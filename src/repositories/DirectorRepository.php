@@ -52,19 +52,4 @@ class DirectorRepository extends Repository
             $director['id'],
         );
     }
-
-    public function create(Director $director): void {
-        $this->database->connect();
-        $stmt = $this->database->getConnection()->prepare('
-            INSERT INTO "Directors" ("firstName", "lastName")
-            VALUES (?, ?)
-        ');
-
-        $stmt->execute([
-            $director->getFirstName(),
-            $director->getLastName(),
-        ]);
-
-        $this->database->disconnect();
-    }
 }

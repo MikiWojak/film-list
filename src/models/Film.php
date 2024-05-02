@@ -30,11 +30,13 @@ class Film {
         $this->id = $id;
     }
 
-    public function getTitle() : string {
+    public function getTitle() : string
+    {
         return $this->title;
     }
 
-    public function getPosterUrl() : string {
+    public function getPosterUrl() : string
+    {
         return $this->posterUrl;
     }
 
