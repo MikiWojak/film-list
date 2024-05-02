@@ -9,20 +9,42 @@ class FilmRepository extends Repository
     {
         $result = [];
 
-        $stmt = $this->database->connect()->prepare(
-            'SELECT * FROM "Films"'
-        );
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT
+                "f"."id" "id",
+                "title",
+                "posterUrl",
+                "avgRate",
+                "description",
+                "releaseDate",
+                "d"."id" "directorId",
+                "firstName",
+                "lastName"
+            FROM "Films" f
+            JOIN "FilmDetails" fd
+                ON "f"."id" = "fd"."filmId"
+            JOIN "Directors" d 
+                ON "fd"."directorId" = "d"."id"
+        ');
         $stmt->execute();
+        $this->database->disconnect();
 
         $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($films as $film) {
             $result[] = new Film(
                 $film['title'],
-                $film['description'],
                 $film['posterUrl'],
+                $film['description'],
+                $film['releaseDate'],
+                new Director(
+                    $film['firstName'],
+                    $film['lastName'],
+                    $film['directorId'],
+                ),
                 $film['avgRate'],
-                $film['id']
+                $film['id'],
             );
         }
 
@@ -32,24 +54,63 @@ class FilmRepository extends Repository
     public function findAllByTitle(string $title): array {
         $title = '%'.strtolower($title).'%';
 
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM "Films" WHERE LOWER("title") LIKE :title
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT
+                "f"."id" "id",
+                "title",
+                "posterUrl",
+                "avgRate",
+                "description",
+                "releaseDate",
+                "d"."id" "directorId",
+                "firstName",
+                "lastName"
+            FROM "Films" f
+            JOIN "FilmDetails" fd
+                ON "f"."id" = "fd"."filmId"
+            JOIN "Directors" d 
+                ON "fd"."directorId" = "d"."id"
+            WHERE
+                LOWER("title") LIKE :title OR
+                LOWER("description") LIKE :title
         ');
         $stmt->bindValue(':title', $title, PDO::PARAM_STR);
         $stmt->execute();
+        $this->database->disconnect();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function findById(int $id): ?Film
+    // @TODO Utilize
+    public function findById(string $id): ?Film
     {
-        $stmt = $this->database->connect()->prepare(
-            'SELECT * FROM "Films" WHERE id = :$id'
-        );
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT
+                "f"."id" "id",
+                "title",
+                "posterUrl",
+                "avgRate",
+                "description",
+                "releaseDate",
+                "d"."id" "directorId",
+                "firstName",
+                "lastName"
+            FROM "Films" f
+            JOIN "FilmDetails" fd
+                ON "f"."id" = "fd"."filmId"
+            JOIN "Directors" d 
+                ON "fd"."directorId" = "d"."id"
+            WHERE
+                id = :id
+        ');
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
         $stmt->execute();
+        $this->database->disconnect();
 
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
         // @TODO Throw Exception
         if ($film === false) {
@@ -58,26 +119,58 @@ class FilmRepository extends Repository
 
         return new Film(
             $film['title'],
-            $film['description'],
             $film['posterUrl'],
+            $film['description'],
+            $film['releaseDate'],
+            new Director(
+                $film['firstName'],
+                $film['lastName'],
+                $film['directorId'],
+            ),
             $film['avgRate'],
-            $film['id']
+            $film['id'],
         );
     }
 
     public function create(Film $film): void {
-        $date = new DateTime();
+        try {
+            $this->database->connect();
 
-        $stmt = $this->database->connect()->prepare('
-            INSERT INTO "Films" ("title", "description", "posterUrl", "createdAt")
-            VALUES (?, ?, ?, ?)
-        ');
+            $this->database->getConnection()->beginTransaction();
 
-        $stmt->execute([
-            $film->getTitle(),
-            $film->getDesctription(),
-            $film->getPosterUrl(),
-            $date->format('Y-m-d H:i:s'),
-        ]);
+            $stmt = $this->database->getConnection()->prepare('
+                INSERT INTO "Films" ("title", "posterUrl")
+                VALUES (?, ?)
+                RETURNING "id"
+            ');
+            $stmt->execute([
+                $film->getTitle(),
+                $film->getPosterUrl(),
+            ]);
+
+            $insertedFilm = $stmt->fetch(PDO::FETCH_ASSOC);
+            $filmId = $insertedFilm['id'];
+
+            $stmt = $this->database->getConnection()->prepare('
+                INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate", "directorId")
+                VALUES (?, ?, ?, ?)
+            ');
+            $stmt->execute([
+                $filmId,
+                $film->getDescription(),
+                $film->getReleaseDate(),
+                $film->getDirector()->getId()
+            ]);
+
+            $this->database->getConnection()->commit();
+
+        } catch (Exception $e) {
+            $this->database->getConnection()->rollBack();
+
+            //@TODO handle
+//            echo "Transaction failed: " . $e->getMessage();
+        } finally {
+            $this->database->disconnect();
+        }
     }
 }

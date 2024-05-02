@@ -1,49 +1,67 @@
 <?php
 
+require_once 'Director.php';
+
 class Film {
     private $id;
     private $title;
-    private $desctription;
     private $posterUrl;
     private $avgRate;
-    // @TODO director
-    // @TODO tags
+    private $description;
+    private $releaseDate;
+    private $director;
 
     public function __construct(
         string $title,
-        string $desctription,
         string $posterUrl,
+        string $description,
+        string $releaseDate,
+        Director $director,
         float $avgRate = 0,
-        int $id = null
+        string $id = null
     ) {
         $this->title = $title;
-        $this->desctription = $desctription;
         $this->posterUrl = $posterUrl;
+        $this->description = $description;
+        $this->releaseDate = $releaseDate;
+        $this->director = $director;
 
         $this->avgRate = $avgRate;
         $this->id = $id;
     }
 
-    public function getTitle() : string {
+    public function getTitle() : string
+    {
         return $this->title;
     }
 
-    public function getDesctription(): string
+    public function getPosterUrl() : string
     {
-        return $this->desctription;
-    }
-
-    public function getPosterUrl() : string {
         return $this->posterUrl;
     }
 
-    public function getId(): ?int
+    public function getDescription(): string
     {
-        return $this->id;
+        return $this->description;
+    }
+
+    public function getReleaseDate(): string
+    {
+        return $this->releaseDate;
+    }
+
+    public function getDirector(): Director
+    {
+        return $this->director;
     }
 
     public function getAvgRate() : float
     {
         return $this->avgRate;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id;
     }
 }

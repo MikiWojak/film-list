@@ -71,8 +71,19 @@
                             </div>
 
                             <div class="form__input">
+                                <label for="poster">Poster</label>
+                                <input
+                                    id="poster"
+                                    name="poster"
+                                    type="file"
+                                    class="input__text"
+                                />
+                            </div>
+
+                            <div class="form__input">
                                 <label for="description">Description</label>
                                 <textarea
+                                    id="description"
                                     name="description"
                                     rows=5
                                     placeholder="Description"
@@ -81,7 +92,26 @@
                             </div>
 
                             <div class="form__input">
-                                <input type="file" name="file"/>
+                                <label for="releaseDate">Release Date</label>
+                                <input
+                                    id="releaseDate"
+                                    name="releaseDate"
+                                    type="date"
+                                    class="input__text"
+                                />
+                            </div>
+
+                            <div class="form__input">
+                                <label for="director">Director</label>
+                                <select id="directorId" name="directorId">
+                                    <option disabled selected value>-- Select Director --</option>
+
+                                    <?php foreach ($directors as $director): ?>
+                                        <option value="<?= $director->getId() ?>">
+                                            <?= "{$director->getFirstName()} {$director->getLastName() }" ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
 
                             <div class="createedit__form__bottom">
