@@ -1,5 +1,5 @@
 <div class="tab-bar">
-    <a href="/dashboard" class="tab-bar__option">
+    <a href="films" class="tab-bar__option">
         <span class="material-symbols-outlined">
             home
         </span>
@@ -14,9 +14,9 @@
             star
         </span>
     </button>
-    <a href="/profile" class="tab-bar__option">
+    <a href="<?= isset($_SESSION['loggedUser']) ? "profile" : "login" ?>" class="tab-bar__option">
         <span class="material-symbols-outlined">
-            account_circle
+            <?= isset($_SESSION['loggedUser']) ? "account_circle" : "login" ?>
         </span>
     </a>
 </div>

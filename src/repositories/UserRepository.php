@@ -6,11 +6,14 @@ require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository
 {
-    public function findByUsername(string $username): ?User
+    public function findByUsername(string $username, bool $includePassword = false): ?User
     {
+        $baseFields = '"id", "username", "email", "createdAt"';
+        $fields = $includePassword ? $baseFields.', "password"' : $baseFields;
+
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT * FROM "Users" WHERE username = :username
+            SELECT '.$fields.' FROM "Users" WHERE username = :username
         ');
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
@@ -25,16 +28,19 @@ class UserRepository extends Repository
         return new User(
             $user['username'],
             $user['email'],
-            $user['password'],
+            $user['password'] ?? null,
             $user['id']
         );
     }
 
-    public function findByEmail(string $email): ?User
+    public function findByEmail(string $email, bool $includePassword = false): ?User
     {
+        $baseFields = '"id", "username", "email", "createdAt"';
+        $fields = $includePassword ? $baseFields.', "password"' : $baseFields;
+
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT * FROM "Users" WHERE email = :email
+            SELECT '.$fields.' FROM "Users" WHERE email = :email
         ');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
@@ -49,7 +55,7 @@ class UserRepository extends Repository
         return new User(
             $user['username'],
             $user['email'],
-            $user['password'],
+            $user['password'] ?? null,
             $user['id']
         );
     }

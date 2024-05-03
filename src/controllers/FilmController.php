@@ -16,16 +16,19 @@ class FilmController extends AppController
     }
 
     public function films() {
+        session_start();
+
         $films = $this->filmRepository->findAll();
 
         $this->render('films', [
             "films" => $films,
-            "title" => "Films"
         ]);
     }
 
     // @TODO Implement
     public function film() {
+        session_start();
+
         $this->render('single-film');
     }
 
@@ -36,7 +39,6 @@ class FilmController extends AppController
             // @TODO Show error message
             $this->render('films', [
                 "films" => $this->filmRepository->findAll(),
-                "title" => "Films"
             ]);
         }
 

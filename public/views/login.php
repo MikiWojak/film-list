@@ -23,7 +23,7 @@
     </head>
     <body class="flex-row-center-center">
         <div class="auth-container">
-            <a href="/dashboard" class="logo">
+            <a href="films" class="logo">
                 <span class="material-symbols-outlined logo__image">
                     movie
                 </span>

@@ -20,16 +20,16 @@ class SecurityController extends AppController
 
     public function login()
     {
+        session_start();
+
         if(!$this->isPost()) {
             return $this->render('login');
         }
 
-        session_start();
-
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $user =  $this->userRepository->findByEmail($email);
+        $user =  $this->userRepository->findByEmail($email, true);
 
         if(!$user) {
             return $this->render('login', ['messages' => ['User not exists']]);
@@ -48,7 +48,9 @@ class SecurityController extends AppController
 //            "title" => "Films"
 //        ]);
 
-        $_SESSION['userId'] = $user->getId();
+        $loggedUser = $this->userRepository->findByEmail($email);
+
+        $_SESSION['loggedUser'] = $loggedUser;
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/profile");
@@ -58,8 +60,10 @@ class SecurityController extends AppController
         session_start();
 
         session_unset();
+        session_destroy();
 
-        return $this->render('films');
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/films");
     }
 
     public function register() {
