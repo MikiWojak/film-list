@@ -23,11 +23,15 @@ class AdminFilmController extends AppController {
     }
 
     public function adminFilms() {
+        session_start();
+
         return $this->render('admin-films', ['messages' => $this->message]);
     }
 
     public function adminAddFilm()
     {
+        session_start();
+
         if (
             $this->isPost() &&
             is_uploaded_file($_FILES['poster']['tmp_name']) &&

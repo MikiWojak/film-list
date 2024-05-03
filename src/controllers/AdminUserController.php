@@ -11,12 +11,8 @@ class AdminUserController extends AppController {
 
     // @TODO Implement
     public function adminUsers() {
-        return $this->render('admin-users');
-    }
+        session_start();
 
-    // @TODO Implement
-    public function adminAddUser()
-    {
-        return $this->render('admin-users-createedit');
+        return $this->render('admin-users');
     }
 }

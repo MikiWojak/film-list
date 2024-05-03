@@ -1,9 +1,28 @@
+<?php
+    $showMenuHamburger = false;
+
+    if (isset($_SESSION['loggedUser'])) {
+        $roles = $_SESSION['loggedUser']->getRoles();
+
+        foreach ($roles as $role) {
+            if ($role->getName() === 'admin') {
+                $showMenuHamburger = true;
+            }
+        }
+    }
+?>
+
 <header class="header">
     <div class="flex-row-center-center header_left">
-<!--        // @TODO For admin only-->
-        <button class="material-symbols-outlined btn--reset header_menu">
-            menu
-        </button>
+        <?php
+            if($showMenuHamburger) {
+                echo '
+                    <button class="material-symbols-outlined btn--reset header_menu">
+                        menu
+                    </button>
+                ';
+            }
+        ?>
 
         <a href="films" class="flex-row-center-center header__logo">
             <span class="material-symbols-outlined header__logo__image">
