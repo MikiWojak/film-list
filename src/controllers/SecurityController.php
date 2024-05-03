@@ -1,5 +1,4 @@
 <?php
-
 require_once 'AppController.php';
 require_once  __DIR__.'/../models/User.php';
 require_once  __DIR__.'/../models/Role.php';
@@ -25,6 +24,8 @@ class SecurityController extends AppController
             return $this->render('login');
         }
 
+        session_start();
+
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -38,7 +39,7 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['User with this email does not exists']]);
         }
 
-        if (password_verify($password, $user->getPassword())) {
+        if (!password_verify($password, $user->getPassword())) {
             return $this->render('login', ['messages' => ['Wrong password']]);
         }
 
@@ -47,10 +48,18 @@ class SecurityController extends AppController
 //            "title" => "Films"
 //        ]);
 
-        // @TODO Keep session / cookie
+        $_SESSION['userId'] = $user->getId();
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/films");
+        header("Location: {$url}/profile");
+    }
+
+    public function logout() {
+        session_start();
+
+        session_unset();
+
+        return $this->render('films');
     }
 
     public function register() {
@@ -99,9 +108,5 @@ class SecurityController extends AppController
         $this->userRepository->create($user, $role);
 
         return $this->render('login', ['messages' => ['Registration complete']]);
-    }
-
-    public function logout() {
-        // @TODO
     }
 }

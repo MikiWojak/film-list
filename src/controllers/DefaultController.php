@@ -10,6 +10,8 @@ class DefaultController extends AppController {
 
     // @TODO Implement. Is it correct place?
     public function profile() {
+        session_start();
+
         $this->render('profile');
     }
 }

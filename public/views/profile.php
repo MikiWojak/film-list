@@ -41,7 +41,7 @@
                         <span>Change Password</span>
                     </a>
 
-                    <a href="#" class="btn--reset btn btn--red">
+                    <a href="logout" class="btn--reset btn btn--red">
                         <span>Logout</span>
                     </a>
                 </div>  

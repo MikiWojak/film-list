@@ -21,6 +21,7 @@ Routing::get('films', 'FilmController');
 Routing::post('search', 'FilmController');
 
 Routing::post('login', 'SecurityController');
+Routing::post('logout', 'SecurityController');
 Routing::post('register', 'SecurityController');
 
 Routing::get('adminFilms', 'AdminFilmController');
