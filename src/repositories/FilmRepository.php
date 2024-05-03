@@ -139,6 +139,7 @@ class FilmRepository extends Repository
 
             $this->database->getConnection()->beginTransaction();
 
+            // @TODO Refactor
             $stmt = $this->database->getConnection()->prepare('
                 INSERT INTO "Films" ("title", "posterUrl")
                 VALUES (?, ?)

@@ -8,77 +8,107 @@ class UserRepository extends Repository
 {
     public function findByUsername(string $username, bool $includePassword = false): ?User
     {
-        $baseFields = '"id", "username", "email", "createdAt"';
-        $fields = $includePassword ? $baseFields.', "password"' : $baseFields;
+        $limitedFields = '"userId", "username", "email", "roleId", "roleName"';
+        $fields = $includePassword ? '*' : $limitedFields;
 
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT '.$fields.' FROM "Users" WHERE username = :username
+            SELECT '.$fields.'
+            FROM "Users2Roles"
+            WHERE username = :username
         ');
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $this->database->disconnect();
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $userRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($user === false) {
-            return null;
-        }
-
-        return new User(
-            $user['username'],
-            $user['email'],
-            $user['password'] ?? null,
-            $user['id']
-        );
+        return $this->findByProcessUser($userRows);
     }
 
     public function findByEmail(string $email, bool $includePassword = false): ?User
     {
-        $baseFields = '"id", "username", "email", "createdAt"';
-        $fields = $includePassword ? $baseFields.', "password"' : $baseFields;
+        $limitedFields = '"userId", "username", "email", "roleId", "roleName"';
+        $fields = $includePassword ? '*' : $limitedFields;
 
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT '.$fields.' FROM "Users" WHERE email = :email
+            SELECT '.$fields.'
+            FROM "Users2Roles"
+            WHERE email = :email
         ');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $this->database->disconnect();
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $userRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($user === false) {
+        return $this->findByProcessUser($userRows);
+    }
+
+    private function findByProcessUser(array $userRows) : ?User {
+        if (count($userRows) === 0) {
             return null;
         }
 
+        $roles = [];
+
+        foreach ($userRows as $row) {
+            $roles[] = new Role(
+                $row['roleName'],
+                $row['roleId'],
+            );
+        }
+
         return new User(
-            $user['username'],
-            $user['email'],
-            $user['password'] ?? null,
-            $user['id']
+            $userRows[0]['username'],
+            $userRows[0]['email'],
+            $roles,
+            $userRows[0]['password'] ?? null,
+            $userRows[0]['userId']
         );
     }
 
-    public function create(User $user, Role $role) : void
+    public function create(User $user) : void
     {
-        $this->database->connect();
+        try {
+            $this->database->connect();
 
-        $stmt = $this->database->getConnection()->prepare('
-                WITH "UserRow" AS (
-                    INSERT INTO "Users" ("username", "email", "password")
-                    VALUES (?, ?, ?)
-                    RETURNING id
-                )
-                INSERT INTO "Role2User" ("roleId", "userId") VALUES (?, (SELECT id FROM "UserRow"))
+            $this->database->getConnection()->beginTransaction();
+
+            $stmt = $this->database->getConnection()->prepare('
+                INSERT INTO "Users" ("username", "email", "password")
+                VALUES (?, ?, ?)
+                RETURNING id
             ');
-        $stmt->execute([
-            $user->getUsername(),
-            $user->getEmail(),
-            $user->getPassword(),
-            $role->getId(),
-        ]);
+            $stmt->execute([
+                $user->getUsername(),
+                $user->getEmail(),
+                $user->getPassword(),
+            ]);
 
-        $this->database->disconnect();
+            $insertedUser = $stmt->fetch(PDO::FETCH_ASSOC);
+            $userId = $insertedUser['id'];
+
+            foreach ($user->getRoles() as $role) {
+                $stmt = $this->database->getConnection()->prepare('
+                    INSERT INTO "Role2User" ("roleId", "userId")
+                    VALUES (?, ?)
+                ');
+                $stmt->execute([
+                    $role->getId(),
+                    $userId,
+                ]);
+            }
+
+            $this->database->getConnection()->commit();
+
+        } catch (Exception $e) {
+            $this->database->getConnection()->rollBack();
+
+            throw $e;
+        } finally {
+            $this->database->disconnect();
+        }
     }
 }
