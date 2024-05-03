@@ -2,16 +2,20 @@
 
 require_once 'AppController.php';
 require_once  __DIR__.'/../models/User.php';
+require_once  __DIR__.'/../models/Role.php';
+require_once  __DIR__.'/../repositories/RoleRepository.php';
 require_once  __DIR__.'/../repositories/UserRepository.php';
 
 class SecurityController extends AppController
 {
+    private $roleRepository;
     private $userRepository;
 
     public function __construct()
     {
         parent::__construct();
 
+        $this->roleRepository = new RoleRepository();
         $this->userRepository = new UserRepository();
     }
 
@@ -59,16 +63,32 @@ class SecurityController extends AppController
         $password = $_POST['password'];
         $confirmedPassword = $_POST['confirmedPassword'];
 
+        // @TODO Validate data
         // @TODO Sanitize data
-        // @TODO Check if agreed with terms
-        // @TODO Check if username already exists
-        // @TODO Check if email already exists
+
+        $userWithExistingUsername = $this->userRepository->findByUsername($username);
+
+        if ($userWithExistingUsername !== null) {
+            return $this->render('register', ['messages' => ['User with given username already exists']]);
+        }
+
+        $userWithExistingEmail = $this->userRepository->findByEmail($email);
+
+        if ($userWithExistingEmail !== null) {
+            return $this->render('register', ['messages' => ['User with given email already exists']]);
+        }
 
         if ($password !== $confirmedPassword) {
-            return $this->render('login', ['messages' => ['Passwords do not match']]);
+            return $this->render('register', ['messages' => ['Passwords do not match']]);
+        }
+
+        if (!isset($_POST['terms'])) {
+            return $this->render('register', ['messages' => ['Agree terms and conditions']]);
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $role = $this->roleRepository->findByName(Role::ROLE_USER);
 
         $user = new User(
             $username,
@@ -76,9 +96,8 @@ class SecurityController extends AppController
             $hashedPassword
         );
 
-        $this->userRepository->create($user);
+        $this->userRepository->create($user, $role);
 
-        // @TODO Show Login
         return $this->render('login', ['messages' => ['Registration complete']]);
     }
 

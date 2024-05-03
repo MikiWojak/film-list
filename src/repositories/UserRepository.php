@@ -1,10 +1,34 @@
 <?php
 
 require_once 'Repository.php';
+require_once __DIR__.'/../models/Role.php';
 require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository
 {
+    public function findByUsername(string $username): ?User
+    {
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT * FROM "Users" WHERE username = :username
+        ');
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        $this->database->disconnect();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user === false) {
+            return null;
+        }
+
+        return new User(
+            $user['username'],
+            $user['email'],
+            $user['password']
+        );
+    }
+
     public function findByEmail(string $email): ?User
     {
         $this->database->connect();
@@ -17,7 +41,6 @@ class UserRepository extends Repository
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // @TODO Throw Exception
         if ($user === false) {
             return null;
         }
@@ -29,20 +52,23 @@ class UserRepository extends Repository
         );
     }
 
-    public function create(User $user) : void
+    public function create(User $user, Role $role) : void
     {
-        // @TODO Add role
-
         $this->database->connect();
 
         $stmt = $this->database->getConnection()->prepare('
-                INSERT INTO "Users" ("username", "email", "password")
-                VALUES (?, ?, ?)
+                WITH "UserRow" AS (
+                    INSERT INTO "Users" ("username", "email", "password")
+                    VALUES (?, ?, ?)
+                    RETURNING id
+                )
+                INSERT INTO "Role2User" ("roleId", "userId") VALUES (?, (SELECT id FROM "UserRow"))
             ');
         $stmt->execute([
             $user->getUsername(),
             $user->getEmail(),
             $user->getPassword(),
+            $role->getId(),
         ]);
 
         $this->database->disconnect();
