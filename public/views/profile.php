@@ -27,21 +27,19 @@
         <div class="admin-container">
             <div class="content">
                 <div class="content__inner--shrink profile">
-                    <h2>Hello, Johndoe</h2>
+                    <h2>Hello, <?= $username ?></h2>
 
-                    <a href="/admin-users" class="btn--reset btn btn--blue">
-                        <span>Admin Panel</span>
-                    </a>
+                    <?php
+                        if(isset($_SESSION['isAdmin'])) {
+                            echo '
+                                <a href="adminFilms" class="btn--reset btn btn--blue">
+                                    <span>Admin Panel</span>
+                                </a>
+                            ';
+                        }
+                    ?>
 
-                    <a href="#" class="btn--reset btn btn--purple">
-                        <span>Change Personal Data</span>
-                    </a>
-
-                    <a href="#" class="btn--reset btn btn--purple">
-                        <span>Change Password</span>
-                    </a>
-
-                    <a href="#" class="btn--reset btn btn--red">
+                    <a href="logout" class="btn--reset btn btn--red">
                         <span>Logout</span>
                     </a>
                 </div>  

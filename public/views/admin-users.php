@@ -20,6 +20,8 @@
         <link rel="stylesheet" type="text/css" href="public/css/main.css" />
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
         <link rel="stylesheet" type="text/css" href="public/css/admin.css" />
+
+        <script type="text/javascript" src="public/js/headerMenu.js" defer></script>
     </head>
     <body>
         <?php include_once __DIR__.'/shared/header.php' ?>
@@ -27,8 +29,7 @@
         <div class="admin-container">
             <?php include_once __DIR__.'/shared/admin/sidebar.php' ?>
 
-            <!-- <main class="content"> -->
-            <main class="content sidebar--enabled">
+             <main class="content">
                 <div class="list__header">
                     <h2>Users</h2>
 

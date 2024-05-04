@@ -1,10 +1,16 @@
 <header class="header">
     <div class="flex-row-center-center header_left">
-        <button class="material-symbols-outlined btn--reset header_menu">
-            menu
-        </button>
+        <?php
+            if(isset($_SESSION['isAdmin'])) {
+                echo '
+                    <button class="material-symbols-outlined btn--reset header_menu">
+                        menu
+                    </button>
+                ';
+            }
+        ?>
 
-        <a href="/dashboard" class="flex-row-center-center header__logo">
+        <a href="films" class="flex-row-center-center header__logo">
             <span class="material-symbols-outlined header__logo__image">
                 movie
             </span>
@@ -12,9 +18,9 @@
         </a>
     </div>
 
-    <a href="/profile" class="flex-row-center-center header__login">
+    <a href="<?= isset($_SESSION['loggedUser']) ? "profile" : "login" ?>" class="flex-row-center-center header__login">
         <span class="material-symbols-outlined header__login__icon">
-            account_circle
+            <?= isset($_SESSION['loggedUser']) ? "account_circle" : "login" ?>
         </span>
     </a>
 </header>

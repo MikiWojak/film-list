@@ -1,5 +1,4 @@
-<!-- <nav class="sidebar"> -->
-<nav class="sidebar sidebar--enabled">
+ <nav class="sidebar">
     <ul>
         <li>
             <a href="/admin-users">

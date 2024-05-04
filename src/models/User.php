@@ -1,19 +1,28 @@
 <?php
 
+require_once 'Role.php';
+
 class User
 {
     private $username;
     private $email;
+    private $roles;
     private $password;
+    private $id;
 
     public function __construct(
         string $username,
         string $email,
-        string $password
+        array $roles,
+        string $password = null,
+        string $id = null
     ) {
         $this->username = $username;
         $this->email = $email;
+        $this->roles = $roles;
+
         $this->password = $password;
+        $this->id = $id;
     }
 
     public function getUsername(): string
@@ -21,19 +30,14 @@ class User
         return $this->username;
     }
 
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
-    }
-
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): void
+    public function getRoles(): array
     {
-        $this->email = $email;
+        return $this->roles;
     }
 
     public function getPassword(): string
@@ -41,8 +45,27 @@ class User
         return $this->password;
     }
 
-    public function setPassword(string $password): void
+    public function getId(): ?string
     {
-        $this->password = $password;
+        return $this->id;
+    }
+
+    public function isAdmin(): bool {
+        return $this->checkIfHasRole(ROLE::ROLE_ADMIN);
+
+    }
+
+    public function isUser(): bool {
+        return $this->checkIfHasRole(ROLE::ROLE_USER);
+    }
+
+    private function checkIfHasRole(string $roleName): bool {
+        foreach ($this->roles as $role) {
+            if ($role->getName() === $roleName) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

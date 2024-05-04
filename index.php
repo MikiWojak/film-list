@@ -21,12 +21,12 @@ Routing::get('films', 'FilmController');
 Routing::post('search', 'FilmController');
 
 Routing::post('login', 'SecurityController');
+Routing::post('logout', 'SecurityController');
 Routing::post('register', 'SecurityController');
 
 Routing::get('adminFilms', 'AdminFilmController');
 Routing::post('adminAddFilm', 'AdminFilmController');
 
 Routing::get('adminUsers', 'AdminUserController');
-Routing::post('adminAddUser', 'AdminUserController');
 
 Routing::run($path);

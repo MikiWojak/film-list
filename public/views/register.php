@@ -32,7 +32,19 @@
                 <h1 class="logo__text">Film Rate</h1>
             </a>
 
-            <form class="flex-column-center-center form">
+            <form
+                action="register"
+                method="POST"
+                class="flex-column-center-center form"
+            >
+                <?php
+                if(isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+                ?>
+
                 <div class="form__input">
                     <label for="username">Username</label>
                     <input
@@ -78,7 +90,7 @@
 
                 <div class="checkbox-container">
                     <label class="checkbox-label">I agree to terms and conditions
-                        <input type="checkbox">
+                        <input type="checkbox" id="terms" name="terms">
                         <span class="checkmark"></span>
                     </label>
                 </div>

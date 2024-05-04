@@ -112,7 +112,6 @@ class FilmRepository extends Repository
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-        // @TODO Throw Exception
         if ($film === false) {
             return null;
         }
@@ -132,12 +131,14 @@ class FilmRepository extends Repository
         );
     }
 
+    // @TODO Refactor
     public function create(Film $film): void {
         try {
             $this->database->connect();
 
             $this->database->getConnection()->beginTransaction();
 
+            // @TODO Refactor
             $stmt = $this->database->getConnection()->prepare('
                 INSERT INTO "Films" ("title", "posterUrl")
                 VALUES (?, ?)
@@ -167,8 +168,7 @@ class FilmRepository extends Repository
         } catch (Exception $e) {
             $this->database->getConnection()->rollBack();
 
-            //@TODO handle
-//            echo "Transaction failed: " . $e->getMessage();
+            throw $e;
         } finally {
             $this->database->disconnect();
         }

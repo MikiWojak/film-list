@@ -41,7 +41,6 @@ class DirectorRepository extends Repository
 
         $director = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // @TODO Throw Exception
         if ($director === false) {
             return null;
         }

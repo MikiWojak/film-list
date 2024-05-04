@@ -7,9 +7,16 @@ class DefaultController extends AppController {
        $this->render('login');
     }
 
-
-    // @TODO Implement. Is it correct place?
     public function profile() {
-        $this->render('profile');
+        if (!isset($_SESSION['loggedUser'])) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            return header("Location: {$url}/login");
+        }
+
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+
+        $this->render('profile', [
+            "username" => $loggedUser->getUsername(),
+        ]);
     }
 }
