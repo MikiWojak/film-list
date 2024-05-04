@@ -1,14 +1,3 @@
-<?php
-    $roles = $_SESSION['loggedUser']->getRoles();
-    $isAdmin = false;
-
-    foreach ($roles as $role) {
-        if ($role->getName() === 'admin') {
-            $isAdmin = true;
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,10 +27,10 @@
         <div class="admin-container">
             <div class="content">
                 <div class="content__inner--shrink profile">
-                    <h2>Hello, <?= $_SESSION['loggedUser']->getUsername() ?></h2>
+                    <h2>Hello, <?= $username ?></h2>
 
                     <?php
-                        if($isAdmin) {
+                        if(isset($_SESSION['isAdmin'])) {
                             echo '
                                 <a href="adminFilms" class="btn--reset btn btn--blue">
                                     <span>Admin Panel</span>

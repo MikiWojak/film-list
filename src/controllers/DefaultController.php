@@ -13,6 +13,10 @@ class DefaultController extends AppController {
             return header("Location: {$url}/login");
         }
 
-        $this->render('profile');
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+
+        $this->render('profile', [
+            "username" => $loggedUser->getUsername(),
+        ]);
     }
 }

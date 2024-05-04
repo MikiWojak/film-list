@@ -49,4 +49,24 @@ class User
     {
         return $this->id;
     }
+
+    public function isAdmin(): bool {
+        foreach ($this->roles as $role) {
+            if ($role->getName() === ROLE::ROLE_ADMIN) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isUser(): bool {
+        foreach ($this->roles as $role) {
+            if ($role->getName() === ROLE::ROLE_USER) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

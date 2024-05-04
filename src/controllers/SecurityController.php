@@ -47,10 +47,18 @@ class SecurityController extends AppController
 
         $loggedUser = $this->userRepository->findByEmail($email);
 
-        $_SESSION['loggedUser'] = $loggedUser;
+        $_SESSION['loggedUser'] = serialize($loggedUser);
+
+        if ($loggedUser->isAdmin()) {
+            $_SESSION['isAdmin'] = serialize($loggedUser->isAdmin());
+        }
+
+        if ($loggedUser->isUser()) {
+            $_SESSION['isUser'] = serialize($loggedUser->isUser());
+        }
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/profile");
+        return header("Location: {$url}/profile");
     }
 
     public function logout() {
@@ -58,7 +66,7 @@ class SecurityController extends AppController
         session_destroy();
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/films");
+        return header("Location: {$url}/films");
     }
 
     public function register() {

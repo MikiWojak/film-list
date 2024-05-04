@@ -1,21 +1,7 @@
-<?php
-    $showMenuHamburger = false;
-
-    if (isset($_SESSION['loggedUser'])) {
-        $roles = $_SESSION['loggedUser']->getRoles();
-
-        foreach ($roles as $role) {
-            if ($role->getName() === 'admin') {
-                $showMenuHamburger = true;
-            }
-        }
-    }
-?>
-
 <header class="header">
     <div class="flex-row-center-center header_left">
         <?php
-            if($showMenuHamburger) {
+            if(isset($_SESSION['isAdmin'])) {
                 echo '
                     <button class="material-symbols-outlined btn--reset header_menu">
                         menu
