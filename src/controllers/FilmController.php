@@ -16,8 +16,6 @@ class FilmController extends AppController
     }
 
     public function films() {
-        session_start();
-
         $films = $this->filmRepository->findAll();
 
         $this->render('films', [
@@ -27,8 +25,6 @@ class FilmController extends AppController
 
     // @TODO Implement
     public function film() {
-        session_start();
-
         $this->render('single-film');
     }
 

@@ -18,10 +18,7 @@ class SecurityController extends AppController
         $this->userRepository = new UserRepository();
     }
 
-    public function login()
-    {
-        session_start();
-
+    public function login() {
         if(!$this->isPost()) {
             return $this->render('login');
         }
@@ -57,8 +54,6 @@ class SecurityController extends AppController
     }
 
     public function logout() {
-        session_start();
-
         session_unset();
         session_destroy();
 
