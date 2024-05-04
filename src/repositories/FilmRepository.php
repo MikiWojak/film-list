@@ -11,21 +11,8 @@ class FilmRepository extends Repository
 
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT
-                "f"."id" "id",
-                "title",
-                "posterUrl",
-                "avgRate",
-                "description",
-                "releaseDate",
-                "d"."id" "directorId",
-                "firstName",
-                "lastName"
-            FROM "Films" f
-            JOIN "FilmDetails" fd
-                ON "f"."id" = "fd"."filmId"
-            JOIN "Directors" d 
-                ON "fd"."directorId" = "d"."id"
+            SELECT *
+            FROM "FilmsDetailDirector"
         ');
         $stmt->execute();
         $this->database->disconnect();
@@ -56,21 +43,8 @@ class FilmRepository extends Repository
 
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT
-                "f"."id" "id",
-                "title",
-                "posterUrl",
-                "avgRate",
-                "description",
-                "releaseDate",
-                "d"."id" "directorId",
-                "firstName",
-                "lastName"
-            FROM "Films" f
-            JOIN "FilmDetails" fd
-                ON "f"."id" = "fd"."filmId"
-            JOIN "Directors" d 
-                ON "fd"."directorId" = "d"."id"
+            SELECT *
+            FROM "FilmsDetailDirector"
             WHERE
                 LOWER("title") LIKE :title OR
                 LOWER("description") LIKE :title
@@ -87,23 +61,9 @@ class FilmRepository extends Repository
     {
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT
-                "f"."id" "id",
-                "title",
-                "posterUrl",
-                "avgRate",
-                "description",
-                "releaseDate",
-                "d"."id" "directorId",
-                "firstName",
-                "lastName"
-            FROM "Films" f
-            JOIN "FilmDetails" fd
-                ON "f"."id" = "fd"."filmId"
-            JOIN "Directors" d 
-                ON "fd"."directorId" = "d"."id"
-            WHERE
-                id = :id
+            SELECT *
+            FROM "FilmsDetailDirector"
+            WHERE id = :id
         ');
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);
         $stmt->execute();
@@ -131,46 +91,27 @@ class FilmRepository extends Repository
         );
     }
 
-    // @TODO Refactor
-    public function create(Film $film): void {
-        try {
-            $this->database->connect();
+    public function create(Film $film): void
+    {
+        $this->database->connect();
 
-            $this->database->getConnection()->beginTransaction();
-
-            // @TODO Refactor
-            $stmt = $this->database->getConnection()->prepare('
+        $stmt = $this->database->getConnection()->prepare('
+            WITH "FilmRow" AS (
                 INSERT INTO "Films" ("title", "posterUrl")
                 VALUES (?, ?)
                 RETURNING "id"
-            ');
-            $stmt->execute([
-                $film->getTitle(),
-                $film->getPosterUrl(),
-            ]);
+            )
+            INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate", "directorId")
+            VALUES ((SELECT id FROM "FilmRow"), ?, ?, ?)
+        ');
+        $stmt->execute([
+            $film->getTitle(),
+            $film->getPosterUrl(),
+            $film->getDescription(),
+            $film->getReleaseDate(),
+            $film->getDirector()->getId()
+        ]);
 
-            $insertedFilm = $stmt->fetch(PDO::FETCH_ASSOC);
-            $filmId = $insertedFilm['id'];
-
-            $stmt = $this->database->getConnection()->prepare('
-                INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate", "directorId")
-                VALUES (?, ?, ?, ?)
-            ');
-            $stmt->execute([
-                $filmId,
-                $film->getDescription(),
-                $film->getReleaseDate(),
-                $film->getDirector()->getId()
-            ]);
-
-            $this->database->getConnection()->commit();
-
-        } catch (Exception $e) {
-            $this->database->getConnection()->rollBack();
-
-            throw $e;
-        } finally {
-            $this->database->disconnect();
-        }
+        $this->database->disconnect();
     }
 }

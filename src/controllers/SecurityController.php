@@ -59,7 +59,20 @@ class SecurityController extends AppController
         session_destroy();
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        return header("Location: {$url}/films");
+        return header("Location: {$url}");
+    }
+
+    public function profile() {
+        if (!isset($_SESSION['loggedUser'])) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            return header("Location: {$url}/login");
+        }
+
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+
+        $this->render('profile', [
+            "username" => $loggedUser->getUsername(),
+        ]);
     }
 
     public function register() {

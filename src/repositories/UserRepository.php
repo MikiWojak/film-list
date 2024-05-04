@@ -8,7 +8,7 @@ class UserRepository extends Repository
 {
     public function findByUsername(string $username, bool $includePassword = false): ?User
     {
-        $limitedFields = '"userId", "username", "email", "roleId", "roleName"';
+        $limitedFields = '"id", "username", "email", "roleId", "roleName"';
         $fields = $includePassword ? '*' : $limitedFields;
 
         $this->database->connect();
@@ -28,7 +28,7 @@ class UserRepository extends Repository
 
     public function findByEmail(string $email, bool $includePassword = false): ?User
     {
-        $limitedFields = '"userId", "username", "email", "roleId", "roleName"';
+        $limitedFields = '"id", "username", "email", "roleId", "roleName"';
         $fields = $includePassword ? '*' : $limitedFields;
 
         $this->database->connect();
@@ -65,7 +65,7 @@ class UserRepository extends Repository
             $userRows[0]['email'],
             $roles,
             $userRows[0]['password'] ?? null,
-            $userRows[0]['userId']
+            $userRows[0]['id']
         );
     }
 

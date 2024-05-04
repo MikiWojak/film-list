@@ -15,7 +15,7 @@ class FilmController extends AppController
         $this->filmRepository = new FilmRepository();
     }
 
-    public function films() {
+    public function index() {
         $films = $this->filmRepository->findAll();
 
         $this->render('films', [

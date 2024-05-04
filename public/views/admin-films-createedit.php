@@ -46,7 +46,7 @@
                         </h2>
 
                         <form
-                                action="adminAddFilm"
+                                action="admincreatefilm"
                                 method="POST"
                                 ENCTYPE="multipart/form-data"
                                 class="flex-column-center-center form createedit__form"

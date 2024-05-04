@@ -1,5 +1,5 @@
 <div class="tab-bar">
-    <a href="films" class="tab-bar__option">
+    <a href="/" class="tab-bar__option">
         <span class="material-symbols-outlined">
             home
         </span>
