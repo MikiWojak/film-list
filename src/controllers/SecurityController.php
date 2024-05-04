@@ -32,10 +32,6 @@ class SecurityController extends AppController
             return $this->loginFailedMismathcingCredentials();
         }
 
-        if ($user->getEmail() !== $email) {
-            return $this->loginFailedMismathcingCredentials();
-        }
-
         if (!password_verify($password, $user->getPassword())) {
             return $this->loginFailedMismathcingCredentials();
         }
