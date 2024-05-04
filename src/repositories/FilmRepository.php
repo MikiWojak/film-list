@@ -112,7 +112,6 @@ class FilmRepository extends Repository
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-        // @TODO Throw Exception
         if ($film === false) {
             return null;
         }

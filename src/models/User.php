@@ -51,18 +51,17 @@ class User
     }
 
     public function isAdmin(): bool {
-        foreach ($this->roles as $role) {
-            if ($role->getName() === ROLE::ROLE_ADMIN) {
-                return true;
-            }
-        }
+        return $this->checkIfHasRole(ROLE::ROLE_ADMIN);
 
-        return false;
     }
 
     public function isUser(): bool {
+        return $this->checkIfHasRole(ROLE::ROLE_USER);
+    }
+
+    private function checkIfHasRole(string $roleName): bool {
         foreach ($this->roles as $role) {
-            if ($role->getName() === ROLE::ROLE_USER) {
+            if ($role->getName() === $roleName) {
                 return true;
             }
         }

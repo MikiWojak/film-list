@@ -32,7 +32,6 @@ class FilmController extends AppController
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if($contentType !== "application/json") {
-            // @TODO Show error message
             $this->render('films', [
                 "films" => $this->filmRepository->findAll(),
             ]);

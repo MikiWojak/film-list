@@ -40,10 +40,7 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password']]);
         }
 
-//        return $this->render('films', [
-//            "films" => [],
-//            "title" => "Films"
-//        ]);
+
 
         $loggedUser = $this->userRepository->findByEmail($email);
 

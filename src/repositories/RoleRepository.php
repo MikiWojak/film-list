@@ -17,7 +17,6 @@ class RoleRepository extends Repository
 
         $role = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // @TODO Throw Exception
         if ($role === false) {
             return null;
         }

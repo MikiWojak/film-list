@@ -23,7 +23,6 @@ class AdminFilmController extends AppController {
     }
 
     public function adminFilms() {
-
         return $this->render('admin-films', ['messages' => $this->message]);
     }
 
