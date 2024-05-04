@@ -29,15 +29,15 @@ class SecurityController extends AppController
         $user =  $this->userRepository->findByEmail($email, true);
 
         if(!$user) {
-            return $this->render('login', ['messages' => ['User not exists']]);
+            return $this->loginFailedMismathcingCredentials();
         }
 
         if ($user->getEmail() !== $email) {
-            return $this->render('login', ['messages' => ['User with this email does not exists']]);
+            return $this->loginFailedMismathcingCredentials();
         }
 
         if (!password_verify($password, $user->getPassword())) {
-            return $this->render('login', ['messages' => ['Wrong password']]);
+            return $this->loginFailedMismathcingCredentials();
         }
 
 
@@ -114,5 +114,9 @@ class SecurityController extends AppController
         $this->userRepository->create($user);
 
         return $this->render('login', ['messages' => ['Registration complete']]);
+    }
+
+    private function loginFailedMismathcingCredentials() {
+        $this->render('login', ['messages' => ['Mismatching credentials']]);
     }
 }
