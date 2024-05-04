@@ -17,7 +17,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="admindirectors">
                 <span class="material-symbols-outlined">
                     person
                 </span>
