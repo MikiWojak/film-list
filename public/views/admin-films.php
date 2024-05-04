@@ -34,7 +34,7 @@
                     <h2>Films</h2>
 
                     <a
-                        href="/admin-films-createedit"
+                        href="admincreatefilm"
                         class="btn--reset flex-row-center-center btn btn--purple add-item-btn"
                     >
                         <span class="material-symbols-outlined">
@@ -47,59 +47,28 @@
                 </div>
 
                 <div class="list--mobile">
-                    <section class="list__item">
-                        <p>Title:</p>
-                        <p><b>Saving Private Ryan</b></p>
+                    <?php foreach ($films as $film): ?>
+                        <section class="list__item">
+                            <p>Title:</p>
+                            <p><b><?= $film->getTitle() ?></b></p>
 
-                        <div class="list__item__bottom">
-                            <a href="/admin-films-createedit" class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                            </a>
-                            <button class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                    </section>
+                            <p>Avg Rate:</p>
+                            <p><b><?= $film->getAvgRate() ?></b></p>
 
-                    <section class="list__item">
-                        <p>Title:</p>
-                        <p><b>Howl's Moving Castle</b></p>
-
-                        <div class="list__item__bottom">
-                            <a href="/admin-films-createedit" class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                            </a>
-                            <button class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <section class="list__item">
-                        <p>Title:</p>
-                        <p><b>Jesteś Bogiem<b></p>
-
-                        <div class="list__item__bottom">
-                            <a href="/admin-films-createedit" class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                            </a>
-                            <button class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                    </section>
+                            <div class="list__item__bottom">
+                                <a href="/admin-films-createedit" class="btn--reset white_link">
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+                                </a>
+                                <button class="btn--reset white_link">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                        </section>
+                    <?php endforeach; ?>
                 </div>
 
                 <div class="table--desktop">
@@ -107,55 +76,29 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Avg Rate</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Saving Private Ryan</td>
-                                <td>
-                                    <a href="/admin-films-createedit" class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </a>
-                                    <button class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            delete
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Howl's Moving Castle</td>
-                                <td>
-                                    <a href="/admin-films-createedit" class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </a>
-                                    <button class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            delete
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jesteś Bogiem</td>
-                                <td>
-                                    <a href="/admin-films-createedit" class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </a>
-                                    <button class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            delete
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
+                            <?php foreach ($films as $film): ?>
+                                <tr>
+                                    <td><?= $film->getTitle() ?></td>
+                                    <td><?= $film->getAvgRate() ?></td>
+                                    <td>
+                                        <a href="/admin-films-createedit" class="btn--reset white_link">
+                                            <span class="material-symbols-outlined">
+                                                edit
+                                            </span>
+                                        </a>
+                                        <button class="btn--reset white_link">
+                                            <span class="material-symbols-outlined">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

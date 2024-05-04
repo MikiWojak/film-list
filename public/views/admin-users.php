@@ -32,18 +32,6 @@
              <main class="content">
                 <div class="list__header">
                     <h2>Users</h2>
-
-                    <a
-                        href="/admin-users-createedit"
-                        class="btn--reset flex-row-center-center btn btn--purple add-item-btn"
-                    >
-                        <span class="material-symbols-outlined">
-                            add_circle
-                        </span>
-                        <span>
-                            Add new user
-                        </span>
-                    </a>
                 </div>
 
                 <div class="list--mobile">
