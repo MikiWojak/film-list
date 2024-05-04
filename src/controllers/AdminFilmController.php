@@ -22,11 +22,11 @@ class AdminFilmController extends AppController {
         $this->directorRepository = new DirectorRepository();
     }
 
-    public function adminFilms() {
+    public function adminfilms() {
         return $this->render('admin-films', ['messages' => $this->message]);
     }
 
-    public function adminAddFilm()
+    public function admincreatefilm()
     {
         if (
             $this->isPost() &&

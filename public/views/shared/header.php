@@ -10,7 +10,7 @@
             }
         ?>
 
-        <a href="films" class="flex-row-center-center header__logo">
+        <a href="/" class="flex-row-center-center header__logo">
             <span class="material-symbols-outlined header__logo__image">
                 movie
             </span>

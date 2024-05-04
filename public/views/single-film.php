@@ -25,7 +25,7 @@
         <?php include_once __DIR__.'/shared/header.php' ?>
 
         <div class="film-container">
-            <a href="/dashboard" class="flex-row-start-center back">
+            <a href="/" class="flex-row-start-center back">
                 <span class="material-symbols-outlined">
                     arrow_left_alt
                 </span>

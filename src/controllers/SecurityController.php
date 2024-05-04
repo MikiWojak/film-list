@@ -62,6 +62,19 @@ class SecurityController extends AppController
         return header("Location: {$url}/films");
     }
 
+    public function profile() {
+        if (!isset($_SESSION['loggedUser'])) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            return header("Location: {$url}/login");
+        }
+
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+
+        $this->render('profile', [
+            "username" => $loggedUser->getUsername(),
+        ]);
+    }
+
     public function register() {
         if(!$this->isPost()) {
             return $this->render('register');

@@ -10,7 +10,7 @@ class AdminUserController extends AppController {
     }
 
     // @TODO Implement
-    public function adminUsers() {
+    public function adminusers() {
         return $this->render('admin-users');
     }
 }
