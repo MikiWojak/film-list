@@ -23,9 +23,14 @@ class FilmController extends AppController
         ]);
     }
 
-    // @TODO Implement
-    public function film() {
-        $this->render('single-film');
+    public function film(string $id) {
+        $film = $this->filmRepository->findById($id);
+
+        // @TODO What if Film not found?
+
+        $this->render('single-film', [
+            'film' => $film
+        ]);
     }
 
     public function search() {

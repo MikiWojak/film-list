@@ -36,7 +36,7 @@
             
             <main>
                 <h2 class="title">
-                    Saving Private Ryan
+                    <?= $film->getTitle() ?>
                 </h2>
 
                 <section class="film-info">
