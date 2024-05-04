@@ -50,10 +50,14 @@
                     <?php foreach ($films as $film): ?>
                         <section class="list__item">
                             <p>Title:</p>
-                            <p><b><?= $film->getTitle() ?></b></p>
+                            <p>
+                                <b><?= $film->getTitle() ?></b>
+                            </p>
 
                             <p>Avg Rate:</p>
-                            <p><b><?= $film->getAvgRate() ?></b></p>
+                            <p>
+                                <b><?= $film->getAvgRate() ?></b>
+                            </p>
 
                             <div class="list__item__bottom">
                                 <a href="/admin-films-createedit" class="btn--reset white_link">

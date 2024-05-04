@@ -6,6 +6,34 @@ require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository
 {
+    public function findAll(): array {
+
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT "id", "username", "email"
+            FROM "Users"
+            ORDER BY "createdAt" DESC
+        ');
+        $stmt->execute();
+        $this->database->disconnect();
+
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+
+        foreach ($users as $user) {
+            $result[] = new User(
+                $user['username'],
+                $user['email'],
+                [],
+                null,
+                $user['id']
+            );
+        }
+
+        return $result;
+    }
+
     public function findByUsername(string $username, bool $includePassword = false): ?User
     {
         $limitedFields = '"id", "username", "email", "roleId", "roleName"';
