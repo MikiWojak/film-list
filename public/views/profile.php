@@ -31,8 +31,6 @@
         <link rel="stylesheet" type="text/css" href="public/css/main.css" />
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
         <link rel="stylesheet" type="text/css" href="public/css/admin.css" />
-
-        <script type="module" src="public/js/hideHeaderMenu.js" defer></script>
     </head>
     <body>
         <?php include_once __DIR__.'/shared/header.php' ?>
@@ -51,14 +49,6 @@
                             ';
                         }
                     ?>
-
-                    <a href="#" class="btn--reset btn btn--purple">
-                        <span>Change Personal Data</span>
-                    </a>
-
-                    <a href="#" class="btn--reset btn btn--purple">
-                        <span>Change Password</span>
-                    </a>
 
                     <a href="logout" class="btn--reset btn btn--red">
                         <span>Logout</span>

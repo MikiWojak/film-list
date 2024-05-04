@@ -24,7 +24,6 @@
 
         <script type="module" src="public/js/filmsSearch.js" defer></script>
         <script type="module" src="public/js/initRateButtonsSetup.js" defer></script>
-        <script type="module" src="public/js/hideHeaderMenu.js" defer></script>
     </head>
     <body>
         <?php include_once __DIR__.'/shared/header.php' ?>

@@ -99,6 +99,11 @@ input[type="file"].input__text {
 .header_menu {
     color: #fff;
     cursor: pointer;
+    display: none;
+}
+
+.header_menu.enabled {
+    display: block;
 }
 
 .header__logo__text {
