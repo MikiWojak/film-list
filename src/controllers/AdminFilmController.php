@@ -38,7 +38,7 @@ class AdminFilmController extends AppController {
             if (!$director) {
                 $this->message = ['Director not found!'];
 
-                $this->showAddEditPage();
+                $this->showCreateEditPage();
             }
 
             move_uploaded_file(
@@ -56,16 +56,11 @@ class AdminFilmController extends AppController {
 
             $this->filmRepository->create($film);
 
-            // @TODO Redirect to Admin Films
-//            return $this->render('admin-films', ['messages' => $this->message]);
-
-            return $this->render('films', [
-                "films" => $this->filmRepository->findAll(),
-                "title" => "Films"
-            ]);
+            $url = "http://$_SERVER[HTTP_HOST]";
+            return header("Location: {$url}/adminfilms");
         }
 
-        $this->showAddEditPage();
+        $this->showCreateEditPage();
     }
 
     private function validate(array $file): bool
@@ -85,7 +80,7 @@ class AdminFilmController extends AppController {
         return true;
     }
 
-    private function showAddEditPage() {
+    private function showCreateEditPage() {
         $directors = $this->directorRepository->findAll();
 
         return $this->render(
