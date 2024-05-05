@@ -37,4 +37,19 @@ class AppController {
         
         print $output;
     }
+
+    protected function renderCss(string $template = null)
+    {
+        $templatePath = 'public/css/'.$template;
+        // @TODO Not found
+        $output = '';
+
+        if(file_exists($templatePath)){
+            ob_start();
+            include $templatePath;
+            $output = ob_get_clean();
+        }
+
+        print $output;
+    }
 }

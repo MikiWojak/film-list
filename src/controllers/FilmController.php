@@ -24,9 +24,18 @@ class FilmController extends AppController
     }
 
     public function film(string $id) {
-        $film = $this->filmRepository->findById($id);
+        $isCss = strpos($_SERVER["REQUEST_URI"], "css");
 
-        // @TODO What if Film not found?
+        if($isCss !== false) {
+            $urlParts = explode("/", $_SERVER["REQUEST_URI"]);
+            $cssFile = $urlParts[4];
+
+            header('Content-type: text/css');
+
+            return $this->renderCss($cssFile);
+        }
+
+        $film = $this->filmRepository->findById($id);
 
         $this->render('single-film', [
             'film' => $film
