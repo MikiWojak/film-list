@@ -56,6 +56,7 @@ const createFilm = (film) => {
     posterElement.src = `public/uploads/${posterUrl}`;
 
     const titleElement = clone.querySelector('.film__title--inner');
+    titleElement.setAttribute("href", `film/${id}`);
     titleElement.innerHTML = title;
 
     const avgRateElement = clone.querySelector('.film__avg_rate--inner');
