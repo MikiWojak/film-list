@@ -38,6 +38,7 @@ class AppController {
         print $output;
     }
 
+    // @TODO Remove if not used
     protected function renderCss(string $template = null)
     {
         $templatePath = 'public/css/'.$template;

@@ -23,17 +23,22 @@ class FilmController extends AppController
         ]);
     }
 
-    public function film(string $id) {
-        $isCss = strpos($_SERVER["REQUEST_URI"], "css");
-
-        if($isCss !== false) {
-            $urlParts = explode("/", $_SERVER["REQUEST_URI"]);
-            $cssFile = $urlParts[4];
-
-            header('Content-type: text/css');
-
-            return $this->renderCss($cssFile);
+    // @TODO Load assets (CSS, images)
+    public function film(string $id = null) {
+        if($id === null) {
+            $this->render('single-film');
         }
+
+//        $isCss = strpos($_SERVER["REQUEST_URI"], "css");
+//
+//        if($isCss !== false) {
+//            $urlParts = explode("/", $_SERVER["REQUEST_URI"]);
+//            $cssFile = $urlParts[4];
+//
+//            header('Content-type: text/css');
+//
+//            return $this->renderCss($cssFile);
+//        }
 
         $film = $this->filmRepository->findById($id);
 
