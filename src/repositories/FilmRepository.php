@@ -115,4 +115,58 @@ class FilmRepository extends Repository
 
         $this->database->disconnect();
     }
+
+    public function rate(string $filmId, string $rate): void
+    {
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+
+        $this->database->connect();
+
+        // Check if rate already exists
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT *
+            FROM "Film2User"
+            WHERE
+                filmId = ? AND
+                userId = ?
+        ');
+        $stmt->execute([
+            $filmId,
+            $loggedUser->getId()
+        ]);
+        $result = $stmt->fetch();
+
+        if ($result) {
+            $stmt = $this->database->getConnection()->prepare('
+                UPDATE "Film2User" 
+                SET "rate" = ? 
+                WHERE
+                    filmId = ? AND
+                    userId = ?
+            ');
+            $stmt->execute([
+                $rate,
+                $filmId,
+                $loggedUser->getId()
+            ]);
+        } else {
+            $insertStmt = $this->database->getConnection()->prepare('
+                INSERT INTO "Film2User" ("filmId", "userId", "rate") 
+                VALUES (?, ?, ?)
+            ');
+            $stmt->execute([
+                $rate,
+                $filmId,
+                $loggedUser->getId()
+            ]);
+        }
+
+        $this->database->disconnect();
+
+        // Update avg rate (separate function)
+    }
+
+    public function removeRate(string $filmId): void {
+
+    }
 }

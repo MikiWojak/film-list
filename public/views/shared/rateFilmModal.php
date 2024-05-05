@@ -4,10 +4,14 @@
             <span class="modal__content__close">&times;</span>
         </div>
 
-        <h2>Rate film (<span id="modal-film-id"></span>)</h2>
+        <h2>Rate film</h2>
         <h1 id="modal-film-title"></h1>
 
-        <form class="flex-column-center-center form">
+        <div
+            class="flex-column-center-center form"
+        >
+            <input type="hidden" name="filmId" id="filmId" value="" />
+
             <select name="rate" id="rate">
                 <option disabled selected value>-- Rate film --</option>
                 <option value="10">(10) Masterpiece</option>
@@ -23,12 +27,13 @@
             </select>
 
             <button
+                id="rate-submit-btn"
                 class="btn--reset btn btn--purple form__submit"
             >
                 Rate
             </button>
 
             <a href="#" class="modal__remove">Remove rate</a>
-        </form>
+        </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ export const setupRateButtons = () => {
             const id = rateButton.getAttribute("data-id");
             const title = rateButton.getAttribute("data-title");
 
-            rateModal.querySelector("#modal-film-id").innerText = id;
+            rateModal.querySelector("#filmId").setAttribute("value", id);
             rateModal.querySelector("#modal-film-title").innerText = title;
 
             rateModal.classList.add('enabled');
