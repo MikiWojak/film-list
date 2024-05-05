@@ -59,6 +59,11 @@
                                 <b><?= $film->getAvgRate() ?></b>
                             </p>
 
+                            <p>Created At:</p>
+                            <p>
+                                <b><?= $film->getCreatedAt() ?></b>
+                            </p>
+
                             <div class="list__item__bottom">
                                 <a href="/admin-films-createedit" class="btn--reset white_link">
                                     <span class="material-symbols-outlined">
@@ -81,6 +86,7 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Avg Rate</th>
+                                <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -89,6 +95,7 @@
                                 <tr>
                                     <td><?= $film->getTitle() ?></td>
                                     <td><?= $film->getAvgRate() ?></td>
+                                    <td><?= $film->getCreatedAt() ?></td>
                                     <td>
                                         <a href="/admin-films-createedit" class="btn--reset white_link">
                                             <span class="material-symbols-outlined">
