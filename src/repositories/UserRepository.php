@@ -10,9 +10,20 @@ class UserRepository extends Repository
 
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT "id", "username", "email"
-            FROM "Users"
-            ORDER BY "createdAt" DESC
+            SELECT
+                "id", 
+                "username", 
+                "email", 
+                STRING_AGG("roleName", \', \') AS "roleNames",
+                "userCreatedAt"
+            FROM
+                "Users2Roles"
+            GROUP BY
+                "id",
+                "username",
+                "email",
+                "userCreatedAt"
+            ORDER BY "userCreatedAt" DESC
         ');
         $stmt->execute();
         $this->database->disconnect();
@@ -27,7 +38,9 @@ class UserRepository extends Repository
                 $user['email'],
                 [],
                 null,
-                $user['id']
+                $user['id'],
+                $user['userCreatedAt'],
+                $user['roleNames']
             );
         }
 

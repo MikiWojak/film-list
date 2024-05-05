@@ -47,6 +47,16 @@
                                 <b><?= $user->getEmail() ?></b>
                             </p>
 
+                            <p>Roles:</p>
+                            <p>
+                                <b><?= $user->getRoleNames() ?></b>
+                            </p>
+
+                            <p>Created At:</p>
+                            <p>
+                                <b><?= $user->getCreatedAt() ?></b>
+                            </p>
+
                             <div class="list__item__bottom">
                                 <button class="btn--reset white_link">
                                     <span class="material-symbols-outlined">
@@ -64,6 +74,8 @@
                             <tr>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Roles</th>
+                                <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -72,6 +84,8 @@
                                 <tr>
                                     <td><?= $user->getUsername() ?></td>
                                     <td><?= $user->getEmail() ?></td>
+                                    <td><?= $user->getRoleNames() ?></td>
+                                    <td><?= $user->getCreatedAt() ?></td>
                                     <td>
                                         <button class="btn--reset white_link">
                                             <span class="material-symbols-outlined">
