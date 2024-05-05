@@ -32,83 +32,40 @@
              <main class="content">
                 <div class="list__header">
                     <h2>Users</h2>
-
-                    <a
-                        href="/admin-users-createedit"
-                        class="btn--reset flex-row-center-center btn btn--purple add-item-btn"
-                    >
-                        <span class="material-symbols-outlined">
-                            add_circle
-                        </span>
-                        <span>
-                            Add new user
-                        </span>
-                    </a>
                 </div>
 
                 <div class="list--mobile">
-                    <section class="list__item">
-                        <p>Username:</p>
-                        <p><b>Johndoe</b></p>
+                    <?php foreach ($users as $user): ?>
+                        <section class="list__item">
+                            <p>Username:</p>
+                            <p>
+                                <b><?= $user->getUsername() ?></b>
+                            </p>
 
-                        <p>Email:</p>
-                        <p><b>john.doe@filmrate.test</b></p>
+                            <p>Email:</p>
+                            <p>
+                                <b><?= $user->getEmail() ?></b>
+                            </p>
 
-                        <div class="list__item__bottom">
-                            <a href="/admin-users-createedit" class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                            </a>
-                            <button class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                    </section>
+                            <p>Roles:</p>
+                            <p>
+                                <b><?= $user->getRoleNames() ?></b>
+                            </p>
 
-                    <section class="list__item">
-                        <p>Username:</p>
-                        <p><b>Janedoe</b></p>
+                            <p>Created At:</p>
+                            <p>
+                                <b><?= $user->getCreatedAt() ?></b>
+                            </p>
 
-                        <p>Email:</p>
-                        <p><b>jane.doe@filmrate.test</b></p>
-
-                        <div class="list__item__bottom">
-                            <a href="/admin-users-createedit" class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                            </a>
-                            <button class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <section class="list__item">
-                        <p>Username:</p>
-                        <p><b>Mikeold</b></p>
-
-                        <p>Email:</p>
-                        <p><b>mike.old@filmrate.test</b></p>
-
-                        <div class="list__item__bottom">
-                            <a href="/admin-users-createedit" class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                            </a>
-                            <button class="btn--reset white_link">
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </button>
-                        </div>
-                    </section>
+                            <div class="list__item__bottom">
+                                <button class="btn--reset white_link">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </button>
+                            </div>
+                        </section>
+                    <?php endforeach; ?>
                 </div>
 
                 <div class="table--desktop">
@@ -117,58 +74,27 @@
                             <tr>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Roles</th>
+                                <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Johndoe</td>
-                                <td>john.doe@filmrate.test</td>
-                                <td>
-                                    <a href="/admin-users-createedit" class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </a>
-                                    <button class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            delete
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Janedoe</td>
-                                <td>jane.doe@filmrate.test</td>
-                                <td>
-                                    <a href="/admin-users-createedit" class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </a>
-                                    <button class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            delete
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Mikeold</td>
-                                <td>mike.old@filmrate.test</td>
-                                <td>
-                                    <a href="/admin-users-createedit" class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </a>
-                                    <button class="btn--reset white_link">
-                                        <span class="material-symbols-outlined">
-                                            delete
-                                        </span>
-                                    </button>
-                                </td>
-                            </tr>
+                            <?php foreach ($users as $user): ?>
+                                <tr>
+                                    <td><?= $user->getUsername() ?></td>
+                                    <td><?= $user->getEmail() ?></td>
+                                    <td><?= $user->getRoleNames() ?></td>
+                                    <td><?= $user->getCreatedAt() ?></td>
+                                    <td>
+                                        <button class="btn--reset white_link">
+                                            <span class="material-symbols-outlined">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

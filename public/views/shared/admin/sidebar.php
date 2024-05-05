@@ -1,7 +1,7 @@
  <nav class="sidebar">
     <ul>
         <li>
-            <a href="/admin-users">
+            <a href="adminusers">
                 <span class="material-symbols-outlined">
                     account_circle
                 </span>
@@ -9,7 +9,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="adminfilms">
                 <span class="material-symbols-outlined">
                     movie
                 </span>
@@ -17,15 +17,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
-                <span class="material-symbols-outlined">
-                    label
-                </span>
-                <span>Tags</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
+            <a href="admindirectors">
                 <span class="material-symbols-outlined">
                     person
                 </span>

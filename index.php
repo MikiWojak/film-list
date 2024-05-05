@@ -5,6 +5,7 @@ require_once 'src/controllers/FilmController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/AdminFilmController.php';
 require_once 'src/controllers/AdminUserController.php';
+require_once 'src/controllers/AdminDirectorController.php';
 
 $controller = new AppController();
 
@@ -25,5 +26,7 @@ Routing::get('adminfilms', 'AdminFilmController');
 Routing::post('admincreatefilm', 'AdminFilmController');
 
 Routing::get('adminusers', 'AdminUserController');
+
+Routing::get('admindirectors', 'AdminDirectorController');
 
 Routing::run($path);

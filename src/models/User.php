@@ -9,13 +9,17 @@ class User
     private $roles;
     private $password;
     private $id;
+    private $createdAt;
+    private $roleNames;
 
     public function __construct(
         string $username,
         string $email,
         array $roles,
         string $password = null,
-        string $id = null
+        string $id = null,
+        string $createdAt = null,
+        string $roleNames = null
     ) {
         $this->username = $username;
         $this->email = $email;
@@ -23,6 +27,8 @@ class User
 
         $this->password = $password;
         $this->id = $id;
+        $this->createdAt = $createdAt;
+        $this->roleNames = $roleNames;
     }
 
     public function getUsername(): string
@@ -48,6 +54,16 @@ class User
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function getCreatedAt(): ?string
+    {
+        return $this->createdAt;
+    }
+
+    public function getRoleNames(): ?string
+    {
+        return $this->roleNames;
     }
 
     public function isAdmin(): bool {

@@ -31,7 +31,7 @@
 
              <main class="content">
                 <div class="content__inner--shrink">
-                    <a href="/admin-films" class="flex-row-start-center back">
+                    <a href="adminfilms" class="flex-row-start-center back">
                         <span class="material-symbols-outlined">
                             arrow_left_alt
                         </span>

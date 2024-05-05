@@ -32,6 +32,7 @@ class FilmRepository extends Repository
                 ),
                 $film['avgRate'],
                 $film['id'],
+                $film['filmCreatedAt']
             );
         }
 

@@ -2,7 +2,8 @@
 
 require_once 'Director.php';
 
-class Film {
+class Film
+{
     private $id;
     private $title;
     private $posterUrl;
@@ -10,6 +11,7 @@ class Film {
     private $description;
     private $releaseDate;
     private $director;
+    private $createdAt;
 
     public function __construct(
         string $title,
@@ -18,8 +20,10 @@ class Film {
         string $releaseDate,
         Director $director,
         float $avgRate = 0,
-        string $id = null
-    ) {
+        string $id = null,
+        string $createdAt = null
+    )
+    {
         $this->title = $title;
         $this->posterUrl = $posterUrl;
         $this->description = $description;
@@ -28,6 +32,7 @@ class Film {
 
         $this->avgRate = $avgRate;
         $this->id = $id;
+        $this->createdAt = $createdAt;
     }
 
     public function getTitle() : string
@@ -63,5 +68,9 @@ class Film {
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function getCreatedAt(): ?string {
+        return $this->createdAt;
     }
 }

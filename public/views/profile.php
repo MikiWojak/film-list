@@ -32,7 +32,7 @@
                     <?php
                         if(isset($_SESSION['isAdmin'])) {
                             echo '
-                                <a href="adminfilms" class="btn--reset btn btn--blue">
+                                <a href="adminusers" class="btn--reset btn btn--blue">
                                     <span>Admin Panel</span>
                                 </a>
                             ';
