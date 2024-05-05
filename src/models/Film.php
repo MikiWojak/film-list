@@ -14,14 +14,14 @@ class Film
     private $createdAt;
 
     public function __construct(
-        string   $title,
-        string   $posterUrl,
-        string   $description,
-        string   $releaseDate,
+        string $title,
+        string $posterUrl,
+        string $description,
+        string $releaseDate,
         Director $director,
-        float    $avgRate = 0,
-        string   $id = null,
-        string   $createdAt = null
+        float $avgRate = 0,
+        string $id = null,
+        string $createdAt = null
     )
     {
         $this->title = $title;
