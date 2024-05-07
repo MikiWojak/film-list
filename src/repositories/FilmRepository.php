@@ -116,9 +116,10 @@ class FilmRepository extends Repository
         $this->database->disconnect();
     }
 
-    public function rate(string $filmId, string $rate): void
+    public function rate(string $filmId, int $rate): void
     {
         $loggedUser = unserialize($_SESSION['loggedUser']);
+        $loggedUserId = $loggedUser->getId();
 
         $this->database->connect();
 
@@ -127,38 +128,36 @@ class FilmRepository extends Repository
             SELECT *
             FROM "Film2User"
             WHERE
-                filmId = ? AND
-                userId = ?
+                "filmId" = ? AND
+                "userId" = ?
         ');
         $stmt->execute([
             $filmId,
-            $loggedUser->getId()
+            $loggedUserId
         ]);
         $result = $stmt->fetch();
 
         if ($result) {
-            $stmt = $this->database->getConnection()->prepare('
+            $updateStmt = $this->database->getConnection()->prepare('
                 UPDATE "Film2User" 
-                SET "rate" = ? 
+                SET "rate" = :rate
                 WHERE
-                    filmId = ? AND
-                    userId = ?
+                    "filmId" = :filmId AND
+                    "userId" = :userId
             ');
-            $stmt->execute([
-                $rate,
-                $filmId,
-                $loggedUser->getId()
-            ]);
+            $updateStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
+            $updateStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
+            $updateStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
+            $updateStmt->execute();
         } else {
             $insertStmt = $this->database->getConnection()->prepare('
                 INSERT INTO "Film2User" ("filmId", "userId", "rate") 
-                VALUES (?, ?, ?)
+                VALUES (:filmId, :userId, :rate)
             ');
-            $stmt->execute([
-                $rate,
-                $filmId,
-                $loggedUser->getId()
-            ]);
+            $insertStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
+            $insertStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
+            $insertStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
+            $insertStmt->execute();
         }
 
         $this->database->disconnect();
