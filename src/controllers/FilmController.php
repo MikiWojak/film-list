@@ -66,14 +66,25 @@ class FilmController extends AppController
     }
 
     public function rate(string $id) {
-        $rate = intval($_POST["rate"]);
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if($contentType !== "application/json") {
+            // @TODO Will it work?
+            http_response_code(400);
+            echo json_encode([]);
+
+            return;
+        }
+
+        $content = trim(file_get_contents("php://input"));
+        $decoded = json_decode($content, true);
+        $rate = intval($decoded["rate"]);
 
         $this->filmRepository->rate($id, $rate);
 
-        $films = $this->filmRepository->findAll();
+        header('Content-type: application/json');
+        http_response_code(200);
 
-        $this->render('films', [
-            "films" => $films,
-        ]);
+        echo json_encode([]);
     }
 }

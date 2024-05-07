@@ -17,3 +17,26 @@ window.addEventListener("click", (event) => {
         rateModal.classList.remove('enabled');
     }
 });
+
+rateSubmitBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    await rateFilm();
+})
+
+const rateFilm = async () => {
+    const data = { rate: rate.value };
+
+    try {
+        const response = await fetch(`/rate/${filmId.value}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+    } catch (error) {
+        console.error(error);
+    }
+}
