@@ -5,6 +5,7 @@ require_once __DIR__.'/../models/Film.php';
 
 class FilmRepository extends Repository
 {
+    // @TODO Add film rates if user logged in
     public function findAll(): array
     {
         $result = [];
@@ -166,6 +167,29 @@ class FilmRepository extends Repository
     }
 
     public function removeRate(string $filmId): void {
+        // @TODO
+    }
 
+    private function updateAvgRate(string $filmId): void {
+        // @TODO
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT *
+            FROM "Film2User"
+            WHERE
+                "filmId" = ? AND
+                "userId" = ?
+        ');
+
+        // @TODO Implement
+//        UPDATE "Films"
+//        SET "avgRate" = (
+//                SELECT AVG(rate)
+//            FROM "Film2User"
+//            WHERE
+//                "filmId" = ?
+//        )
+//        WHERE "id" = ?
+//                ;
     }
 }
