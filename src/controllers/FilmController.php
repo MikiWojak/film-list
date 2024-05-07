@@ -69,7 +69,6 @@ class FilmController extends AppController
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if($contentType !== "application/json") {
-            // @TODO Will it work?
             http_response_code(400);
             echo json_encode([]);
 

@@ -87,29 +87,6 @@ class UserRepository extends Repository
         return $this->findByProcessUser($userRows);
     }
 
-    private function findByProcessUser(array $userRows) : ?User {
-        if (count($userRows) === 0) {
-            return null;
-        }
-
-        $roles = [];
-
-        foreach ($userRows as $row) {
-            $roles[] = new Role(
-                $row['roleName'],
-                $row['roleId'],
-            );
-        }
-
-        return new User(
-            $userRows[0]['username'],
-            $userRows[0]['email'],
-            $roles,
-            $userRows[0]['password'] ?? null,
-            $userRows[0]['id']
-        );
-    }
-
     public function create(User $user) : void
     {
         try {
@@ -151,5 +128,28 @@ class UserRepository extends Repository
         } finally {
             $this->database->disconnect();
         }
+    }
+
+    private function findByProcessUser(array $userRows) : ?User {
+        if (count($userRows) === 0) {
+            return null;
+        }
+
+        $roles = [];
+
+        foreach ($userRows as $row) {
+            $roles[] = new Role(
+                $row['roleName'],
+                $row['roleId'],
+            );
+        }
+
+        return new User(
+            $userRows[0]['username'],
+            $userRows[0]['email'],
+            $roles,
+            $userRows[0]['password'] ?? null,
+            $userRows[0]['id']
+        );
     }
 }
