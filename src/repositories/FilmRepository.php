@@ -237,11 +237,10 @@ class FilmRepository extends Repository
     }
 
     private function updateAvgRate(string $filmId): void {
-        // @TODO Fix on no rates!
         $stmt = $this->database->getConnection()->prepare('
             UPDATE "Films"
             SET "avgRate" = (
-                    SELECT AVG(rate)
+                SELECT COALESCE(AVG(rate), 0)
                 FROM "Film2User"
                 WHERE
                     "filmId" = ?

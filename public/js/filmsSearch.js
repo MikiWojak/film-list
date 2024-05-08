@@ -18,7 +18,7 @@ searchSubmitBtn.addEventListener('click', (event) =>
     fetchFilms()
 );
 
-const fetchFilms = async () => {
+export const fetchFilms = async () => {
     const data = { search: search.value };
 
     try {
@@ -67,6 +67,7 @@ const createFilm = (film) => {
 
     const rateBtnElement = clone.querySelector('#rate__btn');
     rateBtnElement.setAttribute('data-id', id);
+    rateBtnElement.setAttribute('data-rate', rate || '');
     rateBtnElement.setAttribute('data-title', title);
 
     filmsContainer.appendChild(clone);

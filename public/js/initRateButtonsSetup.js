@@ -1,3 +1,4 @@
+import { fetchFilms } from './filmsSearch.js';
 import { setupRateButtons } from './rateButtonsSetup.js';
 
 const rateModal = document.querySelector("#rate-modal");
@@ -39,13 +40,17 @@ const doRate = async () => {
     const data = { rate: rate.value };
 
     try {
-        const response = await fetch(`/rate/${filmId.value}`, {
+        await fetch(`/rate/${filmId.value}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
         });
+
+        await fetchFilms();
+
+        rateModal.classList.remove('enabled');
     } catch (error) {
         console.error(error);
     }
@@ -53,12 +58,16 @@ const doRate = async () => {
 
 const removeRate = async () => {
     try {
-        const response = await fetch(`/removerate/${filmId.value}`, {
+        await fetch(`/removerate/${filmId.value}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
         });
+
+        await fetchFilms();
+
+        rateModal.classList.remove('enabled');
     } catch (error) {
         console.error(error);
     }
