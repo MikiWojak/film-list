@@ -16,7 +16,11 @@ class FilmController extends AppController
     }
 
     public function index() {
-        $films = $this->filmRepository->findAll();
+        $loggedUserId = isset($_SESSION['loggedUser'])
+            ? unserialize($_SESSION['loggedUser'])->getId()
+            : null;
+
+        $films = $this->filmRepository->findAll($loggedUserId);
 
         $this->render('films', [
             "films" => $films,
@@ -48,11 +52,15 @@ class FilmController extends AppController
     }
 
     public function search() {
+        $loggedUserId = isset($_SESSION['loggedUser'])
+            ? unserialize($_SESSION['loggedUser'])->getId()
+            : null;
+
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if($contentType !== "application/json") {
             $this->render('films', [
-                "films" => $this->filmRepository->findAll(),
+                "films" => $this->filmRepository->findAll($loggedUserId),
             ]);
         }
 
@@ -62,10 +70,13 @@ class FilmController extends AppController
         header('Content-type: application/json');
         http_response_code(200);
 
-        echo json_encode($this->filmRepository->findAllByTitle($decoded["search"]));
+        echo json_encode($this->filmRepository->findAllByTitle($decoded["search"], $loggedUserId));
     }
 
     public function rate(string $id) {
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+        $loggedUserId = $loggedUser->getId();
+
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if($contentType !== "application/json") {
@@ -80,7 +91,7 @@ class FilmController extends AppController
         $rate = intval($decoded["rate"]);
 
         try {
-            $this->filmRepository->rate($id, $rate);
+            $this->filmRepository->rate($id, $loggedUserId, $rate);
 
             header('Content-type: application/json');
             http_response_code(200);
@@ -92,8 +103,11 @@ class FilmController extends AppController
     }
 
     public function removerate(string $id) {
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+        $loggedUserId = $loggedUser->getId();
+
         try {
-            $this->filmRepository->removeRate($id);
+            $this->filmRepository->removeRate($id, $loggedUserId);
 
             header('Content-type: application/json');
             http_response_code(200);

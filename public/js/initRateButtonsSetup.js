@@ -32,6 +32,10 @@ removeRateBtn.addEventListener("click", async (event) => {
 })
 
 const doRate = async () => {
+    if (!rate.value) {
+        return;
+    }
+
     const data = { rate: rate.value };
 
     try {

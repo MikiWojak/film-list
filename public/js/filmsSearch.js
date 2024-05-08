@@ -50,7 +50,7 @@ const createFilm = (film) => {
     const template = document.querySelector('#film-template');
     const clone = template.content.cloneNode(true);
 
-    const { id, title, posterUrl, avgRate } = film;
+    const { id, title, posterUrl, avgRate, rate } = film;
 
     const posterElement = clone.querySelector('img');
     posterElement.src = `public/uploads/${posterUrl}`;
@@ -61,6 +61,9 @@ const createFilm = (film) => {
 
     const avgRateElement = clone.querySelector('.film__avg_rate--inner');
     avgRateElement.innerHTML = avgRate;
+
+    const myRateElement = clone.querySelector('.film__my_rate--inner');
+    myRateElement.innerHTML = rate || 'Rate';
 
     const rateBtnElement = clone.querySelector('#rate__btn');
     rateBtnElement.setAttribute('data-id', id);

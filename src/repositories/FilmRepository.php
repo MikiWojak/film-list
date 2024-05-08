@@ -5,20 +5,35 @@ require_once __DIR__.'/../models/Film.php';
 
 class FilmRepository extends Repository
 {
-    // @TODO Add film rates if user logged in
-    public function findAll(): array
+    public function findAll(string $loggedUserId = null): array
     {
-        $result = [];
-
         $this->database->connect();
-        $stmt = $this->database->getConnection()->prepare('
-            SELECT *
-            FROM "FilmsDetailDirector"
-        ');
+
+        $stmt = null;
+
+        if ($loggedUserId === null) {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT *
+                FROM "FilmsDetailDirector"
+            ');
+        } else {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT "fdd".*, "f2u"."rate"
+                FROM "FilmsDetailDirector" fdd
+                LEFT JOIN "Film2User" f2u ON 
+                    "fdd".id = "f2u"."filmId" AND 
+                    "f2u"."userId" = :userId
+            ');
+            $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
+        }
+
         $stmt->execute();
+
         $this->database->disconnect();
 
         $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
 
         foreach ($films as $film) {
             $result[] = new Film(
@@ -33,26 +48,46 @@ class FilmRepository extends Repository
                 ),
                 $film['avgRate'],
                 $film['id'],
-                $film['filmCreatedAt']
+                $film['filmCreatedAt'],
+                $film['rate'] ?? null
             );
         }
 
         return $result;
     }
 
-    public function findAllByTitle(string $title): array {
+    public function findAllByTitle(string $title, string $loggedUserId = null): array {
         $title = '%'.strtolower($title).'%';
 
         $this->database->connect();
-        $stmt = $this->database->getConnection()->prepare('
-            SELECT *
-            FROM "FilmsDetailDirector"
-            WHERE
-                LOWER("title") LIKE :title OR
-                LOWER("description") LIKE :title
-        ');
+
+        $stmt = null;
+
+        if ($loggedUserId === null) {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT *
+                FROM "FilmsDetailDirector"
+                WHERE
+                    LOWER("title") LIKE :title OR
+                    LOWER("description") LIKE :title
+            ');
+        } else {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT "fdd".*, "f2u"."rate"
+                FROM "FilmsDetailDirector" fdd
+                LEFT JOIN "Film2User" f2u ON 
+                    "fdd".id = "f2u"."filmId" AND 
+                    "f2u"."userId" = :userId
+                WHERE
+                    LOWER("title") LIKE :title OR
+                    LOWER("description") LIKE :title
+            ');
+            $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
+        }
+
         $stmt->bindValue(':title', $title, PDO::PARAM_STR);
         $stmt->execute();
+
         $this->database->disconnect();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -117,11 +152,8 @@ class FilmRepository extends Repository
         $this->database->disconnect();
     }
 
-    public function rate(string $filmId, int $rate): void
+    public function rate(string $filmId, string $userId, int $rate): void
     {
-        $loggedUser = unserialize($_SESSION['loggedUser']);
-        $loggedUserId = $loggedUser->getId();
-
         try {
             $this->database->connect();
 
@@ -136,7 +168,7 @@ class FilmRepository extends Repository
             ');
             $stmt->execute([
                 $filmId,
-                $loggedUserId
+                $userId
             ]);
             $result = $stmt->fetch();
 
@@ -150,7 +182,7 @@ class FilmRepository extends Repository
                 ');
                 $updateStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
                 $updateStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
-                $updateStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
+                $updateStmt->bindParam(':userId', $userId, PDO::PARAM_STR);
                 $updateStmt->execute();
             } else {
                 $insertStmt = $this->database->getConnection()->prepare('
@@ -158,7 +190,7 @@ class FilmRepository extends Repository
                     VALUES (:filmId, :userId, :rate)
                 ');
                 $insertStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
-                $insertStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
+                $insertStmt->bindParam(':userId', $userId, PDO::PARAM_STR);
                 $insertStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
                 $insertStmt->execute();
             }
@@ -175,10 +207,7 @@ class FilmRepository extends Repository
         }
     }
 
-    public function removeRate(string $filmId): void {
-        $loggedUser = unserialize($_SESSION['loggedUser']);
-        $loggedUserId = $loggedUser->getId();
-
+    public function removeRate(string $filmId, $userId): void {
         try {
             $this->database->connect();
 
@@ -192,7 +221,7 @@ class FilmRepository extends Repository
             ');
             $stmt->execute([
                 $filmId,
-                $loggedUserId
+                $userId
             ]);
 
             $this->updateAvgRate($filmId);
@@ -208,6 +237,7 @@ class FilmRepository extends Repository
     }
 
     private function updateAvgRate(string $filmId): void {
+        // @TODO Fix on no rates!
         $stmt = $this->database->getConnection()->prepare('
             UPDATE "Films"
             SET "avgRate" = (

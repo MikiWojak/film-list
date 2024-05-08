@@ -74,6 +74,11 @@
 .modal__remove {
     color: red;
     text-decoration: none;
+    display: none;
+}
+
+.modal__remove.enabled {
+    display: block;
 }
 
 .modal__remove:hover {

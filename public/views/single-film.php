@@ -63,7 +63,9 @@
                                     star
                                 </span>
 
-                                <span>Rate</span>
+                                <span>
+                                    <?= $film->getRate() === null ? 'Rate' : '$film->getRate()' ?>
+                                </span>
                             </div>
                         </div>
 
