@@ -122,48 +122,57 @@ class FilmRepository extends Repository
         $loggedUser = unserialize($_SESSION['loggedUser']);
         $loggedUserId = $loggedUser->getId();
 
-        $this->database->connect();
+        try {
+            $this->database->connect();
 
-        // Check if rate already exists
-        $stmt = $this->database->getConnection()->prepare('
-            SELECT *
-            FROM "Film2User"
-            WHERE
-                "filmId" = ? AND
-                "userId" = ?
-        ');
-        $stmt->execute([
-            $filmId,
-            $loggedUserId
-        ]);
-        $result = $stmt->fetch();
+            $this->database->getConnection()->beginTransaction();
 
-        if ($result) {
-            $updateStmt = $this->database->getConnection()->prepare('
-                UPDATE "Film2User" 
-                SET "rate" = :rate
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT *
+                FROM "Film2User"
                 WHERE
-                    "filmId" = :filmId AND
-                    "userId" = :userId
+                    "filmId" = ? AND
+                    "userId" = ?
             ');
-            $updateStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
-            $updateStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
-            $updateStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
-            $updateStmt->execute();
-        } else {
-            $insertStmt = $this->database->getConnection()->prepare('
-                INSERT INTO "Film2User" ("filmId", "userId", "rate") 
-                VALUES (:filmId, :userId, :rate)
-            ');
-            $insertStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
-            $insertStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
-            $insertStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
-            $insertStmt->execute();
+            $stmt->execute([
+                $filmId,
+                $loggedUserId
+            ]);
+            $result = $stmt->fetch();
+
+            if ($result) {
+                $updateStmt = $this->database->getConnection()->prepare('
+                    UPDATE "Film2User" 
+                    SET "rate" = :rate
+                    WHERE
+                        "filmId" = :filmId AND
+                        "userId" = :userId
+                ');
+                $updateStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
+                $updateStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
+                $updateStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
+                $updateStmt->execute();
+            } else {
+                $insertStmt = $this->database->getConnection()->prepare('
+                    INSERT INTO "Film2User" ("filmId", "userId", "rate") 
+                    VALUES (:filmId, :userId, :rate)
+                ');
+                $insertStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
+                $insertStmt->bindParam(':userId', $loggedUserId, PDO::PARAM_STR);
+                $insertStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
+                $insertStmt->execute();
+            }
+
+            $this->updateAvgRate($filmId);
+
+            $this->database->getConnection()->commit();
+        } catch (Exception $e) {
+            $this->database->getConnection()->rollBack();
+
+            throw $e;
+        } finally {
+            $this->database->disconnect();
         }
-
-        $this->database->disconnect();
-
-        // Update avg rate (separate function)
     }
 
     public function removeRate(string $filmId): void {
@@ -171,25 +180,19 @@ class FilmRepository extends Repository
     }
 
     private function updateAvgRate(string $filmId): void {
-        // @TODO
-        $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
-            SELECT *
-            FROM "Film2User"
-            WHERE
-                "filmId" = ? AND
-                "userId" = ?
+            UPDATE "Films"
+            SET "avgRate" = (
+                    SELECT AVG(rate)
+                FROM "Film2User"
+                WHERE
+                    "filmId" = ?
+            )
+            WHERE "id" = ?
         ');
-
-        // @TODO Implement
-//        UPDATE "Films"
-//        SET "avgRate" = (
-//                SELECT AVG(rate)
-//            FROM "Film2User"
-//            WHERE
-//                "filmId" = ?
-//        )
-//        WHERE "id" = ?
-//                ;
+        $stmt->execute([
+            $filmId,
+            $filmId
+        ]);
     }
 }
