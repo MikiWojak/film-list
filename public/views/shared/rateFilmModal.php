@@ -33,7 +33,7 @@
                 Rate
             </button>
 
-            <a href="#" class="modal__remove">Remove rate</a>
+            <a href="#" id="remove-rate-btn" class="modal__remove">Remove rate</a>
         </div>
     </div>
 </div>

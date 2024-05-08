@@ -176,7 +176,35 @@ class FilmRepository extends Repository
     }
 
     public function removeRate(string $filmId): void {
-        // @TODO
+        $loggedUser = unserialize($_SESSION['loggedUser']);
+        $loggedUserId = $loggedUser->getId();
+
+        try {
+            $this->database->connect();
+
+            $this->database->getConnection()->beginTransaction();
+
+            $stmt = $this->database->getConnection()->prepare('
+                DELETE FROM "Film2User"
+                WHERE
+                    "filmId" = ? AND
+                    "userId" = ?
+            ');
+            $stmt->execute([
+                $filmId,
+                $loggedUserId
+            ]);
+
+            $this->updateAvgRate($filmId);
+
+            $this->database->getConnection()->commit();
+        } catch (Exception $e) {
+            $this->database->getConnection()->rollBack();
+
+            throw $e;
+        } finally {
+            $this->database->disconnect();
+        }
     }
 
     private function updateAvgRate(string $filmId): void {

@@ -79,11 +79,28 @@ class FilmController extends AppController
         $decoded = json_decode($content, true);
         $rate = intval($decoded["rate"]);
 
-        $this->filmRepository->rate($id, $rate);
+        try {
+            $this->filmRepository->rate($id, $rate);
 
-        header('Content-type: application/json');
-        http_response_code(200);
+            header('Content-type: application/json');
+            http_response_code(200);
+            echo json_encode([]);
+        } catch(Exception $e) {
+            http_response_code(500);
+            echo json_encode([]);
+        }
+    }
 
-        echo json_encode([]);
+    public function removerate(string $id) {
+        try {
+            $this->filmRepository->removeRate($id);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+            echo json_encode([]);
+        } catch(Exception $e) {
+            http_response_code(500);
+            echo json_encode([]);
+        }
     }
 }

@@ -36,6 +36,7 @@ if (isLoggedIn()) {
 
     if (hasRole(ROLE::ROLE_USER)) {
         Routing::get('rate', 'FilmController');
+        Routing::get('removerate', 'FilmController');
     }
 
     if (hasRole(ROLE::ROLE_ADMIN)) {
