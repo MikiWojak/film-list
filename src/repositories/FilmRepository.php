@@ -233,6 +233,20 @@ class FilmRepository extends Repository
         }
     }
 
+    public function delete(string $id): void {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            DELETE FROM "Films" WHERE "id" = ?
+        ');
+
+        $stmt->execute([
+            $id
+        ]);
+
+        $this->database->disconnect();
+    }
+
     private function updateAvgRate(string $filmId): void {
         $stmt = $this->database->getConnection()->prepare('
             UPDATE "Films"

@@ -58,11 +58,13 @@
                             </p>
 
                             <div class="list__item__bottom">
-                                <button class="btn--reset white_link">
+                                <a
+                                    class="btn--reset white_link"
+                                >
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
-                                </button>
+                                </a>
                             </div>
                         </section>
                     <?php endforeach; ?>

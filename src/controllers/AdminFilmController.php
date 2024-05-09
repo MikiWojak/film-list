@@ -68,6 +68,14 @@ class AdminFilmController extends AppController {
         $this->showCreateEditPage();
     }
 
+    public function admindeletefilm(string $id)
+    {
+        $this->filmRepository->delete($id);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        return header("Location: {$url}/adminfilms");
+    }
+
     private function validate(array $file): bool
     {
         if ($file['size'] > self::MAX_FILE_SIZE) {

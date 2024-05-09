@@ -65,11 +65,13 @@
                             </p>
 
                             <div class="list__item__bottom">
-                                <button class="btn--reset white_link">
+                                <a
+                                    href="admindeletefilm/<?= $film->getId() ?>"
+                                    class="btn--reset white_link">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
-                                </button>
+                                </a>
                             </div>
                         </section>
                     <?php endforeach; ?>
@@ -92,11 +94,14 @@
                                     <td><?= $film->getAvgRate() ?></td>
                                     <td><?= $film->getCreatedAt() ?></td>
                                     <td>
-                                        <button class="btn--reset white_link">
+                                        <a
+                                            href="admindeletefilm/<?= $film->getId() ?>"
+                                            class="btn--reset white_link"
+                                        >
                                             <span class="material-symbols-outlined">
                                                 delete
                                             </span>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
