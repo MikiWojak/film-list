@@ -10,6 +10,12 @@
         <div
             class="flex-column-center-center form"
         >
+            <input
+                type="hidden"
+                name="isLoggedIn"
+                id="isLoggedIn"
+                value="<?= isset($_SESSION['loggedUser']) ?>"
+            />
             <input type="hidden" name="filmId" id="filmId" value="" />
 
             <select name="rate" id="rate">

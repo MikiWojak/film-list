@@ -4,6 +4,14 @@ export const setupRateButtons = () => {
 
     rateButtons.forEach(rateButton =>
         rateButton.addEventListener("click", () => {
+            const isLoggedIn = rateModal.querySelector("#isLoggedIn").value;
+
+            if (!isLoggedIn) {
+                alert("You must be logged in to rate a film");
+
+                return;
+            }
+
             const id = rateButton.getAttribute("data-id");
             const rate = rateButton.getAttribute("data-rate");
             const title = rateButton.getAttribute("data-title");
