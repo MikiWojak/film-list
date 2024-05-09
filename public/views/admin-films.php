@@ -65,11 +65,6 @@
                             </p>
 
                             <div class="list__item__bottom">
-                                <a href="/admin-films-createedit" class="btn--reset white_link">
-                                    <span class="material-symbols-outlined">
-                                        edit
-                                    </span>
-                                </a>
                                 <button class="btn--reset white_link">
                                     <span class="material-symbols-outlined">
                                         delete
@@ -97,11 +92,6 @@
                                     <td><?= $film->getAvgRate() ?></td>
                                     <td><?= $film->getCreatedAt() ?></td>
                                     <td>
-                                        <a href="/admin-films-createedit" class="btn--reset white_link">
-                                            <span class="material-symbols-outlined">
-                                                edit
-                                            </span>
-                                        </a>
                                         <button class="btn--reset white_link">
                                             <span class="material-symbols-outlined">
                                                 delete
