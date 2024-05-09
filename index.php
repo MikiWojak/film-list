@@ -34,7 +34,10 @@ if (isLoggedIn()) {
     Routing::post('logout', 'SecurityController');
     Routing::get('profile', 'SecurityController');
 
-    // @TODO Rate - User
+    if (hasRole(ROLE::ROLE_USER)) {
+        Routing::get('rate', 'FilmController');
+        Routing::get('removerate', 'FilmController');
+    }
 
     if (hasRole(ROLE::ROLE_ADMIN)) {
         Routing::get('adminfilms', 'AdminFilmController');

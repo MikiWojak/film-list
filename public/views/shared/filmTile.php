@@ -28,6 +28,7 @@
                 id="rate__btn"
                 class="flex-row-center-center film__rate"
                 data-id="<?= $isFilmSet ? $film->getId() : "" ?>"
+                data-rate="<?= $isFilmSet ? $film->getRate() : "" ?>"
                 data-title="<?= $isFilmSet ? $film->getTitle() : "" ?>"
             >
                 <span class="material-symbols-outlined star">
@@ -35,7 +36,7 @@
                 </span>
 
                 <span class="film__my_rate--inner">
-                    Rate
+                    <?= $isFilmSet && $film->getRate() !== null ? $film->getRate() : 'Rate' ?>
                 </span>
             </button>
         </div>
