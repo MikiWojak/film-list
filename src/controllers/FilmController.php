@@ -80,6 +80,7 @@ class FilmController extends AppController
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if($contentType !== "application/json") {
+            header('Content-type: application/json');
             http_response_code(400);
             echo json_encode([]);
 
@@ -97,6 +98,7 @@ class FilmController extends AppController
             http_response_code(200);
             echo json_encode([]);
         } catch(Exception $e) {
+            header('Content-type: application/json');
             http_response_code(500);
             echo json_encode([]);
         }
@@ -113,6 +115,7 @@ class FilmController extends AppController
             http_response_code(200);
             echo json_encode([]);
         } catch(Exception $e) {
+            header('Content-type: application/json');
             http_response_code(500);
             echo json_encode([]);
         }

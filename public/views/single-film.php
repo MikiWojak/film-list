@@ -64,7 +64,7 @@
                                 </span>
 
                                 <span>
-                                    <?= $film->getRate() === null ? 'Rate' : '$film->getRate()' ?>
+                                    <?= $film->getRate() === null ? 'Rate' : $film->getRate() ?>
                                 </span>
                             </div>
                         </div>

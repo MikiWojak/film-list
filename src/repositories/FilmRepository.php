@@ -173,27 +173,24 @@ class FilmRepository extends Repository
             $result = $stmt->fetch();
 
             if ($result) {
-                $updateStmt = $this->database->getConnection()->prepare('
+                $stmt = $this->database->getConnection()->prepare('
                     UPDATE "Film2User" 
                     SET "rate" = :rate
                     WHERE
                         "filmId" = :filmId AND
                         "userId" = :userId
                 ');
-                $updateStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
-                $updateStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
-                $updateStmt->bindParam(':userId', $userId, PDO::PARAM_STR);
-                $updateStmt->execute();
             } else {
-                $insertStmt = $this->database->getConnection()->prepare('
+                $stmt = $this->database->getConnection()->prepare('
                     INSERT INTO "Film2User" ("filmId", "userId", "rate") 
                     VALUES (:filmId, :userId, :rate)
                 ');
-                $insertStmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
-                $insertStmt->bindParam(':userId', $userId, PDO::PARAM_STR);
-                $insertStmt->bindParam(':rate', $rate, PDO::PARAM_INT);
-                $insertStmt->execute();
             }
+
+            $stmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+            $stmt->bindParam(':rate', $rate, PDO::PARAM_INT);
+            $stmt->execute();
 
             $this->updateAvgRate($filmId);
 
@@ -243,13 +240,11 @@ class FilmRepository extends Repository
                 SELECT COALESCE(AVG(rate), 0)
                 FROM "Film2User"
                 WHERE
-                    "filmId" = ?
+                    "filmId" = :filmId
             )
-            WHERE "id" = ?
+            WHERE "id" = :filmId
         ');
-        $stmt->execute([
-            $filmId,
-            $filmId
-        ]);
+        $stmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
