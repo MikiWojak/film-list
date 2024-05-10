@@ -93,7 +93,6 @@ class FilmRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // @TODO Utilize
     public function findById(string $id): ?Film
     {
         $this->database->connect();
