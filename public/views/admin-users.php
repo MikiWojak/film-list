@@ -1,3 +1,8 @@
+<?php
+    $loggedUser = unserialize($_SESSION['loggedUser']);
+    $loggedUserId = $loggedUser->getId();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,14 +73,20 @@
                             </p>
 
                             <div class="list__item__bottom">
-                                <a
-                                    href="admindeleteuser/<?= $user->getId() ?>"
-                                    class="btn--reset white_link"
-                                >
-                                    <span class="material-symbols-outlined">
-                                        delete
-                                    </span>
-                                </a>
+                                <?php
+                                if ($loggedUserId !== $user->getId()) {
+                                    echo "
+                                        <a
+                                            href=\"admindeleteuser?id={$user->getId()}\"
+                                            class=\"btn--reset white_link\"
+                                        >
+                                            <span class=\"material-symbols-outlined\">
+                                                delete
+                                            </span>
+                                        </a>
+                                    ";
+                                }
+                                ?>
                             </div>
                         </section>
                     <?php endforeach; ?>
@@ -100,14 +111,20 @@
                                     <td><?= $user->getRoleNames() ?></td>
                                     <td><?= $user->getCreatedAt() ?></td>
                                     <td>
-                                        <a
-                                            href="admindeleteuser/<?= $user->getId() ?>"
-                                            class="btn--reset white_link"
-                                        >
-                                            <span class="material-symbols-outlined">
-                                                delete
-                                            </span>
-                                        </a>
+                                        <?php
+                                        if ($loggedUserId !== $user->getId()) {
+                                            echo "
+                                                <a
+                                                    href=\"admindeleteuser?id={$user->getId()}\"
+                                                    class=\"btn--reset white_link\"
+                                                >
+                                                    <span class=\"material-symbols-outlined\">
+                                                        delete
+                                                    </span>
+                                                </a>
+                                            ";
+                                        }
+                                        ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
