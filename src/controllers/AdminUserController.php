@@ -24,24 +24,28 @@ class AdminUserController extends AppController {
         ]);
     }
 
-    public function admindeleteuser(string $id)
+    public function admindeleteuser()
     {
+        $id = $_GET['id'];
+
         $loggedUser = unserialize($_SESSION['loggedUser']);
         $loggedUserId = $loggedUser->getId();
 
         if ($loggedUserId === $id) {
-            return $this->render(
-                'admin-users',
-                ['messages' => ["You can't delete your own account!"]]
-            );
+            return $this->render('admin-users', [
+                'users' => $this->userRepository->findAll(),
+                'messages' => ["You can't delete your own account!"]
+            ]);
         }
 
         $this->userRepository->delete($id);
 
         $this->filmRepository->refreshAllAvgRate();
 
-        $url = "http://$_SERVER[HTTP_HOST]";
-        return header("Location: {$url}/adminusers");
+        $this->render('admin-users', [
+            'users' => $this->userRepository->findAll(),
+            'messages' => ["User has been deleted."]
+        ]);
     }
 
 }
