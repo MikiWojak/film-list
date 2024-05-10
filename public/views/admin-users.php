@@ -59,6 +59,7 @@
 
                             <div class="list__item__bottom">
                                 <a
+                                    href="admindeleteuser/<?= $user->getId() ?>"
                                     class="btn--reset white_link"
                                 >
                                     <span class="material-symbols-outlined">
@@ -89,11 +90,14 @@
                                     <td><?= $user->getRoleNames() ?></td>
                                     <td><?= $user->getCreatedAt() ?></td>
                                     <td>
-                                        <button class="btn--reset white_link">
+                                        <a
+                                            href="admindeleteuser/<?= $user->getId() ?>"
+                                            class="btn--reset white_link"
+                                        >
                                             <span class="material-symbols-outlined">
                                                 delete
                                             </span>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

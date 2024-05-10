@@ -44,6 +44,7 @@ if (isLoggedIn()) {
         Routing::post('admincreatefilm', 'AdminFilmController');
         Routing::get('admindeletefilm', 'AdminFilmController');
         Routing::get('adminusers', 'AdminUserController');
+        Routing::get('admindeleteuser', 'AdminUserController');
         Routing::get('admindirectors', 'AdminDirectorController');
     }
 } else {

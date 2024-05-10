@@ -14,11 +14,21 @@ class AdminUserController extends AppController {
     }
 
     public function adminusers() {
-        // @TODO Get Users with Roles
         $users = $this->userRepository->findAll();
 
         return $this->render('admin-users', [
             'users' => $users
         ]);
     }
+
+    public function admindeleteuser(string $id)
+    {
+        $this->userRepository->delete($id);
+
+        // @TODO Recalvulate averages!
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        return header("Location: {$url}/adminusers");
+    }
+
 }
