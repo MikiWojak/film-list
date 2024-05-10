@@ -46,6 +46,16 @@
                     </a>
                 </div>
 
+                 <div>
+                     <?php
+                     if(isset($messages)) {
+                         foreach ($messages as $message) {
+                             echo $message;
+                         }
+                     }
+                     ?>
+                 </div>
+
                 <div class="list--mobile">
                     <?php foreach ($films as $film): ?>
                         <section class="list__item">
@@ -66,7 +76,7 @@
 
                             <div class="list__item__bottom">
                                 <a
-                                    href="admindeletefilm/<?= $film->getId() ?>"
+                                    href="admindeletefilm?id=<?= $film->getId() ?>"
                                     class="btn--reset white_link">
                                     <span class="material-symbols-outlined">
                                         delete
@@ -95,7 +105,7 @@
                                     <td><?= $film->getCreatedAt() ?></td>
                                     <td>
                                         <a
-                                            href="admindeletefilm/<?= $film->getId() ?>"
+                                            href="admindeletefilm?id=<?= $film->getId() ?>"
                                             class="btn--reset white_link"
                                         >
                                             <span class="material-symbols-outlined">

@@ -68,12 +68,16 @@ class AdminFilmController extends AppController {
         $this->showCreateEditPage();
     }
 
-    public function admindeletefilm(string $id)
+    public function admindeletefilm()
     {
+        $id = $_GET['id'];
+
         $this->filmRepository->delete($id);
 
-        $url = "http://$_SERVER[HTTP_HOST]";
-        return header("Location: {$url}/adminfilms");
+        $this->render('admin-films', [
+            'films' => $this->filmRepository->findAll(),
+            'messages' => ["Film has been deleted."]
+        ]);
     }
 
     private function validate(array $file): bool
