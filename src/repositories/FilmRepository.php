@@ -247,11 +247,27 @@ class FilmRepository extends Repository
         $this->database->disconnect();
     }
 
+    public function refreshAllAvgRate() {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            UPDATE "Films" f
+            SET "avgRate" = (
+                SELECT COALESCE(AVG("rate"), 0)
+                FROM "Film2User" f2u
+                WHERE "f2u"."filmId" = "f"."id"
+            )
+        ');
+        $stmt->execute();
+
+        $this->database->disconnect();
+    }
+
     private function updateAvgRate(string $filmId): void {
         $stmt = $this->database->getConnection()->prepare('
             UPDATE "Films"
             SET "avgRate" = (
-                SELECT COALESCE(AVG(rate), 0)
+                SELECT COALESCE(AVG("rate"), 0)
                 FROM "Film2User"
                 WHERE
                     "filmId" = :filmId

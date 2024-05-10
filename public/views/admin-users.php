@@ -34,6 +34,16 @@
                     <h2>Users</h2>
                 </div>
 
+                 <div>
+                     <?php
+                     if(isset($messages)) {
+                         foreach ($messages as $message) {
+                             echo $message;
+                         }
+                     }
+                     ?>
+                 </div>
+
                 <div class="list--mobile">
                     <?php foreach ($users as $user): ?>
                         <section class="list__item">
