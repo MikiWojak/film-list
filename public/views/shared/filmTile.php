@@ -9,7 +9,7 @@
 
     <div class="film__bottom">
         <h2 class="film__title">
-            <a href="film/<?= $isFilmSet ? $film->getId() : "" ?>" class="white_link film__title--inner">
+            <a href="<?= $isFilmSet ? "film?id={$film->getId()}" : "" ?>" class="white_link film__title--inner">
                 <?= $isFilmSet ? $film->getTitle() : "" ?>
             </a>
         </h2>
