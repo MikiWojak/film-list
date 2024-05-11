@@ -41,6 +41,7 @@ if (isLoggedIn()) {
     if (hasRole(ROLE::ROLE_ADMIN)) {
         Routing::get('adminfilms', 'AdminFilmController');
         Routing::post('admincreatefilm', 'AdminFilmController');
+        Routing::post('adminupdatefilm', 'AdminFilmController');
         Routing::get('admindeletefilm', 'AdminFilmController');
         Routing::get('adminusers', 'AdminUserController');
         Routing::get('admindeleteuser', 'AdminUserController');

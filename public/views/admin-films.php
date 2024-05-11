@@ -75,6 +75,11 @@
                             </p>
 
                             <div class="list__item__bottom">
+                                <a href="adminupdatefilm?id=<?= $film->getId() ?>" class="btn--reset white_link">
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+                                </a>
                                 <a
                                     href="admindeletefilm?id=<?= $film->getId() ?>"
                                     class="btn--reset white_link">
@@ -104,6 +109,11 @@
                                     <td><?= $film->getAvgRate() ?></td>
                                     <td><?= $film->getCreatedAt() ?></td>
                                     <td>
+                                        <a href="adminupdatefilm?id=<?= $film->getId() ?>" class="btn--reset white_link">
+                                            <span class="material-symbols-outlined">
+                                                edit
+                                            </span>
+                                        </a>
                                         <a
                                             href="admindeletefilm?id=<?= $film->getId() ?>"
                                             class="btn--reset white_link"
