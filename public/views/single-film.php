@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Saving Private Ryan</title>
+        <title><?= $film->getTitle() ?></title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -70,12 +70,12 @@
                         </div>
 
                         <div class="desktop-only">
-                            <p>
+                            <div>
                                 Director:
                                 <b>
                                     <?= "{$film->getDirector()->getFirstName()} {$film->getDirector()->getLastName() }" ?>
                                 </b>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </section>
