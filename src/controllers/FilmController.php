@@ -27,11 +27,14 @@ class FilmController extends AppController
         ]);
     }
 
-    // @TODO Adjust for logged user
     public function film() {
+        $loggedUserId = isset($_SESSION['loggedUser'])
+            ? unserialize($_SESSION['loggedUser'])->getId()
+            : null;
+
         $id = $_GET["id"];
 
-        $film = $this->filmRepository->findById($id);
+        $film = $this->filmRepository->findById($id, $loggedUserId);
 
         $this->render('single-film', [
             'film' => $film

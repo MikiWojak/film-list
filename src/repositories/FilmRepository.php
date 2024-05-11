@@ -93,20 +93,36 @@ class FilmRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function findById(string $id): ?Film
+    public function findById(string $id, string $loggedUserId = null): ?Film
     {
         $this->database->connect();
-        $stmt = $this->database->getConnection()->prepare('
-            SELECT *
-            FROM "FilmsDetailDirector"
-            WHERE id = :id
-        ');
+
+        $stmt = null;
+
+        if ($loggedUserId === null) {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT *
+                FROM "FilmsDetailDirector"
+                WHERE "id" = :id
+            ');
+        } else {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT "fdd".*, "f2u"."rate"
+                FROM "FilmsDetailDirector" fdd
+                LEFT JOIN "Film2User" f2u ON 
+                    "fdd".id = "f2u"."filmId" AND 
+                    "f2u"."userId" = :userId
+                WHERE "id" = :id
+            ');
+            $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
+        }
+
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);
         $stmt->execute();
+
         $this->database->disconnect();
 
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
-
 
         if ($film === false) {
             return null;
@@ -124,6 +140,8 @@ class FilmRepository extends Repository
             ),
             $film['avgRate'],
             $film['id'],
+            $film['filmCreatedAt'],
+            $film['rate'] ?? null
         );
     }
 
