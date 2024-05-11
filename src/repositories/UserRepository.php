@@ -40,7 +40,7 @@ class UserRepository extends Repository
 
     public function findByUsername(string $username, bool $includePassword = false): ?User
     {
-        $limitedFields = '"id", "username", "email", "roleId", "roleName"';
+        $limitedFields = '"id", "username", "email", "createdAt", "roleId", "roleName"';
         $fields = $includePassword ? '*' : $limitedFields;
 
         $this->database->connect();
@@ -55,25 +55,12 @@ class UserRepository extends Repository
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user === false) {
-            return null;
-        }
-
-        return new User(
-            $user['username'],
-            $user['email'],
-            new Role(
-                $user['roleName'],
-                $user['roleId'],
-            ),
-            $user['password'] ?? null,
-            $user['id'],
-        );
+        return $this->processFetchedUser($user);
     }
 
     public function findByEmail(string $email, bool $includePassword = false): ?User
     {
-        $limitedFields = '"id", "username", "email", "roleId", "roleName"';
+        $limitedFields = '"id", "username", "email", "createdAt", "roleId", "roleName"';
         $fields = $includePassword ? '*' : $limitedFields;
 
         $this->database->connect();
@@ -88,20 +75,7 @@ class UserRepository extends Repository
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user === false) {
-            return null;
-        }
-
-        return new User(
-            $user['username'],
-            $user['email'],
-            new Role(
-                $user['roleName'],
-                $user['roleId'],
-            ),
-            $user['password'] ?? null,
-            $user['id'],
-        );
+        return $this->processFetchedUser($user);
     }
 
     public function create(User $user) : void
@@ -134,5 +108,23 @@ class UserRepository extends Repository
         ]);
 
         $this->database->disconnect();
+    }
+
+    private function processFetchedUser(array | false $user): ?User {
+        if ($user === false) {
+            return null;
+        }
+
+        return new User(
+            $user['username'],
+            $user['email'],
+            new Role(
+                $user['roleName'],
+                $user['roleId'],
+            ),
+            $user['password'] ?? null,
+            $user['id'],
+            $user['createdAt'],
+        );
     }
 }
