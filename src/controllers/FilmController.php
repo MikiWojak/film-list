@@ -36,8 +36,6 @@ class FilmController extends AppController
 
         $film = $this->filmRepository->findById($id, $loggedUserId);
 
-        // @TODO What if film not found?
-
         $this->render('single-film', [
             'film' => $film
         ]);

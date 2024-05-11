@@ -20,9 +20,6 @@
         <link rel="stylesheet" type="text/css" href="public/css/main.css" />
         <link rel="stylesheet" type="text/css" href="public/css/common.css" />
         <link rel="stylesheet" type="text/css" href="public/css/films.css" />
-        <link rel="stylesheet" type="text/css" href="public/css/modal.css" />
-
-        <script type="module" src="public/js/initRateButtonsSetup.js" defer></script>
     </head>
     <body>
         <?php include_once __DIR__.'/shared/header.php' ?>
@@ -61,21 +58,15 @@
 
                                 <span><?= $film->getAvgRate() ?></span>
                             </div>
-                            <button
-                                id="rate__btn"
-                                class="btn--reset flex-row-center-center film__rate"
-                                data-id="<?= $film->getId() ?>"
-                                data-rate="<?= $film->getRate() ?>"
-                                data-title="<?= $film->getTitle() ?>"
-                            >
+                            <div class="flex-row-center-center film__rate">
                                 <span class="material-symbols-outlined star">
                                     star
                                 </span>
 
-                                <span class="film__my_rate--inner">
-                                    <?= $film->getRate() !== null ? $film->getRate() : 'Rate' ?>
+                                <span>
+                                    <?= $film->getRate() === null ? 'Rate' : $film->getRate() ?>
                                 </span>
-                            </button>
+                            </div>
                         </div>
 
                         <div class="desktop-only">
@@ -105,7 +96,5 @@
         </div>
 
         <?php include_once __DIR__.'/shared/tabBar.php' ?>
-
-        <?php include_once __DIR__.'/shared/rateFilmModal.php' ?>
     </body>
 </html>
