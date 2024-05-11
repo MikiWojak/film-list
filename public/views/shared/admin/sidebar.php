@@ -16,13 +16,5 @@
                 <span>Films</span>
             </a>
         </li>
-        <li>
-            <a href="admindirectors">
-                <span class="material-symbols-outlined">
-                    person
-                </span>
-                <span>Directors</span>
-            </a>
-        </li>
     </ul>
 </nav>

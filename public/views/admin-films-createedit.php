@@ -102,19 +102,6 @@
                                 />
                             </div>
 
-                            <div class="form__input">
-                                <label for="director">Director</label>
-                                <select id="directorId" name="directorId">
-                                    <option disabled selected value>-- Select Director --</option>
-
-                                    <?php foreach ($directors as $director): ?>
-                                        <option value="<?= $director->getId() ?>">
-                                            <?= "{$director->getFirstName()} {$director->getLastName() }" ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
                             <div class="createedit__form__bottom">
                                 <button type="submit" class="btn--reset btn btn--green">
                                     <span class="material-symbols-outlined">

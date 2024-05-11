@@ -14,14 +14,14 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetailDirector"
+                FROM "FilmsDetail"
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
-                SELECT "fdd".*, "f2u"."rate"
-                FROM "FilmsDetailDirector" fdd
+                SELECT "fd".*, "f2u"."rate"
+                FROM "FilmsDetail" fd
                 LEFT JOIN "Film2User" f2u ON 
-                    "fdd".id = "f2u"."filmId" AND 
+                    "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
             ');
             $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
@@ -41,11 +41,6 @@ class FilmRepository extends Repository
                 $film['posterUrl'],
                 $film['description'],
                 $film['releaseDate'],
-                new Director(
-                    $film['firstName'],
-                    $film['lastName'],
-                    $film['directorId'],
-                ),
                 $film['avgRate'],
                 $film['id'],
                 $film['filmCreatedAt'],
@@ -66,17 +61,17 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetailDirector"
+                FROM "FilmsDetail"
                 WHERE
                     LOWER("title") LIKE :title OR
                     LOWER("description") LIKE :title
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
-                SELECT "fdd".*, "f2u"."rate"
-                FROM "FilmsDetailDirector" fdd
+                SELECT "fd".*, "f2u"."rate"
+                FROM "FilmsDetail" fd
                 LEFT JOIN "Film2User" f2u ON 
-                    "fdd".id = "f2u"."filmId" AND 
+                    "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
                 WHERE
                     LOWER("title") LIKE :title OR
@@ -102,15 +97,15 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetailDirector"
+                FROM "FilmsDetail"
                 WHERE "id" = :id
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
-                SELECT "fdd".*, "f2u"."rate"
-                FROM "FilmsDetailDirector" fdd
+                SELECT "fd".*, "f2u"."rate"
+                FROM "FilmsDetail" fd
                 LEFT JOIN "Film2User" f2u ON 
-                    "fdd".id = "f2u"."filmId" AND 
+                    "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
                 WHERE "id" = :id
             ');
@@ -133,11 +128,6 @@ class FilmRepository extends Repository
             $film['posterUrl'],
             $film['description'],
             $film['releaseDate'],
-            new Director(
-                $film['firstName'],
-                $film['lastName'],
-                $film['directorId'],
-            ),
             $film['avgRate'],
             $film['id'],
             $film['filmCreatedAt'],
@@ -155,7 +145,7 @@ class FilmRepository extends Repository
                 VALUES (?, ?)
                 RETURNING "id"
             )
-            INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate", "directorId")
+            INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate")
             VALUES ((SELECT id FROM "FilmRow"), ?, ?, ?)
         ');
         $stmt->execute([
@@ -163,7 +153,6 @@ class FilmRepository extends Repository
             $film->getPosterUrl(),
             $film->getDescription(),
             $film->getReleaseDate(),
-            $film->getDirector()->getId()
         ]);
 
         $this->database->disconnect();

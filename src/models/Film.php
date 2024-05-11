@@ -1,7 +1,5 @@
 <?php
 
-require_once 'Director.php';
-
 class Film
 {
     private $id;
@@ -10,7 +8,6 @@ class Film
     private $avgRate;
     private $description;
     private $releaseDate;
-    private $director;
     private $createdAt;
     private $rate;
 
@@ -19,7 +16,6 @@ class Film
         string $posterUrl,
         string $description,
         string $releaseDate,
-        Director $director,
         float $avgRate = 0,
         string $id = null,
         string $createdAt = null,
@@ -30,7 +26,6 @@ class Film
         $this->posterUrl = $posterUrl;
         $this->description = $description;
         $this->releaseDate = $releaseDate;
-        $this->director = $director;
 
         $this->avgRate = $avgRate;
         $this->id = $id;
@@ -56,11 +51,6 @@ class Film
     public function getReleaseDate(): string
     {
         return $this->releaseDate;
-    }
-
-    public function getDirector(): Director
-    {
-        return $this->director;
     }
 
     public function getAvgRate() : float

@@ -68,25 +68,7 @@
                                 </span>
                             </div>
                         </div>
-
-                        <div class="desktop-only">
-                            <div>
-                                Director:
-                                <b>
-                                    <?= "{$film->getDirector()->getFirstName()} {$film->getDirector()->getLastName() }" ?>
-                                </b>
-                            </div>
-                        </div>
                     </div>
-                </section>
-
-                <section class="film-info--mobile">
-                    <p>
-                        Director:
-                        <b>
-                            <?= "{$film->getDirector()->getFirstName()} {$film->getDirector()->getLastName() }" ?>
-                        </b>
-                    </p>
                 </section>
 
                 <section class="film_desctiption">
