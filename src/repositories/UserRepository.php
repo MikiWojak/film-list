@@ -130,6 +130,20 @@ class UserRepository extends Repository
         }
     }
 
+    public function delete(string $id): void {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            DELETE FROM "Users" WHERE "id" = ?
+        ');
+
+        $stmt->execute([
+            $id
+        ]);
+
+        $this->database->disconnect();
+    }
+
     private function findByProcessUser(array $userRows) : ?User {
         if (count($userRows) === 0) {
             return null;

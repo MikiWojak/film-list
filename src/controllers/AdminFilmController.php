@@ -68,6 +68,18 @@ class AdminFilmController extends AppController {
         $this->showCreateEditPage();
     }
 
+    public function admindeletefilm()
+    {
+        $id = $_GET['id'];
+
+        $this->filmRepository->delete($id);
+
+        $this->render('admin-films', [
+            'films' => $this->filmRepository->findAll(),
+            'messages' => ["Film has been deleted."]
+        ]);
+    }
+
     private function validate(array $file): bool
     {
         if ($file['size'] > self::MAX_FILE_SIZE) {

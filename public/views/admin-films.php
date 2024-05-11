@@ -46,6 +46,16 @@
                     </a>
                 </div>
 
+                 <div>
+                     <?php
+                     if(isset($messages)) {
+                         foreach ($messages as $message) {
+                             echo $message;
+                         }
+                     }
+                     ?>
+                 </div>
+
                 <div class="list--mobile">
                     <?php foreach ($films as $film): ?>
                         <section class="list__item">
@@ -65,16 +75,13 @@
                             </p>
 
                             <div class="list__item__bottom">
-                                <a href="/admin-films-createedit" class="btn--reset white_link">
-                                    <span class="material-symbols-outlined">
-                                        edit
-                                    </span>
-                                </a>
-                                <button class="btn--reset white_link">
+                                <a
+                                    href="admindeletefilm?id=<?= $film->getId() ?>"
+                                    class="btn--reset white_link">
                                     <span class="material-symbols-outlined">
                                         delete
                                     </span>
-                                </button>
+                                </a>
                             </div>
                         </section>
                     <?php endforeach; ?>
@@ -97,16 +104,14 @@
                                     <td><?= $film->getAvgRate() ?></td>
                                     <td><?= $film->getCreatedAt() ?></td>
                                     <td>
-                                        <a href="/admin-films-createedit" class="btn--reset white_link">
-                                            <span class="material-symbols-outlined">
-                                                edit
-                                            </span>
-                                        </a>
-                                        <button class="btn--reset white_link">
+                                        <a
+                                            href="admindeletefilm?id=<?= $film->getId() ?>"
+                                            class="btn--reset white_link"
+                                        >
                                             <span class="material-symbols-outlined">
                                                 delete
                                             </span>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
