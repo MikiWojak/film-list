@@ -1,4 +1,4 @@
-import { fetchFilms } from './filmsSearch.js';
+// import { fetchFilms } from './filmsSearch.js';
 import { setupRateButtons } from './rateButtonsSetup.js';
 
 const rateModal = document.querySelector("#rate-modal");
