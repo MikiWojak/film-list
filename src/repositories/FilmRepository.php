@@ -246,7 +246,7 @@ class FilmRepository extends Repository
         $this->database->disconnect();
     }
 
-    public function refreshAllAvgRate() {
+    public function refreshAllAvgRate(): void {
         $this->database->connect();
 
         $stmt = $this->database->getConnection()->prepare('
