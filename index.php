@@ -6,7 +6,6 @@ require_once 'src/controllers/FilmController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/AdminFilmController.php';
 require_once 'src/controllers/AdminUserController.php';
-require_once 'src/controllers/AdminDirectorController.php';
 
 $controller = new AppController();
 
@@ -34,7 +33,7 @@ if (isLoggedIn()) {
     Routing::post('logout', 'SecurityController');
     Routing::get('profile', 'SecurityController');
 
-    if (hasRole(ROLE::ROLE_USER)) {
+    if (hasRole(ROLE::ROLE_USER) || hasRole(ROLE::ROLE_ADMIN)) {
         Routing::get('rate', 'FilmController');
         Routing::get('removerate', 'FilmController');
     }
@@ -45,7 +44,6 @@ if (isLoggedIn()) {
         Routing::get('admindeletefilm', 'AdminFilmController');
         Routing::get('adminusers', 'AdminUserController');
         Routing::get('admindeleteuser', 'AdminUserController');
-        Routing::get('admindirectors', 'AdminDirectorController');
     }
 } else {
     Routing::post('login', 'SecurityController');

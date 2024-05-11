@@ -62,9 +62,9 @@
                                 <b><?= $user->getEmail() ?></b>
                             </p>
 
-                            <p>Roles:</p>
+                            <p>Role:</p>
                             <p>
-                                <b><?= $user->getRoleNames() ?></b>
+                                <b><?= $user->getRole()->getName() ?></b>
                             </p>
 
                             <p>Created At:</p>
@@ -98,7 +98,7 @@
                             <tr>
                                 <th>Username</th>
                                 <th>Email</th>
-                                <th>Roles</th>
+                                <th>Role</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
@@ -108,7 +108,7 @@
                                 <tr>
                                     <td><?= $user->getUsername() ?></td>
                                     <td><?= $user->getEmail() ?></td>
-                                    <td><?= $user->getRoleNames() ?></td>
+                                    <td><?= $user->getRole()->getName() ?></td>
                                     <td><?= $user->getCreatedAt() ?></td>
                                     <td>
                                         <?php

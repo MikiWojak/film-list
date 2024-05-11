@@ -6,16 +6,15 @@ class User
 {
     private $username;
     private $email;
-    private $roles;
+    private $role;
     private $password;
     private $id;
     private $createdAt;
-    private $roleNames;
 
     public function __construct(
         string $username,
         string $email,
-        array $roles,
+        Role $role,
         string $password = null,
         string $id = null,
         string $createdAt = null,
@@ -23,12 +22,11 @@ class User
     ) {
         $this->username = $username;
         $this->email = $email;
-        $this->roles = $roles;
+        $this->role = $role;
 
         $this->password = $password;
         $this->id = $id;
         $this->createdAt = $createdAt;
-        $this->roleNames = $roleNames;
     }
 
     public function getUsername(): string
@@ -41,9 +39,9 @@ class User
         return $this->email;
     }
 
-    public function getRoles(): array
+    public function getRole(): Role
     {
-        return $this->roles;
+        return $this->role;
     }
 
     public function getPassword(): string
@@ -61,11 +59,6 @@ class User
         return $this->createdAt;
     }
 
-    public function getRoleNames(): ?string
-    {
-        return $this->roleNames;
-    }
-
     public function isAdmin(): bool {
         return $this->hasRole(ROLE::ROLE_ADMIN);
 
@@ -76,12 +69,6 @@ class User
     }
 
     public function hasRole(string $roleName): bool {
-        foreach ($this->roles as $role) {
-            if ($role->getName() === $roleName) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->role->getName() === $roleName;
     }
 }

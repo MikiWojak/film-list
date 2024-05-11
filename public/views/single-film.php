@@ -71,9 +71,9 @@
 
                         <div class="desktop-only">
                             <div>
-                                Director:
+                                Release Date:
                                 <b>
-                                    <?= "{$film->getDirector()->getFirstName()} {$film->getDirector()->getLastName() }" ?>
+                                    <?= "{$film->getReleaseDate() }" ?>
                                 </b>
                             </div>
                         </div>
@@ -82,9 +82,9 @@
 
                 <section class="film-info--mobile">
                     <p>
-                        Director:
+                        Release Date:
                         <b>
-                            <?= "{$film->getDirector()->getFirstName()} {$film->getDirector()->getLastName() }" ?>
+                            <?= "{$film->getReleaseDate() }" ?>
                         </b>
                     </p>
                 </section>
