@@ -146,7 +146,7 @@ class FilmRepository extends Repository
                 RETURNING "id"
             )
             INSERT INTO "FilmDetails" ("filmId", "description", "releaseDate")
-            VALUES ((SELECT id FROM "FilmRow"), ?, ?, ?)
+            VALUES ((SELECT id FROM "FilmRow"), ?, ?)
         ');
         $stmt->execute([
             $film->getTitle(),
