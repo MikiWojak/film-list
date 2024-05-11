@@ -33,7 +33,7 @@ if (isLoggedIn()) {
     Routing::post('logout', 'SecurityController');
     Routing::get('profile', 'SecurityController');
 
-    if (hasRole(ROLE::ROLE_USER)) {
+    if (hasRole(ROLE::ROLE_USER) || hasRole(ROLE::ROLE_ADMIN)) {
         Routing::get('rate', 'FilmController');
         Routing::get('removerate', 'FilmController');
     }

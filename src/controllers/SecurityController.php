@@ -110,13 +110,12 @@ class SecurityController extends AppController
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $roles = [];
-        $roles[] = $this->roleRepository->findByName(Role::ROLE_USER); // @TODO What is not found?
+        $role = $this->roleRepository->findByName(Role::ROLE_USER); // @TODO What is not found?
 
         $user = new User(
             $username,
             $email,
-            $roles,
+            $role,
             $hashedPassword
         );
 
