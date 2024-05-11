@@ -68,7 +68,25 @@
                                 </span>
                             </div>
                         </div>
+
+                        <div class="desktop-only">
+                            <div>
+                                Release Date:
+                                <b>
+                                    <?= "{$film->getReleaseDate() }" ?>
+                                </b>
+                            </div>
+                        </div>
                     </div>
+                </section>
+
+                <section class="film-info--mobile">
+                    <p>
+                        Release Date:
+                        <b>
+                            <?= "{$film->getReleaseDate() }" ?>
+                        </b>
+                    </p>
                 </section>
 
                 <section class="film_desctiption">
