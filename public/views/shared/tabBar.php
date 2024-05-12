@@ -9,7 +9,7 @@
             search
         </span>
     </button>
-    <button class="tab-bar__option">
+    <button class="tab-bar__option tab-bar--rated">
         <span class="material-symbols-outlined">
             star
         </span>

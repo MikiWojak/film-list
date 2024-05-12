@@ -42,6 +42,7 @@
                     </span>
                 </button>
                 <div class="flex-row-center-center search__form">
+<!--                    // @TODO Show search input on Desktop and Mobile-->
                     <input
                         id="search"
                         type="text"
