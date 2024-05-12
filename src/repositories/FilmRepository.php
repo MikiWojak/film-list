@@ -14,12 +14,12 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetail"
+                FROM "FilmsWithDetails"
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT "fd".*, "f2u"."rate"
-                FROM "FilmsDetail" fd
+                FROM "FilmsWithDetails" fd
                 LEFT JOIN "Film2User" f2u ON 
                     "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
@@ -61,7 +61,7 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetail"
+                FROM "FilmsWithDetails"
                 WHERE
                     LOWER("title") LIKE :title OR
                     LOWER("description") LIKE :title
@@ -69,7 +69,7 @@ class FilmRepository extends Repository
         } else {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT "fd".*, "f2u"."rate"
-                FROM "FilmsDetail" fd
+                FROM "FilmsWithDetails" fd
                 LEFT JOIN "Film2User" f2u ON 
                     "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
@@ -97,13 +97,13 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetail"
+                FROM "FilmsWithDetails"
                 WHERE "id" = :id
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT "fd".*, "f2u"."rate"
-                FROM "FilmsDetail" fd
+                FROM "FilmsWithDetails" fd
                 LEFT JOIN "Film2User" f2u ON 
                     "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
