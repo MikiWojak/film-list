@@ -17,7 +17,7 @@
         <div class="film__bottom__rate-section">
             <div class="flex-row-center-center film__rate">
                 <span class="material-symbols-outlined star">
-                    star_rate
+                    hotel_class
                 </span>
 
                 <span class="film__avg_rate--inner">

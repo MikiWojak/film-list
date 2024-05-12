@@ -30,6 +30,12 @@
 
         <div class="film-container">
             <div class="flex-row-center-center search--desktop">
+                <input
+                    type="hidden"
+                    name="isLoggedIn"
+                    id="isLoggedIn"
+                    value="<?= isset($_SESSION['loggedUser']) ?>"
+                />
                 <button class="search__rated-btn">
                     <span class="material-symbols-outlined star">
                         star

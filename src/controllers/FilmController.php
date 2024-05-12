@@ -60,7 +60,11 @@ class FilmController extends AppController
         header('Content-type: application/json');
         http_response_code(200);
 
-        echo json_encode($this->filmRepository->findAllByTitle($decoded["search"], $loggedUserId));
+        echo json_encode($this->filmRepository->findAllByTitle(
+            $decoded["search"],
+            $decoded["rated"],
+            $loggedUserId
+        ));
     }
 
     public function rate(string $id) {

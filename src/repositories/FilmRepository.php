@@ -51,7 +51,7 @@ class FilmRepository extends Repository
         return $result;
     }
 
-    public function findAllByTitle(string $title, string $loggedUserId = null): array {
+    public function findAllByTitle(string $title, bool $rated, string $loggedUserId = null): array {
         $title = '%'.strtolower($title).'%';
 
         $this->database->connect();
@@ -68,15 +68,17 @@ class FilmRepository extends Repository
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
-                SELECT "fd".*, "f2u"."rate"
+                SELECT "fd".*, "f2u".*
                 FROM "FilmsWithDetails" fd
                 LEFT JOIN "Film2User" f2u ON 
                     "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
-                WHERE
+                WHERE (
                     LOWER("title") LIKE :title OR
                     LOWER("description") LIKE :title
-            ');
+                )'
+                . ($loggedUserId && $rated ? ' AND "f2u"."userId" IS NOT NULL' : '')
+            );
             $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
         }
 

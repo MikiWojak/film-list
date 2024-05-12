@@ -1,10 +1,10 @@
 import { setupMultipleRateButtons } from "./setupMultipleRateButtons.js";
 
-export const fetchFilms = async () => {
+export const fetchFilms = async (rated = false) => {
     const search = document.querySelector('#search');
     const filmsContainer = document.querySelector('.film_list');
 
-    const data = { search: search.value };
+    const data = { search: search.value, rated };
 
     try {
         const response = await fetch("/search", {
