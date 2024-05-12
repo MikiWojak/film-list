@@ -158,6 +158,45 @@ class FilmRepository extends Repository
         $this->database->disconnect();
     }
 
+    public function update(Film $film): void {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            WITH "UpdatedFilm" AS (
+                UPDATE "Films"
+                SET "title" = ?
+                WHERE "id" = ?
+                RETURNING "id"
+            )
+            UPDATE "FilmDetails"
+            SET "description" = ?,
+                "releaseDate" = ?
+            WHERE "filmId" = (SELECT "id" FROM "UpdatedFilm")
+        ');
+        $stmt->execute([
+            $film->getTitle(),
+            $film->getId(),
+            $film->getDescription(),
+            $film->getReleaseDate(),
+        ]);
+
+        $this->database->disconnect();
+    }
+
+    public function delete(string $id): void {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            DELETE FROM "Films" WHERE "id" = ?
+        ');
+
+        $stmt->execute([
+            $id
+        ]);
+
+        $this->database->disconnect();
+    }
+
     public function rate(string $filmId, string $userId, int $rate): void
     {
         try {
@@ -237,20 +276,6 @@ class FilmRepository extends Repository
         } finally {
             $this->database->disconnect();
         }
-    }
-
-    public function delete(string $id): void {
-        $this->database->connect();
-
-        $stmt = $this->database->getConnection()->prepare('
-            DELETE FROM "Films" WHERE "id" = ?
-        ');
-
-        $stmt->execute([
-            $id
-        ]);
-
-        $this->database->disconnect();
     }
 
     public function refreshAllAvgRate(): void {

@@ -52,7 +52,7 @@
                         </h2>
 
                         <form
-                                action="admincreatefilm"
+                                action="<?= $editMode ? 'adminupdatefilm' : 'admincreatefilm' ?>"
                                 method="POST"
                                 ENCTYPE="multipart/form-data"
                                 class="flex-column-center-center form createedit__form"
@@ -66,6 +66,19 @@
                                 }
                                 ?>
                             </div>
+
+                            <?php
+                                if($editMode) {
+                                    echo "
+                                        <input
+                                            type=\"hidden\" 
+                                            name=\"filmId\" 
+                                            id=\"filmId\" 
+                                            value=\"{$film->getId()}\" 
+                                        />
+                                    ";
+                                }
+                            ?>
 
                             <div class="form__input">
                                 <label for="title">Title</label>
@@ -123,22 +136,6 @@
                                     </span>
                                     <span>Save</span>
                                 </button>
-
-                                <?php
-                                if($editMode) {
-                                    echo "
-                                        <a
-                                            href=\"admindeletefilm?id=<?= {$film->getId()} ?>\"
-                                            class=\"btn--reset btn btn--red\"
-                                        >
-                                            <span class=\"material-symbols-outlined\">
-                                                delete
-                                            </span>
-                                            <span>Delete</span>
-                                        </a>
-                                    ";
-                                }
-                                ?>
                             </div>
                         </form>
                     </main>
