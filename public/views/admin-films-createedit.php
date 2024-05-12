@@ -1,9 +1,15 @@
+<?php
+    $editMode = isset($film);
+
+    $title = $editMode ? "Edit Film" : "Create Film";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin - Create Film</title>
+        <title>Admin - <?= $title ?></title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,11 +48,11 @@
 
                     <main>
                         <h2 class="createedit__header">
-                            Create Film
+                            <?= $title ?>
                         </h2>
 
                         <form
-                                action="admincreatefilm"
+                                action="<?= $editMode ? 'adminupdatefilm' : 'admincreatefilm' ?>"
                                 method="POST"
                                 ENCTYPE="multipart/form-data"
                                 class="flex-column-center-center form createedit__form"
@@ -61,25 +67,45 @@
                                 ?>
                             </div>
 
+                            <?php
+                                if($editMode) {
+                                    echo "
+                                        <input
+                                            type=\"hidden\" 
+                                            name=\"filmId\" 
+                                            id=\"filmId\" 
+                                            value=\"{$film->getId()}\" 
+                                        />
+                                    ";
+                                }
+                            ?>
+
                             <div class="form__input">
                                 <label for="title">Title</label>
                                 <input
                                     id="title"
                                     name="title"
+                                    value="<?= $editMode ? $film->getTitle() : "" ?>"
                                     placeholder="Title"
                                     class="input__text"
                                 />
                             </div>
 
-                            <div class="form__input">
-                                <label for="poster">Poster</label>
-                                <input
-                                    id="poster"
-                                    name="poster"
-                                    type="file"
-                                    class="input__text"
-                                />
-                            </div>
+                            <?php
+                            if(!$editMode) {
+                                echo '
+                                    <div class="form__input">
+                                    <label for="poster">Poster</label>
+                                    <input
+                                        id="poster"
+                                        name="poster"
+                                        type="file"
+                                        class="input__text"
+                                    />
+                                 </div>
+                                ';
+                            }
+                            ?>
 
                             <div class="form__input">
                                 <label for="description">Description</label>
@@ -89,7 +115,7 @@
                                     rows=5
                                     placeholder="Description"
                                     class="input__text"
-                                ></textarea>
+                                ><?= $editMode ? $film->getDescription() : "" ?></textarea>
                             </div>
 
                             <div class="form__input">
@@ -97,6 +123,7 @@
                                 <input
                                     id="releaseDate"
                                     name="releaseDate"
+                                    value="<?= $editMode ? $film->getReleaseDate() : "" ?>"
                                     type="date"
                                     class="input__text"
                                 />

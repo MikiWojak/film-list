@@ -71,4 +71,19 @@ class Film
     {
         return $this->rate;
     }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function setReleaseDate(string $releaseDate): void
+    {
+        $this->releaseDate = $releaseDate;
+    }
 }

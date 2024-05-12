@@ -56,6 +56,32 @@ class AdminFilmController extends AppController {
         $this->showCreateEditPage();
     }
 
+    public function adminupdatefilm ()
+    {
+        if (!$this->isPost()) {
+            $id = $_GET['id'];
+
+            return $this->render('admin-films-createedit', [
+                'film' => $this->filmRepository->findById($id)
+            ]);
+        }
+
+        $id = $_POST['filmId'];
+
+        $film = $this->filmRepository->findById($id);
+
+        $film->setTitle($_POST['title']);
+        $film->setDescription($_POST['description']);
+        $film->setReleaseDate($_POST['releaseDate']);
+
+        $this->filmRepository->update($film);
+
+        return $this->render('admin-films-createedit', [
+            'film' => $this->filmRepository->findById($id),
+            'messages' => ["Film has been updated."]
+        ]);
+    }
+
     public function admindeletefilm()
     {
         $id = $_GET['id'];

@@ -14,12 +14,12 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetail"
+                FROM "FilmsWithDetails"
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT "fd".*, "f2u"."rate"
-                FROM "FilmsDetail" fd
+                FROM "FilmsWithDetails" fd
                 LEFT JOIN "Film2User" f2u ON 
                     "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
@@ -61,7 +61,7 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetail"
+                FROM "FilmsWithDetails"
                 WHERE
                     LOWER("title") LIKE :title OR
                     LOWER("description") LIKE :title
@@ -69,7 +69,7 @@ class FilmRepository extends Repository
         } else {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT "fd".*, "f2u"."rate"
-                FROM "FilmsDetail" fd
+                FROM "FilmsWithDetails" fd
                 LEFT JOIN "Film2User" f2u ON 
                     "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
@@ -97,13 +97,13 @@ class FilmRepository extends Repository
         if ($loggedUserId === null) {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT *
-                FROM "FilmsDetail"
+                FROM "FilmsWithDetails"
                 WHERE "id" = :id
             ');
         } else {
             $stmt = $this->database->getConnection()->prepare('
                 SELECT "fd".*, "f2u"."rate"
-                FROM "FilmsDetail" fd
+                FROM "FilmsWithDetails" fd
                 LEFT JOIN "Film2User" f2u ON 
                     "fd".id = "f2u"."filmId" AND 
                     "f2u"."userId" = :userId
@@ -153,6 +153,45 @@ class FilmRepository extends Repository
             $film->getPosterUrl(),
             $film->getDescription(),
             $film->getReleaseDate(),
+        ]);
+
+        $this->database->disconnect();
+    }
+
+    public function update(Film $film): void {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            WITH "UpdatedFilm" AS (
+                UPDATE "Films"
+                SET "title" = ?
+                WHERE "id" = ?
+                RETURNING "id"
+            )
+            UPDATE "FilmDetails"
+            SET "description" = ?,
+                "releaseDate" = ?
+            WHERE "filmId" = (SELECT "id" FROM "UpdatedFilm")
+        ');
+        $stmt->execute([
+            $film->getTitle(),
+            $film->getId(),
+            $film->getDescription(),
+            $film->getReleaseDate(),
+        ]);
+
+        $this->database->disconnect();
+    }
+
+    public function delete(string $id): void {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            DELETE FROM "Films" WHERE "id" = ?
+        ');
+
+        $stmt->execute([
+            $id
         ]);
 
         $this->database->disconnect();
@@ -237,20 +276,6 @@ class FilmRepository extends Repository
         } finally {
             $this->database->disconnect();
         }
-    }
-
-    public function delete(string $id): void {
-        $this->database->connect();
-
-        $stmt = $this->database->getConnection()->prepare('
-            DELETE FROM "Films" WHERE "id" = ?
-        ');
-
-        $stmt->execute([
-            $id
-        ]);
-
-        $this->database->disconnect();
     }
 
     public function refreshAllAvgRate(): void {
