@@ -1,4 +1,4 @@
-import { doRateButtonSetup } from './rateButtonsSetup.js'
+import { setupRateButton } from './setupRateButton.js'
 
 const rateModal = document.querySelector("#rate-modal");
 const rateButton = document.querySelector("#rate__btn");
@@ -8,7 +8,7 @@ const removeRateBtn = rateModal.querySelector("#remove-rate-btn");
 const rate = rateModal.querySelector("#rate");
 const filmId = rateModal.querySelector("#filmId");
 
-doRateButtonSetup(rateButton, rateModal);
+setupRateButton(rateButton, rateModal);
 
 modalCloseBtn.addEventListener("click", () =>
     rateModal.classList.remove('enabled')

@@ -1,13 +1,4 @@
-export const setupRateButtons = () => {
-    const rateModal = document.querySelector("#rate-modal");
-    const rateButtons = document.querySelectorAll("#rate__btn");
-
-    rateButtons.forEach(
-        rateButton => doRateButtonSetup(rateButton, rateModal)
-    );
-}
-
-export const doRateButtonSetup = (rateButton, rateModal) => {
+export const setupRateButton = (rateButton, rateModal) => {
     rateButton.addEventListener("click", () => {
         const isLoggedIn = rateModal.querySelector("#isLoggedIn").value;
 

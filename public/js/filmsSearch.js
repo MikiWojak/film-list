@@ -1,4 +1,4 @@
-import { setupRateButtons } from './rateButtonsSetup.js';
+import { setupMultipleRateButtons } from './setupMultipleRateButtons.js';
 
 const search = document.querySelector('#search');
 const searchSubmitBtn = document.querySelector('.search__form__submit');
@@ -43,7 +43,7 @@ export const fetchFilms = async () => {
 const loadFilms = (films) => {
     films.forEach(film => createFilm(film));
 
-    setupRateButtons();
+    setupMultipleRateButtons();
 }
 
 const createFilm = (film) => {

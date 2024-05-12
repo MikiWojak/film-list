@@ -1,5 +1,5 @@
 import { fetchFilms } from './filmsSearch.js';
-import { setupRateButtons } from './rateButtonsSetup.js';
+import { setupMultipleRateButtons } from './setupMultipleRateButtons.js';
 
 const rateModal = document.querySelector("#rate-modal");
 const modalCloseBtn = rateModal.querySelector(".modal__content__close");
@@ -8,7 +8,7 @@ const removeRateBtn = rateModal.querySelector("#remove-rate-btn");
 const rate = rateModal.querySelector("#rate");
 const filmId = rateModal.querySelector("#filmId");
 
-setupRateButtons();
+setupMultipleRateButtons();
 
 modalCloseBtn.addEventListener("click", () =>
     rateModal.classList.remove('enabled')
