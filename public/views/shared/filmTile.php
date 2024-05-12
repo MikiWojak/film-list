@@ -26,7 +26,7 @@
             </div>
             <button
                 id="rate__btn"
-                class="flex-row-center-center film__rate"
+                class="flex-row-center-center btn--reset film__rate"
                 data-id="<?= $isFilmSet ? $film->getId() : "" ?>"
                 data-rate="<?= $isFilmSet ? $film->getRate() : "" ?>"
                 data-title="<?= $isFilmSet ? $film->getTitle() : "" ?>"
