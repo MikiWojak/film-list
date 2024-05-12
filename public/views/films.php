@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" href="public/css/modal.css" />
 
         <script type="module" src="public/js/filmsSearch.js" defer></script>
-        <script type="module" src="public/js/filmsRateButtonsSetup.js" defer></script>
+        <script type="module" src="public/js/multipleFilmsSetup.js" defer></script>
     </head>
     <body>
         <?php include_once __DIR__.'/shared/header.php' ?>

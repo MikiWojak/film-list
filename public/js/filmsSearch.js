@@ -18,28 +18,6 @@ searchSubmitBtn.addEventListener('click', (event) =>
     fetchFilms()
 );
 
-export const fetchFilms = async () => {
-    const data = { search: search.value };
-
-    try {
-        const response = await fetch("/search", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-
-        const films = await response.json();
-
-        filmsContainer.innerHTML = '';
-
-        loadFilms(films);
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 const loadFilms = (films) => {
     films.forEach(film => createFilm(film));
 
@@ -71,4 +49,26 @@ const createFilm = (film) => {
     rateBtnElement.setAttribute('data-title', title);
 
     filmsContainer.appendChild(clone);
+}
+
+export const fetchFilms = async () => {
+    const data = { search: search.value };
+
+    try {
+        const response = await fetch("/search", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const films = await response.json();
+
+        filmsContainer.innerHTML = '';
+
+        loadFilms(films);
+    } catch (error) {
+        console.error(error);
+    }
 }
