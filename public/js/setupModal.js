@@ -1,4 +1,6 @@
-export const setupModal = () => {
+import { fetchFilms } from "./filmsSearch.js";
+
+export const setupModal = (isSingle = false) => {
     const rateModal = document.querySelector("#rate-modal");
     const modalCloseBtn = rateModal.querySelector(".modal__content__close");
     const rateSubmitBtn = rateModal.querySelector("#rate-submit-btn");
@@ -17,17 +19,17 @@ export const setupModal = () => {
     rateSubmitBtn.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        await doRate();
+        await doRate(isSingle);
     });
 
     removeRateBtn.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        await removeRate();
+        await removeRate(isSingle);
     });
 }
 
-const doRate = async () => {
+const doRate = async (isSingle = false) => {
     const rateModal = document.querySelector("#rate-modal");
     const rate = rateModal.querySelector("#rate");
     const filmId = rateModal.querySelector("#filmId");
@@ -47,15 +49,20 @@ const doRate = async () => {
             body: JSON.stringify(data),
         });
 
-        // await refresh();
+        if (isSingle) {
+            location.reload();
+        } else {
+            await fetchFilms();
 
-        rateModal.classList.remove('enabled');
+            rateModal.classList.remove('enabled');
+        }
+
     } catch (error) {
         console.error(error);
     }
 }
 
-const removeRate = async () => {
+const removeRate = async (isSingle = false) => {
     const rateModal = document.querySelector("#rate-modal");
     const filmId = rateModal.querySelector("#filmId");
 
@@ -67,12 +74,16 @@ const removeRate = async () => {
             },
         });
 
-        // await refresh();
+        if (isSingle) {
+            location.reload();
+        } else {
+            await fetchFilms();
+
+            rateModal.classList.remove('enabled');
+        }
 
         rateModal.classList.remove('enabled');
     } catch (error) {
         console.error(error);
     }
 }
-
-// const refresh = () => {}
