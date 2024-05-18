@@ -79,21 +79,26 @@
 .search--desktop {
     margin-bottom: 1.5em;
     gap: 0.5em;
-
-    @media only screen and (max-device-width: 767px) {
-        display: none;
-    }
 }
 
 .search__form {
-    width: 50%;
+    width: 100%;
+
+    @media only screen and (min-device-width: 768px) {
+        width: 50%;
+    }
 }
 
 .search__rated-btn,
 .search__form__submit {
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
+    display: none;
+
+    @media only screen and (min-device-width: 768px) {
+        display: block;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+    }
 }
 
 .search__rated-btn > span,

@@ -8,11 +8,10 @@ const loggedInInput = searchSection.querySelector('#isLoggedIn');
 
 const tabBar = document.querySelector('.tab-bar');
 const tabBarRatedBtn = tabBar.querySelector('.tab-bar--rated');
+const tabBarSearchBtn = tabBar.querySelector('.tab-bar--search');
 
 const search = document.querySelector('#search');
 const searchSubmitBtn = document.querySelector('.search__form__submit');
-
-ratedBtn.addEventListener('click', () => getRatedFilmsOnly());
 
 search.addEventListener('keyup', async (event) => {
     if (event.key !== "Enter") {
@@ -28,7 +27,14 @@ searchSubmitBtn.addEventListener('click', (event) =>
     fetchFilms()
 );
 
+tabBarSearchBtn.addEventListener('click', (event) =>
+    fetchFilms()
+);
+tabBarSearchBtn.classList.add('visible');
+
+ratedBtn.addEventListener('click', () => getRatedFilmsOnly());
 tabBarRatedBtn.addEventListener('click', () => getRatedFilmsOnly());
+tabBarRatedBtn.classList.add('visible');
 
 const getRatedFilmsOnly = async () => {
     const isLoggedIn = loggedInInput.value;

@@ -4,7 +4,7 @@
             home
         </span>
     </a>
-    <button class="tab-bar__option">
+    <button class="tab-bar__option tab-bar--search">
         <span class="material-symbols-outlined">
             search
         </span>
