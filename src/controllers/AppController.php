@@ -23,8 +23,8 @@ class AppController {
     protected function render(string $template = null, array $variables = [])
     {
         $templatePath = 'public/views/'. $template.'.php';
-        // @TODO 404 page
-        $output = 'File not found';
+        $notFoundPath = 'public/views/404.php';
+        $output = '';
                 
         if(file_exists($templatePath)){
             // Extract variables
@@ -32,6 +32,10 @@ class AppController {
 
             ob_start();
             include $templatePath;
+            $output = ob_get_clean();
+        } else {
+            ob_start();
+            include $notFoundPath;
             $output = ob_get_clean();
         }
         

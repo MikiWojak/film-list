@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ .'/src/controllers/DefaultController.php';
+
 class Routing {
     public static $routes;
 
@@ -16,7 +18,9 @@ class Routing {
         $action = $urlParts[0];
 
         if (!array_key_exists($action, self::$routes)) {
-            die("Wrong url!");
+            $object = new DefaultController();
+
+            return $object->notFound();
         }
 
         $controller = self::$routes[$action];
