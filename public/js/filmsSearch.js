@@ -19,15 +19,15 @@ search.addEventListener('keyup', async (event) => {
 
     event.preventDefault();
 
-    await fetchFilms();
+    await fetchFilms(filterRated);
 })
 
 searchSubmitBtn.addEventListener('click', (event) =>
-    fetchFilms()
+    fetchFilms(filterRated)
 );
 
 tabBarSearchBtn.addEventListener('click', (event) =>
-    fetchFilms()
+    fetchFilms(filterRated)
 );
 tabBarSearchBtn.classList.add('visible');
 
