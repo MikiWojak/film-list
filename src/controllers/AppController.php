@@ -24,21 +24,16 @@ class AppController {
     {
         $templatePath = 'public/views/'. $template.'.php';
         $notFoundPath = 'public/views/404.php';
-        $output = '';
-                
-        if(file_exists($templatePath)){
-            // Extract variables
-            extract($variables);
 
-            ob_start();
-            include $templatePath;
-            $output = ob_get_clean();
-        } else {
-            ob_start();
-            include $notFoundPath;
-            $output = ob_get_clean();
-        }
-        
+        $templateToLoadPath = file_exists($templatePath) ? $templatePath : $notFoundPath;
+
+        // Extract variables
+        extract($variables);
+
+        ob_start();
+        include $templateToLoadPath;
+        $output = ob_get_clean();
+
         print $output;
     }
 }
