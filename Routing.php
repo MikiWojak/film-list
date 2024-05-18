@@ -21,15 +21,15 @@ class Routing {
 
         $controller = self::$routes[$action];
         // Object based on String
-        $errObject = new $controller;
+        $object = new $controller;
         $action = $action ?: 'index';
 
         $id = $urlParts[1] ?? '';
 
         if (preg_match("/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i", $id)) {
-            $errObject->$action($id);
+            $object->$action($id);
         } else {
-            $errObject->$action();
+            $object->$action();
         }
     }
 }

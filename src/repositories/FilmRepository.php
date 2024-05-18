@@ -51,7 +51,7 @@ class FilmRepository extends Repository
         return $result;
     }
 
-    public function findAllByTitle(string $title, bool $rated, string $loggedUserId = null): array {
+    public function findAllByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
         $title = '%'.strtolower($title).'%';
 
         $this->database->connect();

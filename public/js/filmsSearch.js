@@ -5,13 +5,12 @@ let filterRated = false
 const searchSection = document.querySelector('.search--desktop')
 const ratedBtn = searchSection.querySelector('.search__rated-btn');
 const loggedInInput = searchSection.querySelector('#isLoggedIn');
+const search = searchSection.querySelector('#search');
+const searchSubmitBtn = searchSection.querySelector('.search__form__submit');
 
 const tabBar = document.querySelector('.tab-bar');
 const tabBarRatedBtn = tabBar.querySelector('.tab-bar--rated');
 const tabBarSearchBtn = tabBar.querySelector('.tab-bar--search');
-
-const search = document.querySelector('#search');
-const searchSubmitBtn = document.querySelector('.search__form__submit');
 
 search.addEventListener('keyup', async (event) => {
     if (event.key !== "Enter") {
@@ -48,10 +47,14 @@ const getRatedFilmsOnly = async () => {
     filterRated = !filterRated;
 
     const ratedBtnInner = ratedBtn.querySelector('span');
-    ratedBtnInner.innerText = filterRated ? 'star_half' : 'star'
-
     const tabBarRatedBtnInner = tabBarRatedBtn.querySelector('span');
-    tabBarRatedBtnInner.innerText = filterRated ? 'star_half' : 'star'
+
+    changeStarRatedIcon(ratedBtnInner, filterRated);
+    changeStarRatedIcon(tabBarRatedBtnInner, filterRated);
 
     await fetchFilms(filterRated);
+}
+
+const changeStarRatedIcon = (element, rated) => {
+    element.innerHTML = rated ? 'star_half' : 'star'
 }
