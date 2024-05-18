@@ -2,7 +2,7 @@
 
 require_once 'AppController.php';
 
-class DefaultController extends AppController
+class ErrorController extends AppController
 {
     public function __construct()
     {

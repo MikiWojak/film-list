@@ -16,11 +16,7 @@ class Routing {
         $action = $urlParts[0];
 
         if (!array_key_exists($action, self::$routes)) {
-            $errController = 'DefaultController';
-            $errObject = new $errController;
-            $errAction = 'notFound';
-
-            return $errObject->$errAction();
+            $action = 'notFound';
         }
 
         $controller = self::$routes[$action];
