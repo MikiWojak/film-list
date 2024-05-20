@@ -3,6 +3,7 @@
 require_once 'Routing.php';
 require_once 'src/models/Role.php';
 require_once 'src/controllers/FilmController.php';
+require_once 'src/controllers/ErrorController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/AdminFilmController.php';
 require_once 'src/controllers/AdminUserController.php';
@@ -28,6 +29,8 @@ function hasRole($role) {
 Routing::get('', 'FilmController');
 Routing::get('film', 'FilmController');
 Routing::post('search', 'FilmController');
+
+Routing::get('notFound', 'ErrorController');
 
 if (isLoggedIn()) {
     Routing::post('logout', 'SecurityController');

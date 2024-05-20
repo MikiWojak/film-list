@@ -56,7 +56,7 @@
                         <div class="film-info_rate">
                             <div class="flex-row-center-center film__rate">
                                 <span class="material-symbols-outlined star">
-                                    star_rate
+                                    hotel_class
                                 </span>
 
                                 <span><?= $film->getAvgRate() ?></span>

@@ -23,18 +23,17 @@ class AppController {
     protected function render(string $template = null, array $variables = [])
     {
         $templatePath = 'public/views/'. $template.'.php';
-        // @TODO 404 page
-        $output = 'File not found';
-                
-        if(file_exists($templatePath)){
-            // Extract variables
-            extract($variables);
+        $notFoundPath = 'public/views/404.php';
 
-            ob_start();
-            include $templatePath;
-            $output = ob_get_clean();
-        }
-        
+        $templateToLoadPath = file_exists($templatePath) ? $templatePath : $notFoundPath;
+
+        // Extract variables
+        extract($variables);
+
+        ob_start();
+        include $templateToLoadPath;
+        $output = ob_get_clean();
+
         print $output;
     }
 }

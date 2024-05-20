@@ -16,7 +16,7 @@ class Routing {
         $action = $urlParts[0];
 
         if (!array_key_exists($action, self::$routes)) {
-            die("Wrong url!");
+            $action = 'notFound';
         }
 
         $controller = self::$routes[$action];

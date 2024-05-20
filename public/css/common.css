@@ -326,3 +326,13 @@ select {
 option {
     padding: 0.25em 0.5em;
 }
+
+.tab-bar--search,
+.tab-bar--rated {
+    display: none;
+}
+
+.tab-bar--search.visible,
+.tab-bar--rated.visible {
+    display: block;
+}
