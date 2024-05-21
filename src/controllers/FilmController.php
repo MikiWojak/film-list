@@ -28,6 +28,9 @@ class FilmController extends AppController
     }
 
     public function film() {
+        // @TODO What if film not found?
+        // @TODO Add button to redirect to home page
+
         $loggedUserId = isset($_SESSION['loggedUser'])
             ? unserialize($_SESSION['loggedUser'])->getId()
             : null;
