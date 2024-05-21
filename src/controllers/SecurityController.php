@@ -26,6 +26,12 @@ class SecurityController extends AppController
         $email = $_POST['email'];
         $password = $_POST['password'];
 
+        if (empty($email) || empty($password)) {
+            return $this->render('login',
+                ['messages' => ['Credentials cannot be empty.']]
+            );
+        }
+
         $user =  $this->userRepository->findByEmail($email, true);
 
         if(!$user) {
@@ -85,27 +91,38 @@ class SecurityController extends AppController
         $password = $_POST['password'];
         $confirmedPassword = $_POST['confirmedPassword'];
 
-        // @TODO Validate data
-        // @TODO Sanitize data
+        if (empty($username) || empty($email) || empty($password) || empty($confirmedPassword)) {
+            return $this->render('register',
+                ['messages' => ['Fill in all fields.']]
+            );
+        }
+
+        $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+        if(!filter_var($sanitizedEmail, FILTER_VALIDATE_EMAIL) || $email !== $sanitizedEmail) {
+            return $this->render('register',
+                ['messages' => ['Enter proper email.']]
+            );
+        }
 
         $userWithExistingUsername = $this->userRepository->findByUsername($username);
 
         if ($userWithExistingUsername !== null) {
-            return $this->render('register', ['messages' => ['User with given username already exists']]);
+            return $this->render('register', ['messages' => ['User with given username already exists.']]);
         }
 
         $userWithExistingEmail = $this->userRepository->findByEmail($email);
 
         if ($userWithExistingEmail !== null) {
-            return $this->render('register', ['messages' => ['User with given email already exists']]);
+            return $this->render('register', ['messages' => ['User with given email already exists.']]);
         }
 
         if ($password !== $confirmedPassword) {
-            return $this->render('register', ['messages' => ['Passwords do not match']]);
+            return $this->render('register', ['messages' => ['Passwords do not match.']]);
         }
 
         if (!isset($_POST['terms'])) {
-            return $this->render('register', ['messages' => ['Agree terms and conditions']]);
+            return $this->render('register', ['messages' => ['Agree terms and conditions.']]);
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -121,10 +138,10 @@ class SecurityController extends AppController
 
         $this->userRepository->create($user);
 
-        return $this->render('login', ['messages' => ['Registration complete']]);
+        return $this->render('login', ['messages' => ['Registration complete.']]);
     }
 
     private function loginFailedMismathcingCredentials() {
-        $this->render('login', ['messages' => ['Mismatching credentials']]);
+        $this->render('login', ['messages' => ['Mismatching credentials.']]);
     }
 }
