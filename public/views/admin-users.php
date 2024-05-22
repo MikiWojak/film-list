@@ -109,7 +109,9 @@
                                     <td><?= $user->getUsername() ?></td>
                                     <td><?= $user->getEmail() ?></td>
                                     <td><?= $user->getRole()->getName() ?></td>
-                                    <td><?= $user->getCreatedAt() ?></td>
+                                    <td>
+                                        <?= date('Y-m-d H:i:s', strtotime($user->getCreatedAt())) ?>
+                                    </td>
                                     <td>
                                         <?php
                                         if ($loggedUserId !== $user->getId()) {

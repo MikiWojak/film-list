@@ -106,8 +106,10 @@
                             <?php foreach ($films as $film): ?>
                                 <tr>
                                     <td><?= $film->getTitle() ?></td>
-                                    <td><?= $film->getAvgRate() ?></td>
-                                    <td><?= $film->getCreatedAt() ?></td>
+                                    <td><?= number_format($film->getAvgRate(), 2) ?></td>
+                                    <td>
+                                        <?= date('Y-m-d H:i:s', strtotime($film->getCreatedAt())) ?>
+                                    </td>
                                     <td>
                                         <a href="adminupdatefilm?id=<?= $film->getId() ?>" class="btn--reset white_link">
                                             <span class="material-symbols-outlined">

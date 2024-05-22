@@ -101,7 +101,7 @@ class SecurityController extends AppController
 
         if(!filter_var($sanitizedEmail, FILTER_VALIDATE_EMAIL) || $email !== $sanitizedEmail) {
             return $this->render('register',
-                ['messages' => ['Enter proper email.']]
+                ['messages' => ['Enter valid email.']]
             );
         }
 

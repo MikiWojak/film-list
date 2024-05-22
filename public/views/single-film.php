@@ -59,7 +59,7 @@
                                     hotel_class
                                 </span>
 
-                                <span><?= $film->getAvgRate() ?></span>
+                                <span><?= number_format($film->getAvgRate(), 2) ?></span>
                             </div>
                                 <button
                                     id="rate__btn"

@@ -37,6 +37,8 @@ const createFilm = (film, filmsContainer) => {
 
     const { id, title, posterUrl, avgRate, rate } = film;
 
+    console.log({ film })
+
     const posterElement = clone.querySelector('img');
     posterElement.src = `public/uploads/${posterUrl}`;
 
@@ -45,7 +47,7 @@ const createFilm = (film, filmsContainer) => {
     titleElement.innerHTML = title;
 
     const avgRateElement = clone.querySelector('.film__avg_rate--inner');
-    avgRateElement.innerHTML = avgRate;
+    avgRateElement.innerHTML = Number(avgRate).toFixed(2);
 
     const myRateElement = clone.querySelector('.film__my_rate--inner');
     myRateElement.innerHTML = rate || 'Rate';
