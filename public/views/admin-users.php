@@ -69,7 +69,9 @@
 
                             <p>Created At:</p>
                             <p>
-                                <b><?= $user->getCreatedAt() ?></b>
+                                <b>
+                                    <?= date('Y-m-d H:i:s', strtotime($user->getCreatedAt())) ?>
+                                </b>
                             </p>
 
                             <div class="list__item__bottom">

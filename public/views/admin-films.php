@@ -66,12 +66,14 @@
 
                             <p>Avg Rate:</p>
                             <p>
-                                <b><?= $film->getAvgRate() ?></b>
+                                <b><?= number_format($film->getAvgRate(), 2) ?></b>
                             </p>
 
                             <p>Created At:</p>
                             <p>
-                                <b><?= $film->getCreatedAt() ?></b>
+                                <b>
+                                    <?= date('Y-m-d H:i:s', strtotime($film->getCreatedAt())) ?>
+                                </b>
                             </p>
 
                             <div class="list__item__bottom">
