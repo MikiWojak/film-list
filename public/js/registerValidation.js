@@ -3,6 +3,7 @@ const usernameInput = form.querySelector('input[name="username"]');
 const emailInput = form.querySelector('input[name="email"]');
 const passwordInput = form.querySelector('input[name="password"]');
 const confirmedPasswordInput = form.querySelector('input[name="confirmedPassword"]');
+const termsCheckbox = form.querySelector('input[name="terms"]');
 const submitBtn = form.querySelector('button[type="submit"]');
 
 const validation = {
@@ -10,6 +11,7 @@ const validation = {
     email: false,
     password: false,
     confirmedPassword: false,
+    terms: false
 }
 
 submitBtn.disabled = true;
@@ -26,7 +28,7 @@ const changeValidationStatus = (name, condition) => {
 
     const isFormValid = Object.values(validation).every(value => value);
 
-    submitBtn.disabled = !isFormValid
+    submitBtn.disabled = !isFormValid;
 }
 
 const validateUsername = () => {
@@ -37,7 +39,7 @@ const validateUsername = () => {
             const condition = value.trim().length > 0;
 
             markValidation(usernameInput, condition);
-            changeValidationStatus('username', condition)
+            changeValidationStatus('username', condition);
         },
         1000
     );
@@ -53,7 +55,7 @@ const validateEmail = () =>
             const condition = isNotEmpty && isValidEmail;
 
             markValidation(emailInput, condition);
-            changeValidationStatus('email', condition)
+            changeValidationStatus('email', condition);
         },
         1000
     );
@@ -66,7 +68,7 @@ const validatePassword = () => {
             const condition = value.trim().length > 0;
 
             markValidation(passwordInput, condition);
-            changeValidationStatus('password', condition)
+            changeValidationStatus('password', condition);
         },
         1000
     );
@@ -81,15 +83,26 @@ const validateConfirmedPassword = () =>
                 passwordInput.value,
                 value
             );
-            const condition = isNotEmpty && arePasswordsSameFlag
+            const condition = isNotEmpty && arePasswordsSameFlag;
 
-            markValidation(confirmedPasswordInput, condition)
-            changeValidationStatus('confirmedPassword', condition)
+            markValidation(confirmedPasswordInput, condition);
+            changeValidationStatus('confirmedPassword', condition);
         },
         1000
     );
+
+const validateTerms = () => {
+        const condition = termsCheckbox.checked;
+
+        const element = form.querySelector('.checkbox-container');
+
+        markValidation(element, condition);
+        changeValidationStatus('terms', condition);
+}
+
 
 usernameInput.addEventListener('keyup', validateUsername);
 emailInput.addEventListener('keyup', validateEmail);
 passwordInput.addEventListener('keyup', validatePassword);
 confirmedPasswordInput.addEventListener('keyup', validateConfirmedPassword);
+termsCheckbox.addEventListener('change', validateTerms);
