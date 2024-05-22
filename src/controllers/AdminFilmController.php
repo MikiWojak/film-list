@@ -127,7 +127,7 @@ class AdminFilmController extends AppController {
 
     private function validate(string $title, string $description, string $releaseDate): bool
     {
-        if(empty($title) || empty($description) || empty($releaseDate)) {
+        if (empty($title) || empty($description) || empty($releaseDate)) {
             $this->message[] = 'Fill in all fields.';
 
             return false;
