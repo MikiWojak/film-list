@@ -1,7 +1,18 @@
 const form = document.querySelector("form");
+const usernameInput = form.querySelector('input[name="username"]');
 const emailInput = form.querySelector('input[name="email"]');
 const passwordInput = form.querySelector('input[name="password"]');
 const confirmedPasswordInput = form.querySelector('input[name="confirmedPassword"]');
+const submitBtn = form.querySelector('button[type="submit"]');
+
+const validation = {
+    username: false,
+    email: false,
+    password: false,
+    confirmedPassword: false,
+}
+
+submitBtn.disabled = true;
 
 const isEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
@@ -10,23 +21,75 @@ const arePasswordsSame = (password, confirmedPassword) => password === confirmed
 const markValidation = (element, condition) =>
     !condition ? element.classList.add('no-valid') : element.classList.remove('no-valid');
 
-const validateEmail = () =>
+const changeValidationStatus = (name, condition) => {
+    validation[name] = condition;
+
+    const isFormValid = Object.values(validation).every(value => value);
+
+    submitBtn.disabled = !isFormValid
+}
+
+const validateUsername = () => {
     setTimeout(
-        () => markValidation(emailInput, isEmail(emailInput.value)),
+        () => {
+            const value = usernameInput.value;
+
+            const condition = value.trim().length > 0;
+
+            markValidation(usernameInput, condition);
+            changeValidationStatus('username', condition)
+        },
         1000
     );
+}
 
-const validatePassword = () =>
-    setTimeout(() => {
-            const condition = arePasswordsSame(
-                passwordInput.value,
-                confirmedPasswordInput.value
-            );
+const validateEmail = () =>
+    setTimeout(
+        () => {
+            const value = emailInput.value;
 
-            markValidation(confirmedPasswordInput, condition)
+            const isNotEmpty = value.trim().length > 0;
+            const isValidEmail =  isEmail(value);
+            const condition = isNotEmpty && isValidEmail;
+
+            markValidation(emailInput, condition);
+            changeValidationStatus('email', condition)
         },
         1000
     );
 
+const validatePassword = () => {
+    setTimeout(
+        () => {
+            const value = passwordInput.value;
+
+            const condition = value.trim().length > 0;
+
+            markValidation(passwordInput, condition);
+            changeValidationStatus('password', condition)
+        },
+        1000
+    );
+}
+
+const validateConfirmedPassword = () =>
+    setTimeout(() => {
+            const value = confirmedPasswordInput.value;
+
+            const isNotEmpty = value.trim().length > 0;
+            const arePasswordsSameFlag = arePasswordsSame(
+                passwordInput.value,
+                value
+            );
+            const condition = isNotEmpty && arePasswordsSameFlag
+
+            markValidation(confirmedPasswordInput, condition)
+            changeValidationStatus('confirmedPassword', condition)
+        },
+        1000
+    );
+
+usernameInput.addEventListener('keyup', validateUsername);
 emailInput.addEventListener('keyup', validateEmail);
-confirmedPasswordInput.addEventListener('keyup', validatePassword);
+passwordInput.addEventListener('keyup', validatePassword);
+confirmedPasswordInput.addEventListener('keyup', validateConfirmedPassword);
