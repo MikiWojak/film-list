@@ -28,9 +28,6 @@ class FilmController extends AppController
     }
 
     public function film() {
-        // @TODO What if film not found?
-        // @TODO Add button to redirect to home page
-
         $loggedUserId = isset($_SESSION['loggedUser'])
             ? unserialize($_SESSION['loggedUser'])->getId()
             : null;
@@ -38,6 +35,10 @@ class FilmController extends AppController
         $id = $_GET["id"];
 
         $film = $this->filmRepository->findById($id, $loggedUserId);
+
+        if (!$film) {
+            return $this->render('404');
+        }
 
         $this->render('single-film', [
             'film' => $film

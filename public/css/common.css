@@ -347,3 +347,7 @@ option {
 .tab-bar--rated.visible {
     display: block;
 }
+
+.text--center {
+    text-align: center;
+}

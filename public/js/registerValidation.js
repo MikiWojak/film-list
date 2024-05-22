@@ -92,14 +92,13 @@ const validateConfirmedPassword = () =>
     );
 
 const validateTerms = () => {
-        const condition = termsCheckbox.checked;
+    const condition = termsCheckbox.checked;
 
-        const element = form.querySelector('.checkbox-container');
+    const element = form.querySelector('.checkbox-container');
 
-        markValidation(element, condition);
-        changeValidationStatus('terms', condition);
+    markValidation(element, condition);
+    changeValidationStatus('terms', condition);
 }
-
 
 usernameInput.addEventListener('keyup', validateUsername);
 emailInput.addEventListener('keyup', validateEmail);

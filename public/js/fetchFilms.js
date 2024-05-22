@@ -37,8 +37,6 @@ const createFilm = (film, filmsContainer) => {
 
     const { id, title, posterUrl, avgRate, rate } = film;
 
-    console.log({ film })
-
     const posterElement = clone.querySelector('img');
     posterElement.src = `public/uploads/${posterUrl}`;
 
