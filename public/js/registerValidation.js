@@ -14,8 +14,6 @@ const validation = {
     terms: false
 }
 
-submitBtn.disabled = true;
-
 const isEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
 const arePasswordsSame = (password, confirmedPassword) => password === confirmedPassword;
@@ -26,70 +24,85 @@ const markValidation = (element, condition) =>
 const changeValidationStatus = (name, condition) => {
     validation[name] = condition;
 
+    checkIfFormValid();
+}
+
+const checkIfFormValid = () => {
     const isFormValid = Object.values(validation).every(value => value);
 
     submitBtn.disabled = !isFormValid;
+
+    return isFormValid;
+}
+
+const validateUsernameOnInput = () => {
+    setTimeout(
+        validateUsername,
+        1000
+    );
 }
 
 const validateUsername = () => {
+    const value = usernameInput.value;
+
+    const condition = value.trim().length > 0;
+
+    markValidation(usernameInput, condition);
+    changeValidationStatus('username', condition);
+}
+
+const validateEmailOnInput = () =>
     setTimeout(
-        () => {
-            const value = usernameInput.value;
+        validateEmail,
+        1000
+    );
 
-            const condition = value.trim().length > 0;
+const validateEmail = () => {
+    const value = emailInput.value;
 
-            markValidation(usernameInput, condition);
-            changeValidationStatus('username', condition);
-        },
+    const isNotEmpty = value.trim().length > 0;
+    const isValidEmail =  isEmail(value);
+    const condition = isNotEmpty && isValidEmail;
+
+    markValidation(emailInput, condition);
+    changeValidationStatus('email', condition);
+}
+
+const validatePasswordOnInput = () => {
+    setTimeout(
+        validatePassword,
         1000
     );
 }
-
-const validateEmail = () =>
-    setTimeout(
-        () => {
-            const value = emailInput.value;
-
-            const isNotEmpty = value.trim().length > 0;
-            const isValidEmail =  isEmail(value);
-            const condition = isNotEmpty && isValidEmail;
-
-            markValidation(emailInput, condition);
-            changeValidationStatus('email', condition);
-        },
-        1000
-    );
 
 const validatePassword = () => {
-    setTimeout(
-        () => {
-            const value = passwordInput.value;
+    const value = passwordInput.value;
 
-            const condition = value.trim().length > 0;
+    const condition = value.trim().length > 0;
 
-            markValidation(passwordInput, condition);
-            changeValidationStatus('password', condition);
-        },
-        1000
-    );
+    markValidation(passwordInput, condition);
+    changeValidationStatus('password', condition);
 }
 
-const validateConfirmedPassword = () =>
-    setTimeout(() => {
-            const value = confirmedPasswordInput.value;
-
-            const isNotEmpty = value.trim().length > 0;
-            const arePasswordsSameFlag = arePasswordsSame(
-                passwordInput.value,
-                value
-            );
-            const condition = isNotEmpty && arePasswordsSameFlag;
-
-            markValidation(confirmedPasswordInput, condition);
-            changeValidationStatus('confirmedPassword', condition);
-        },
+const validateConfirmedPasswordOnInput = () =>
+    setTimeout(
+        validateConfirmedPassword,
         1000
     );
+
+const validateConfirmedPassword = () => {
+    const value = confirmedPasswordInput.value;
+
+    const isNotEmpty = value.trim().length > 0;
+    const arePasswordsSameFlag = arePasswordsSame(
+        passwordInput.value,
+        value
+    );
+    const condition = isNotEmpty && arePasswordsSameFlag;
+
+    markValidation(confirmedPasswordInput, condition);
+    changeValidationStatus('confirmedPassword', condition);
+}
 
 const validateTerms = () => {
     const condition = termsCheckbox.checked;
@@ -100,8 +113,22 @@ const validateTerms = () => {
     changeValidationStatus('terms', condition);
 }
 
-usernameInput.addEventListener('keyup', validateUsername);
-emailInput.addEventListener('keyup', validateEmail);
-passwordInput.addEventListener('keyup', validatePassword);
-confirmedPasswordInput.addEventListener('keyup', validateConfirmedPassword);
+usernameInput.addEventListener('keyup', validateUsernameOnInput);
+emailInput.addEventListener('keyup', validateEmailOnInput);
+passwordInput.addEventListener('keyup', validatePasswordOnInput);
+confirmedPasswordInput.addEventListener('keyup', validateConfirmedPasswordOnInput);
 termsCheckbox.addEventListener('change', validateTerms);
+
+submitBtn.addEventListener('click', (event) => {
+    validateUsername();
+    validateEmail();
+    validatePassword();
+    validateConfirmedPassword();
+    validateTerms();
+
+    const isFormValid = checkIfFormValid();
+
+    if (!isFormValid) {
+        event.preventDefault();
+    }
+})
