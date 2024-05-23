@@ -69,7 +69,9 @@
 
                             <p>Created At:</p>
                             <p>
-                                <b><?= $user->getCreatedAt() ?></b>
+                                <b>
+                                    <?= date('Y-m-d H:i:s', strtotime($user->getCreatedAt())) ?>
+                                </b>
                             </p>
 
                             <div class="list__item__bottom">
@@ -109,7 +111,9 @@
                                     <td><?= $user->getUsername() ?></td>
                                     <td><?= $user->getEmail() ?></td>
                                     <td><?= $user->getRole()->getName() ?></td>
-                                    <td><?= $user->getCreatedAt() ?></td>
+                                    <td>
+                                        <?= date('Y-m-d H:i:s', strtotime($user->getCreatedAt())) ?>
+                                    </td>
                                     <td>
                                         <?php
                                         if ($loggedUserId !== $user->getId()) {

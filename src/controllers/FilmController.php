@@ -36,6 +36,10 @@ class FilmController extends AppController
 
         $film = $this->filmRepository->findById($id, $loggedUserId);
 
+        if (!$film) {
+            return $this->render('404');
+        }
+
         $this->render('single-film', [
             'film' => $film
         ]);

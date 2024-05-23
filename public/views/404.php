@@ -22,7 +22,14 @@
     <link rel="stylesheet" type="text/css" href="public/css/auth.css" />
 </head>
 <body class="flex-row-center-center">
-    <h1>Not found!</h1>
-</div>
+    <div class="flex-column-center-center">
+        <h1 class="text--center">Page or resource not found!</h1>
+
+        <div>
+            <a href="/" class="btn--reset btn btn--purple">
+                Return to homepage
+            </a>
+        </div>
+    </div>
 </body>
 </html>

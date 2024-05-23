@@ -30,30 +30,44 @@ class AdminFilmController extends AppController {
 
     public function admincreatefilm()
     {
-        if (
-            $this->isPost() &&
-            is_uploaded_file($_FILES['poster']['tmp_name']) &&
-            $this->validate($_FILES['poster'])
-        ) {
-            move_uploaded_file(
-                $_FILES['poster']['tmp_name'],
-                dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['poster']['name']
-            );
-
-            $film = new Film(
-                $_POST['title'],
-                $_FILES['poster']['name'],
-                $_POST['description'],
-                $_POST['releaseDate'],
-            );
-
-            $this->filmRepository->create($film);
-
-            $url = "http://$_SERVER[HTTP_HOST]";
-            return header("Location: {$url}/adminfilms");
+        if(!$this->isPost()) {
+            return $this->showCreateEditPage();
         }
 
-        $this->showCreateEditPage();
+        $title = $_POST['title'];
+        $description = htmlentities($_POST['description'], ENT_QUOTES, 'UTF-8');
+        $releaseDate = $_POST['releaseDate'];
+
+        if (!$this->validate($title, $description, $releaseDate)) {
+            return $this->showCreateEditPage();
+        }
+
+        if (!is_uploaded_file($_FILES['poster']['tmp_name'])) {
+            $this->message[] = "File is not uploaded.";
+
+            return $this->showCreateEditPage();
+        }
+
+        if (!$this->validateFile($_FILES['poster'])) {
+            return $this->showCreateEditPage();
+        }
+
+        move_uploaded_file(
+            $_FILES['poster']['tmp_name'],
+            dirname(__DIR__).self::UPLOAD_DIRECTORY.$_FILES['poster']['name']
+        );
+
+        $film = new Film(
+            $title,
+            $_FILES['poster']['name'],
+            $description,
+            $releaseDate,
+        );
+
+        $this->filmRepository->create($film);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/adminfilms");
     }
 
     public function adminupdatefilm ()
@@ -61,18 +75,35 @@ class AdminFilmController extends AppController {
         if (!$this->isPost()) {
             $id = $_GET['id'];
 
-            return $this->render('admin-films-createedit', [
-                'film' => $this->filmRepository->findById($id)
-            ]);
+            $film = $this->filmRepository->findById($id);
+
+            if ($film === null) {
+                $this->message[] = "Film not found.";
+            }
+
+            return $this->showCreateEditPage($film);
         }
 
         $id = $_POST['filmId'];
-
         $film = $this->filmRepository->findById($id);
 
-        $film->setTitle($_POST['title']);
-        $film->setDescription($_POST['description']);
-        $film->setReleaseDate($_POST['releaseDate']);
+        if ($film === null) {
+            $this->message[] = "Film not found.";
+
+            return $this->showCreateEditPage();
+        }
+
+        $title = $_POST['title'];
+        $description = htmlentities($_POST['description'], ENT_QUOTES, 'UTF-8');
+        $releaseDate = $_POST['releaseDate'];
+
+        if (!$this->validate($title, $description, $releaseDate)) {
+            return $this->showCreateEditPage($film);
+        }
+
+        $film->setTitle($title);
+        $film->setDescription($description);
+        $film->setReleaseDate($releaseDate);
 
         $this->filmRepository->update($film);
 
@@ -94,7 +125,18 @@ class AdminFilmController extends AppController {
         ]);
     }
 
-    private function validate(array $file): bool
+    private function validate(string $title, string $description, string $releaseDate): bool
+    {
+        if (empty($title) || empty($description) || empty($releaseDate)) {
+            $this->message[] = 'Fill in all fields.';
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private function validateFile(array $file): bool
     {
         if ($file['size'] > self::MAX_FILE_SIZE) {
             $this->message[] = 'File is too large for destination file system.';
@@ -111,10 +153,12 @@ class AdminFilmController extends AppController {
         return true;
     }
 
-    private function showCreateEditPage() {
+    private function showCreateEditPage(Film $film = null) {
         return $this->render(
-            'admin-films-createedit',
-            ['messages' => $this->message]
+            'admin-films-createedit', [
+                'film' => $film,
+                'messages' => $this->message
+            ]
         );
     }
 }

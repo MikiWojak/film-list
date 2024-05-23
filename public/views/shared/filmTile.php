@@ -21,7 +21,7 @@
                 </span>
 
                 <span class="film__avg_rate--inner">
-                    <?= $isFilmSet ? $film->getAvgRate() : "" ?>
+                    <?= $isFilmSet ? number_format($film->getAvgRate(), 2) : "" ?>
                 </span>
             </div>
             <button

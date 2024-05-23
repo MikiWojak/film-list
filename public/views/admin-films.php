@@ -66,12 +66,14 @@
 
                             <p>Avg Rate:</p>
                             <p>
-                                <b><?= $film->getAvgRate() ?></b>
+                                <b><?= number_format($film->getAvgRate(), 2) ?></b>
                             </p>
 
                             <p>Created At:</p>
                             <p>
-                                <b><?= $film->getCreatedAt() ?></b>
+                                <b>
+                                    <?= date('Y-m-d H:i:s', strtotime($film->getCreatedAt())) ?>
+                                </b>
                             </p>
 
                             <div class="list__item__bottom">
@@ -106,8 +108,10 @@
                             <?php foreach ($films as $film): ?>
                                 <tr>
                                     <td><?= $film->getTitle() ?></td>
-                                    <td><?= $film->getAvgRate() ?></td>
-                                    <td><?= $film->getCreatedAt() ?></td>
+                                    <td><?= number_format($film->getAvgRate(), 2) ?></td>
+                                    <td>
+                                        <?= date('Y-m-d H:i:s', strtotime($film->getCreatedAt())) ?>
+                                    </td>
                                     <td>
                                         <a href="adminupdatefilm?id=<?= $film->getId() ?>" class="btn--reset white_link">
                                             <span class="material-symbols-outlined">
