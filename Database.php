@@ -18,7 +18,7 @@ class Database {
 
         $this->host = HOST;
         $this->port = PORT;
-        $this->database = '123';
+        $this->database = DATABASE;
         $this->username = USERNAME;
         $this->password = PASSWORD;
     }
