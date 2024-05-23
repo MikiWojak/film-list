@@ -6,7 +6,6 @@ class Database {
     private static $instance = null;
     private $conn;
     
-    // @TODO Get from .env
     private $host;
     private $port;
     private $database;
@@ -19,7 +18,7 @@ class Database {
 
         $this->host = HOST;
         $this->port = PORT;
-        $this->database = DATABASE;
+        $this->database = '123';
         $this->username = USERNAME;
         $this->password = PASSWORD;
     }
@@ -48,8 +47,11 @@ class Database {
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(PDOException $e) {
-            // @TODO Show error page
-            die("Connection failed: " . $e->getMessage());
+            ob_start();
+            include 'public/views/error.php';;
+            $output = ob_get_clean();
+
+            die($output);
         }
     }
 
