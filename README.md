@@ -37,7 +37,7 @@ Film Rate is the web application to rate films. The user can rate film, modify a
 ### Process of installation
 ```shell
 # Clone repository
-git@github.com:MikiWojak/film-rate.git
+git clone git@github.com:MikiWojak/film-rate.git
 
 # Go to project directory
 cd film-rate
@@ -49,6 +49,7 @@ cp config.php.example config.php
 (sudo) chmod 777 public/uploads
 
 # Build docker images
+# It might take 5-10 minutes
 docker-compose build
 
 # Run docker containers in the background to load SQL dump
@@ -77,7 +78,7 @@ docker-compose down
 - You can use application as unauthorized [Guest](#guest), however your possibilities will be significantly limited
 - Click Login icon:
   - Desktop - top right
-  - Mobile - bottom right
+  - Mobile - bottom right (tab bar)
 - Login using one of these credentials:
   - User with role [Admin](#admin):
     - Email: **admin@filmrate.test**
@@ -152,7 +153,7 @@ All User's features, also:
 ![image](screenshots/mobile-login.png)
 ### Mobile - Rate film
 ![image](screenshots/mobile-rate-film.png)
-### Desktop - Profile
+### Mobile - Profile
 ![image](screenshots/mobile-profile.png)
 ### Mobile - Admin films
 ![image](screenshots/mobile-admin-films.png)
