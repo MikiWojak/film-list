@@ -1,4 +1,4 @@
-# film-rate
+# Film Rate
 
 ## Table of content
 - [App description](#app-description)
@@ -20,6 +20,7 @@ Film Rate is the web application to rate films. The user can rate film, modify a
 - JavaScript
 - PHP
 - PostgreSQL
+- Xdebug
 
 ## Database design and structure
 ### ERD Diagram
@@ -47,13 +48,15 @@ cp config.php.example config.php
 # Add priviledges to public/uploads
 (sudo) chmod 777 public/uploads
 
-# Build docker image
+# Build docker images
 docker-compose build
 
-# Run docker containers in the background
+# Run docker containers in the background to load SQL dump
 docker-compose up -d
 
-# Load SQL Dump TODO
+# Load SQL Dump (e. g. `db.sql` - schema and basic data)
+# On default settings
+docker exec -i film-rate-db-1 psql -U docker db < db.sql
 ```
 
 ## Usage
@@ -65,16 +68,16 @@ docker-compose up -d
 
 ### Shut down web application
 ```shell
-# Shut down docker containers, thus the web application
-docker-compose up -d
+# Shut down docker containers
+docker-compose down
 ```
 
 ### Web application
 - Go to location http://localhost:8080
 - You can use application as unauthorized [Guest](#guest), however your possibilities will be significantly limited
 - Click Login icon:
-  - Desktop - Top right
-  - Mobile - Bottom right
+  - Desktop - top right
+  - Mobile - bottom right
 - Login using one of these credentials:
   - User with role [Admin](#admin):
     - Email: **admin@filmrate.test**
@@ -85,8 +88,8 @@ docker-compose up -d
 - Now you can do actions permitted for specific role
 
 ### pgAdmin
-- Go to location http://localhost:5050/
-- Login using credentials:
+- Go to location http://localhost:5050
+- Login using credentials (default ones):
   - Email Address / Username: **admin@example.com**
   - Password: **admin**
 - Register database server using *internal credentials* (default ones):
@@ -95,10 +98,11 @@ docker-compose up -d
   - Maintenance database: **db**
   - Username: **docker**
   - Password: **docker**
-- Now you have access to the database
+- Now you can manage the database
 
 ## Features
-### Guest (unauthorized)
+### Guest
+(unauthorized)
 - View films
 - Search films by title
 - View single film
@@ -110,7 +114,7 @@ docker-compose up -d
 - Search films by title
 - Filter films - only rated by logged user
 - View single film
-- Rate film, edit and remove it
+- Rate film, edit and remove rate
 - Profile page
 
 ### Admin
