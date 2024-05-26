@@ -6,6 +6,8 @@ include 'src/models/User.php';
 
 final class UserTest extends TestCase
 {
+    // @TODO Prepare Users for tests
+
     // @TODO hasRole - true
     // @TODO hasRole - false
 
