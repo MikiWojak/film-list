@@ -8,7 +8,10 @@ public/uploads/*
 !public/uploads/.gitkeep
 
 config.php
+
 vendor/
 var/
 .cache
 composer.lock
+
+.phpunit.cache
