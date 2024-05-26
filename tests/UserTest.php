@@ -6,6 +6,14 @@ include 'src/models/User.php';
 
 final class UserTest extends TestCase
 {
+    // @TODO hasRole - true
+    // @TODO hasRole - false
+
+    // @TODO isAdmin - true
+    // @TODO isAdmin - false
+
+    // @TODO isUser - true
+    // @TODO isUser - false
     public function testClassConstructor()
     {
         $user = new User(
