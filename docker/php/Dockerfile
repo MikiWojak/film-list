@@ -36,18 +36,6 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-enable xdebug \
     && apk del -f .build-deps
 
-# Install php-cli
-RUN apk add --no-cache php-cli
-
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Install PHPUnit via Composer
-RUN composer global require phpunit/phpunit --prefer-dist
-
-# Add Composer's global bin directory to the PATH
-ENV PATH="/root/.composer/vendor/bin:${PATH}"
-
 # Upload limit (ATM no limit)
 RUN echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
 

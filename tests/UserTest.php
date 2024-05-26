@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
+include 'src/models/User.php';
+
 final class UserTest extends TestCase
 {
     public function testClassConstructor()
