@@ -18,7 +18,6 @@ class User
         string $password = null,
         string $id = null,
         string $createdAt = null,
-        string $roleNames = null
     ) {
         $this->username = $username;
         $this->email = $email;
