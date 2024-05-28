@@ -35,7 +35,10 @@ const createFilm = (film, filmsContainer) => {
     const template = document.querySelector('#film-template');
     const clone = template.content.cloneNode(true);
 
-    const { id, title, posterUrl, avgRate, rate } = film;
+    const {
+        film: { id, title, posterUrl, avgRate},
+        rate
+    } = film;
 
     const posterElement = clone.querySelector('img');
     posterElement.src = `public/uploads/${posterUrl}`;

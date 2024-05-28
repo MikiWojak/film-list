@@ -62,29 +62,11 @@ class FilmRepository extends Repository
 
         $this->database->disconnect();
 
-        $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $ratedFilms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $result = [];
-
-        foreach ($films as $film) {
-            $result[] = new RatedFilm(
-                new Film(
-                    $film['title'],
-                    $film['posterUrl'],
-                    $film['description'],
-                    $film['releaseDate'],
-                    $film['avgRate'],
-                    $film['id'],
-                    $film['filmCreatedAt']
-                ),
-                $film['rate'] ?? null
-            );
-        }
-
-        return $result;
+        return $this->processRatedFilms($ratedFilms);
     }
 
-    // @TODO Adjust
     public function findAllRatedByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
         $title = '%'.strtolower($title).'%';
 
@@ -119,9 +101,12 @@ class FilmRepository extends Repository
         $stmt->bindValue(':title', $title, PDO::PARAM_STR);
         $stmt->execute();
 
+
         $this->database->disconnect();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $ratedFilms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->processRatedFilms($ratedFilms);
     }
 
     public function findById(string $id, string $loggedUserId = null): ?Film
@@ -185,23 +170,23 @@ class FilmRepository extends Repository
 
         $this->database->disconnect();
 
-        $film = $stmt->fetch(PDO::FETCH_ASSOC);
+        $ratedFilm = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($film === false) {
+        if ($ratedFilm === false) {
             return null;
         }
 
         return new RatedFilm(
             new Film(
-                $film['title'],
-                $film['posterUrl'],
-                $film['description'],
-                $film['releaseDate'],
-                $film['avgRate'],
-                $film['id'],
-                $film['filmCreatedAt']
+                $ratedFilm['title'],
+                $ratedFilm['posterUrl'],
+                $ratedFilm['description'],
+                $ratedFilm['releaseDate'],
+                $ratedFilm['avgRate'],
+                $ratedFilm['id'],
+                $ratedFilm['filmCreatedAt']
             ),
-            $film['rate'] ?? null
+            $ratedFilm['rate'] ?? null
         );
     }
 
@@ -377,5 +362,26 @@ class FilmRepository extends Repository
         ');
         $stmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    private function processRatedFilms(array $ratedFilms): array {
+        $result = [];
+
+        foreach ($ratedFilms as $ratedFilm) {
+            $result[] = new RatedFilm(
+                new Film(
+                    $ratedFilm['title'],
+                    $ratedFilm['posterUrl'],
+                    $ratedFilm['description'],
+                    $ratedFilm['releaseDate'],
+                    $ratedFilm['avgRate'],
+                    $ratedFilm['id'],
+                    $ratedFilm['filmCreatedAt']
+                ),
+                $ratedFilm['rate'] ?? null
+            );
+        }
+
+        return $result;
     }
 }
