@@ -64,7 +64,24 @@ class FilmRepository extends Repository
 
         $ratedFilms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $this->processRatedFilms($ratedFilms);
+        $result = [];
+
+        foreach ($ratedFilms as $ratedFilm) {
+            $result[] = new RatedFilm(
+                new Film(
+                    $ratedFilm['title'],
+                    $ratedFilm['posterUrl'],
+                    $ratedFilm['description'],
+                    $ratedFilm['releaseDate'],
+                    $ratedFilm['avgRate'],
+                    $ratedFilm['id'],
+                    $ratedFilm['filmCreatedAt']
+                ),
+                $ratedFilm['rate'] ?? null
+            );
+        }
+
+        return $result;
     }
 
     public function findAllRatedByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
@@ -106,7 +123,24 @@ class FilmRepository extends Repository
 
         $ratedFilms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $this->processRatedFilms($ratedFilms);
+        $data = [];
+
+        foreach ($ratedFilms as $ratedFilm) {
+            $data[] = [
+                'film' => [
+                    'id' => $ratedFilm['id'],
+                    'title' => $ratedFilm['title'],
+                    'posterUrl' => $ratedFilm['posterUrl'],
+                    'description' => $ratedFilm['description'],
+                    'releaseDate' => $ratedFilm['releaseDate'],
+                    'avgRate' => $ratedFilm['avgRate'],
+                    'createdAt' => $ratedFilm['createdAt'],
+                ],
+                'rate' => $ratedFilm['rate'],
+            ];
+        }
+
+        return $data;
     }
 
     public function findById(string $id, string $loggedUserId = null): ?Film
@@ -362,26 +396,5 @@ class FilmRepository extends Repository
         ');
         $stmt->bindParam(':filmId', $filmId, PDO::PARAM_STR);
         $stmt->execute();
-    }
-
-    private function processRatedFilms(array $ratedFilms): array {
-        $result = [];
-
-        foreach ($ratedFilms as $ratedFilm) {
-            $result[] = new RatedFilm(
-                new Film(
-                    $ratedFilm['title'],
-                    $ratedFilm['posterUrl'],
-                    $ratedFilm['description'],
-                    $ratedFilm['releaseDate'],
-                    $ratedFilm['avgRate'],
-                    $ratedFilm['id'],
-                    $ratedFilm['filmCreatedAt']
-                ),
-                $ratedFilm['rate'] ?? null
-            );
-        }
-
-        return $result;
     }
 }

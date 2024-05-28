@@ -64,31 +64,13 @@ class FilmController extends AppController
         header('Content-type: application/json');
         http_response_code(200);
 
-        $ratedFilms = $this->filmRepository->findAllRatedByTitleAndRated(
+        $data = $this->filmRepository->findAllRatedByTitleAndRated(
             $decoded["search"],
             $decoded["rated"],
             $loggedUserId
         );
 
-        // @TODO Move to repository
-        $data = [];
-
-        foreach ($ratedFilms as $ratedFilm) {
-            $data[] = [
-                'film' => [
-                    'title' => $ratedFilm->getFilm()->getTitle(),
-                    'posterUrl' => $ratedFilm->getFilm()->getPosterUrl(),
-                    'description' => $ratedFilm->getFilm()->getDescription(),
-                    'releaseDate' => $ratedFilm->getFilm()->getReleaseDate(),
-                    'avgRate' => $ratedFilm->getFilm()->getAvgRate(),
-                    'id' => $ratedFilm->getFilm()->getId(),
-                    'createdAt' => $ratedFilm->getFilm()->getCreatedAt(),
-                ],
-                'rate' => $ratedFilm->getRate()
-            ];
-        }
-
-        $json = json_encode($data, JSON_PRETTY_PRINT);
+        $json = json_encode($data);
 
         echo $json;
     }
