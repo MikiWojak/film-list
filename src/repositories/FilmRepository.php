@@ -2,10 +2,41 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Film.php';
+require_once __DIR__.'/../models/RatedFilm.php';
 
 class FilmRepository extends Repository
 {
-    public function findAll(string $loggedUserId = null): array
+    public function findAll(): array {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT *
+            FROM "FilmsWithDetails"
+        ');
+        $stmt->execute();
+
+        $this->database->disconnect();
+
+        $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+
+        foreach ($films as $film) {
+            $result[] = new Film(
+                $film['title'],
+                $film['posterUrl'],
+                $film['description'],
+                $film['releaseDate'],
+                $film['avgRate'],
+                $film['id'],
+                $film['filmCreatedAt']
+            );
+        }
+
+        return $result;
+    }
+
+    public function findAllRated(string $loggedUserId = null): array
     {
         $this->database->connect();
 
@@ -36,14 +67,16 @@ class FilmRepository extends Repository
         $result = [];
 
         foreach ($films as $film) {
-            $result[] = new Film(
-                $film['title'],
-                $film['posterUrl'],
-                $film['description'],
-                $film['releaseDate'],
-                $film['avgRate'],
-                $film['id'],
-                $film['filmCreatedAt'],
+            $result[] = new RatedFilm(
+                new Film(
+                    $film['title'],
+                    $film['posterUrl'],
+                    $film['description'],
+                    $film['releaseDate'],
+                    $film['avgRate'],
+                    $film['id'],
+                    $film['filmCreatedAt']
+                ),
                 $film['rate'] ?? null
             );
         }
@@ -51,7 +84,8 @@ class FilmRepository extends Repository
         return $result;
     }
 
-    public function findAllByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
+    // @TODO Adjust
+    public function findAllRatedByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
         $title = '%'.strtolower($title).'%';
 
         $this->database->connect();
@@ -94,6 +128,38 @@ class FilmRepository extends Repository
     {
         $this->database->connect();
 
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT *
+            FROM "FilmsWithDetails"
+            WHERE "id" = :id
+        ');
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $this->database->disconnect();
+
+        $film = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($film === false) {
+            return null;
+        }
+
+         return new Film(
+            $film['title'],
+            $film['posterUrl'],
+            $film['description'],
+            $film['releaseDate'],
+            $film['avgRate'],
+            $film['id'],
+            $film['filmCreatedAt']
+        );
+    }
+
+    public function findByIdRated(string $id, string $loggedUserId = null): ?RatedFilm
+    {
+        $this->database->connect();
+
         $stmt = null;
 
         if ($loggedUserId === null) {
@@ -125,14 +191,16 @@ class FilmRepository extends Repository
             return null;
         }
 
-        return new Film(
-            $film['title'],
-            $film['posterUrl'],
-            $film['description'],
-            $film['releaseDate'],
-            $film['avgRate'],
-            $film['id'],
-            $film['filmCreatedAt'],
+        return new RatedFilm(
+            new Film(
+                $film['title'],
+                $film['posterUrl'],
+                $film['description'],
+                $film['releaseDate'],
+                $film['avgRate'],
+                $film['id'],
+                $film['filmCreatedAt']
+            ),
             $film['rate'] ?? null
         );
     }

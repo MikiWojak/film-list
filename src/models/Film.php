@@ -9,7 +9,6 @@ class Film
     private $description;
     private $releaseDate;
     private $createdAt;
-    private $rate;
 
     public function __construct(
         string $title,
@@ -19,7 +18,6 @@ class Film
         float $avgRate = 0,
         string $id = null,
         string $createdAt = null,
-        int $rate = null
     )
     {
         $this->title = $title;
@@ -30,7 +28,6 @@ class Film
         $this->avgRate = $avgRate;
         $this->id = $id;
         $this->createdAt = $createdAt;
-        $this->rate = $rate;
     }
 
     public function getTitle() : string
@@ -65,11 +62,6 @@ class Film
 
     public function getCreatedAt(): ?string {
         return $this->createdAt;
-    }
-
-    public function getRate(): ?int
-    {
-        return $this->rate;
     }
 
     public function setTitle(string $title): void
