@@ -62,41 +62,51 @@ final class UserTest extends TestCase
     }
 
     public function testHasRoleFalse() {
+        $result = $this->userAdmin->hasRole(Role::ROLE_USER);
+
         $this->assertEquals(
             false,
-            $this->userAdmin->hasRole(Role::ROLE_USER),
+            $result,
             'Returns FALSE checking if ADMIN has Role USER'
         );
     }
 
     public function testIsAdminTrue() {
+        $result = $this->userAdmin->isAdmin();
+
         $this->assertEquals(
             true,
-            $this->userAdmin->isAdmin(),
+            $result,
             'Returns TRUE checking if ADMIN is ADMIN'
         );
     }
 
     public function testIsAdminFalse() {
+        $result = $this->userUser->isAdmin();
+
         $this->assertEquals(
             false,
-            $this->userUser->isAdmin(),
+            $result,
             'Returns FALSE checking if USER is ADMIN'
         );
     }
 
     public function testIsUserTrue() {
+        $result = $this->userUser->isUser();
+
         $this->assertEquals(
             true,
-            $this->userUser->isUser(),
-            'Returns FALSE checking if USER is USER'
+            $result,
+            'Returns TRUE checking if USER is USER'
         );
     }
 
     public function testIsUserFalse() {
+        $result = $this->userAdmin->isUser();
+
         $this->assertEquals(
             false,
-            $this->userAdmin->isUser(),
+            $result,
             'Returns FALSE checking if ADMIN is USER'
         );
     }
