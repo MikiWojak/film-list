@@ -160,3 +160,13 @@ All User's features, also:
 ![image](screenshots/mobile-admin-films-1.png)
 ### Mobile - Admin add film
 ![image](screenshots/mobile-admin-add-film.png)
+
+## Unit Tests
+### Setup
+```shell
+# Install composer packages
+docker compose run composer install
+
+# Run unit tests
+docker compose run phpunit
+```
