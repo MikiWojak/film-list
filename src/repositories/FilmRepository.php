@@ -2,10 +2,41 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Film.php';
+require_once __DIR__.'/../models/RatedFilm.php';
 
 class FilmRepository extends Repository
 {
-    public function findAll(string $loggedUserId = null): array
+    public function findAll(): array {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT *
+            FROM "FilmsWithDetails"
+        ');
+        $stmt->execute();
+
+        $this->database->disconnect();
+
+        $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+
+        foreach ($films as $film) {
+            $result[] = new Film(
+                $film['title'],
+                $film['posterUrl'],
+                $film['description'],
+                $film['releaseDate'],
+                $film['avgRate'],
+                $film['id'],
+                $film['filmCreatedAt']
+            );
+        }
+
+        return $result;
+    }
+
+    public function findAllRated(string $loggedUserId = null): array
     {
         $this->database->connect();
 
@@ -31,27 +62,29 @@ class FilmRepository extends Repository
 
         $this->database->disconnect();
 
-        $films = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $ratedFilms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $result = [];
 
-        foreach ($films as $film) {
-            $result[] = new Film(
-                $film['title'],
-                $film['posterUrl'],
-                $film['description'],
-                $film['releaseDate'],
-                $film['avgRate'],
-                $film['id'],
-                $film['filmCreatedAt'],
-                $film['rate'] ?? null
+        foreach ($ratedFilms as $ratedFilm) {
+            $result[] = new RatedFilm(
+                new Film(
+                    $ratedFilm['title'],
+                    $ratedFilm['posterUrl'],
+                    $ratedFilm['description'],
+                    $ratedFilm['releaseDate'],
+                    $ratedFilm['avgRate'],
+                    $ratedFilm['id'],
+                    $ratedFilm['filmCreatedAt']
+                ),
+                $ratedFilm['rate'] ?? null
             );
         }
 
         return $result;
     }
 
-    public function findAllByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
+    public function findAllRatedByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
         $title = '%'.strtolower($title).'%';
 
         $this->database->connect();
@@ -87,10 +120,61 @@ class FilmRepository extends Repository
 
         $this->database->disconnect();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $ratedFilms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $data = [];
+
+        foreach ($ratedFilms as $ratedFilm) {
+            $data[] = [
+                'film' => [
+                    'id' => $ratedFilm['id'],
+                    'title' => $ratedFilm['title'],
+                    'posterUrl' => $ratedFilm['posterUrl'],
+                    'description' => $ratedFilm['description'],
+                    'releaseDate' => $ratedFilm['releaseDate'],
+                    'avgRate' => $ratedFilm['avgRate'],
+                    'createdAt' => $ratedFilm['createdAt'],
+                ],
+                'rate' => $ratedFilm['rate'],
+            ];
+        }
+
+        return $data;
     }
 
     public function findById(string $id, string $loggedUserId = null): ?Film
+    {
+        $this->database->connect();
+
+        $stmt = $this->database->getConnection()->prepare('
+            SELECT *
+            FROM "FilmsWithDetails"
+            WHERE "id" = :id
+        ');
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $this->database->disconnect();
+
+        $film = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($film === false) {
+            return null;
+        }
+
+         return new Film(
+            $film['title'],
+            $film['posterUrl'],
+            $film['description'],
+            $film['releaseDate'],
+            $film['avgRate'],
+            $film['id'],
+            $film['filmCreatedAt']
+        );
+    }
+
+    public function findRatedById(string $id, string $loggedUserId = null): ?RatedFilm
     {
         $this->database->connect();
 
@@ -119,21 +203,23 @@ class FilmRepository extends Repository
 
         $this->database->disconnect();
 
-        $film = $stmt->fetch(PDO::FETCH_ASSOC);
+        $ratedFilm = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($film === false) {
+        if ($ratedFilm === false) {
             return null;
         }
 
-        return new Film(
-            $film['title'],
-            $film['posterUrl'],
-            $film['description'],
-            $film['releaseDate'],
-            $film['avgRate'],
-            $film['id'],
-            $film['filmCreatedAt'],
-            $film['rate'] ?? null
+        return new RatedFilm(
+            new Film(
+                $ratedFilm['title'],
+                $ratedFilm['posterUrl'],
+                $ratedFilm['description'],
+                $ratedFilm['releaseDate'],
+                $ratedFilm['avgRate'],
+                $ratedFilm['id'],
+                $ratedFilm['filmCreatedAt']
+            ),
+            $ratedFilm['rate'] ?? null
         );
     }
 

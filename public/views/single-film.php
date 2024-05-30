@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><?= $film->getTitle() ?></title>
+        <title><?= $ratedFilm->getFilm()->getTitle() ?></title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,14 +39,14 @@
             
             <main>
                 <h2 class="title">
-                    <?= $film->getTitle() ?>
+                    <?= $ratedFilm->getFilm()->getTitle() ?>
                 </h2>
 
                 <section class="film-info">
                     <div class="film-info__poster">
                         <img
                             class="film-info__poster--img"
-                            src="<?= "public/uploads/{$film->getPosterUrl()}"  ?>"
+                            src="<?= "public/uploads/{$ratedFilm->getFilm()->getPosterUrl()}"  ?>"
                             alt="Poster"
                         >
                     </div>
@@ -59,21 +59,21 @@
                                     hotel_class
                                 </span>
 
-                                <span><?= number_format($film->getAvgRate(), 2) ?></span>
+                                <span><?= number_format($ratedFilm->getFilm()->getAvgRate(), 2) ?></span>
                             </div>
                                 <button
                                     id="rate__btn"
                                     class="flex-row-center-center btn--reset film__rate"
-                                    data-id="<?= $film->getId() ?>"
-                                    data-rate="<?= $film->getRate() ?>"
-                                    data-title="<?= $film->getTitle() ?>"
+                                    data-id="<?= $ratedFilm->getFilm()->getId() ?>"
+                                    data-rate="<?= $ratedFilm->getRate() ?>"
+                                    data-title="<?= $ratedFilm->getFilm()->getTitle() ?>"
                                 >
                                     <span class="material-symbols-outlined star">
                                         star
                                     </span>
 
                                     <span class="film__my_rate--inner">
-                                        <?= $film->getRate() !== null ? $film->getRate() : 'Rate' ?>
+                                        <?= $ratedFilm->getRate() !== null ? $ratedFilm->getRate() : 'Rate' ?>
                                     </span>
                                 </button>
                         </div>
@@ -82,7 +82,7 @@
                             <div>
                                 Release Date:
                                 <b>
-                                    <?= "{$film->getReleaseDate() }" ?>
+                                    <?= "{$ratedFilm->getFilm()->getReleaseDate() }" ?>
                                 </b>
                             </div>
                         </div>
@@ -93,13 +93,13 @@
                     <p>
                         Release Date:
                         <b>
-                            <?= "{$film->getReleaseDate() }" ?>
+                            <?= "{$ratedFilm->getFilm()->getReleaseDate() }" ?>
                         </b>
                     </p>
                 </section>
 
                 <section class="film_desctiption">
-                    <?= $film->getDescription() ?>
+                    <?= $ratedFilm->getFilm()->getDescription() ?>
                 </section>
             </main>
         </div>
