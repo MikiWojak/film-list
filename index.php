@@ -30,7 +30,7 @@ Routing::get('', 'FilmController');
 Routing::get('film', 'FilmController');
 Routing::post('search', 'FilmController');
 
-Routing::get('notFound', 'ErrorController');
+Routing::get('notfound', 'ErrorController');
 
 if (isLoggedIn()) {
     Routing::post('logout', 'SecurityController');

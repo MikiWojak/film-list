@@ -16,15 +16,15 @@ class AdminUserController extends AppController {
         $this->filmRepository = new FilmRepository();
     }
 
-    public function adminusers() {
+    public function adminusers(): void {
         $users = $this->userRepository->findAll();
 
-        return $this->render('admin-users', [
+        $this->render('admin-users', [
             'users' => $users
         ]);
     }
 
-    public function admindeleteuser()
+    public function admindeleteuser(): void
     {
         $id = $_GET['id'];
 
@@ -32,10 +32,12 @@ class AdminUserController extends AppController {
         $loggedUserId = $loggedUser->getId();
 
         if ($loggedUserId === $id) {
-            return $this->render('admin-users', [
+            $this->render('admin-users', [
                 'users' => $this->userRepository->findAll(),
                 'messages' => ["You can't delete your own account!"]
             ]);
+
+            return;
         }
 
         $this->userRepository->delete($id);
