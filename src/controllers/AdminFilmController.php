@@ -19,19 +19,21 @@ class AdminFilmController extends AppController {
         $this->filmRepository = new FilmRepository();
     }
 
-    public function adminfilms() {
+    public function adminfilms(): void {
         $films = $this->filmRepository->findAll();
 
-        return $this->render('admin-films', [
+        $this->render('admin-films', [
             "films" => $films,
             'messages' => $this->message
         ]);
     }
 
-    public function admincreatefilm()
+    public function admincreatefilm(): void
     {
         if(!$this->isPost()) {
-            return $this->showCreateEditPage();
+            $this->showCreateEditPage();
+
+            return;
         }
 
         $title = $_POST['title'];
@@ -39,17 +41,23 @@ class AdminFilmController extends AppController {
         $releaseDate = $_POST['releaseDate'];
 
         if (!$this->validate($title, $description, $releaseDate)) {
-            return $this->showCreateEditPage();
+            $this->showCreateEditPage();
+
+            return;
         }
 
         if (!is_uploaded_file($_FILES['poster']['tmp_name'])) {
             $this->message[] = "File is not uploaded.";
 
-            return $this->showCreateEditPage();
+            $this->showCreateEditPage();
+
+            return;
         }
 
         if (!$this->validateFile($_FILES['poster'])) {
-            return $this->showCreateEditPage();
+            $this->showCreateEditPage();
+
+            return;
         }
 
         move_uploaded_file(
@@ -70,7 +78,7 @@ class AdminFilmController extends AppController {
         header("Location: {$url}/adminfilms");
     }
 
-    public function adminupdatefilm ()
+    public function adminupdatefilm (): void
     {
         if (!$this->isPost()) {
             $id = $_GET['id'];
@@ -81,7 +89,9 @@ class AdminFilmController extends AppController {
                 $this->message[] = "Film not found.";
             }
 
-            return $this->showCreateEditPage($film);
+            $this->showCreateEditPage($film);
+
+            return;
         }
 
         $id = $_POST['filmId'];
@@ -90,7 +100,9 @@ class AdminFilmController extends AppController {
         if ($film === null) {
             $this->message[] = "Film not found.";
 
-            return $this->showCreateEditPage();
+            $this->showCreateEditPage();
+
+            return;
         }
 
         $title = $_POST['title'];
@@ -98,7 +110,9 @@ class AdminFilmController extends AppController {
         $releaseDate = $_POST['releaseDate'];
 
         if (!$this->validate($title, $description, $releaseDate)) {
-            return $this->showCreateEditPage($film);
+            $this->showCreateEditPage($film);
+
+            return;
         }
 
         $film->setTitle($title);
@@ -107,13 +121,13 @@ class AdminFilmController extends AppController {
 
         $this->filmRepository->update($film);
 
-        return $this->render('admin-films-createedit', [
+        $this->render('admin-films-createedit', [
             'film' => $this->filmRepository->findById($id),
             'messages' => ["Film has been updated."]
         ]);
     }
 
-    public function admindeletefilm()
+    public function admindeletefilm(): void
     {
         $id = $_GET['id'];
 
@@ -153,8 +167,8 @@ class AdminFilmController extends AppController {
         return true;
     }
 
-    private function showCreateEditPage(Film $film = null) {
-        return $this->render(
+    private function showCreateEditPage(Film $film = null): void {
+        $this->render(
             'admin-films-createedit', [
                 'film' => $film,
                 'messages' => $this->message

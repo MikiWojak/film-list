@@ -43,7 +43,7 @@ class User
         return $this->role;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }

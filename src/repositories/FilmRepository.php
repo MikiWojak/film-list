@@ -337,7 +337,7 @@ class FilmRepository extends Repository
         }
     }
 
-    public function removeRate(string $filmId, $userId): void {
+    public function removeRate(string $filmId, string $userId): void {
         try {
             $this->database->connect();
 
