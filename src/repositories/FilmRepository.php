@@ -133,9 +133,9 @@ class FilmRepository extends Repository
                     'description' => $ratedFilm['description'],
                     'releaseDate' => $ratedFilm['releaseDate'],
                     'avgRate' => $ratedFilm['avgRate'],
-                    'createdAt' => $ratedFilm['createdAt'],
+                    'createdAt' => $ratedFilm['filmCreatedAt'],
                 ],
-                'rate' => $ratedFilm['rate'],
+                'rate' => $ratedFilm['rate'] ?? null,
             ];
         }
 
