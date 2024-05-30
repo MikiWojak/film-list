@@ -1,7 +1,7 @@
 <?php
 
 class Routing {
-    public static $routes;
+    private static $routes;
 
     public static function get(string $url, string $controller): void {
         self::$routes[$url] = $controller;

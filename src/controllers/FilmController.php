@@ -3,16 +3,19 @@
 require_once 'AppController.php';
 require_once 'src/models/Film.php';
 require_once __DIR__ .'/../repositories/FilmRepository.php';
+require_once __DIR__ .'/../repositories/RatedFilmRepository.php';
 
 class FilmController extends AppController
 {
     private $filmRepository;
+    private $ratedFilmRepository;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->filmRepository = new FilmRepository();
+        $this->ratedFilmRepository = new RatedFilmRepository();
     }
 
     public function index(): void {
@@ -20,7 +23,7 @@ class FilmController extends AppController
             ? unserialize($_SESSION['loggedUser'])->getId()
             : null;
 
-        $ratedFilms = $this->filmRepository->findAllRated($loggedUserId);
+        $ratedFilms = $this->ratedFilmRepository->findAll($loggedUserId);
 
         $this->render('films', [
             "ratedFilms" => $ratedFilms,
@@ -34,7 +37,7 @@ class FilmController extends AppController
 
         $id = $_GET["id"];
 
-        $ratedFilm = $this->filmRepository->findRatedById($id, $loggedUserId);
+        $ratedFilm = $this->ratedFilmRepository->findById($id, $loggedUserId);
 
         if (!$ratedFilm) {
             $this->render('404');
@@ -56,7 +59,7 @@ class FilmController extends AppController
 
         if($contentType !== "application/json") {
             $this->render('films', [
-                "films" => $this->filmRepository->findAllRated($loggedUserId),
+                "films" => $this->ratedFilmRepository->findAll($loggedUserId),
             ]);
         }
 
@@ -66,7 +69,7 @@ class FilmController extends AppController
         header('Content-type: application/json');
         http_response_code(200);
 
-        $data = $this->filmRepository->findAllRatedByTitleAndRated(
+        $data = $this->ratedFilmRepository->findAllByTitleAndRated(
             $decoded["search"],
             $decoded["rated"],
             $loggedUserId
