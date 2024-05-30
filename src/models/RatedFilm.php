@@ -2,7 +2,6 @@
 
 require_once 'Film.php';
 
-
 class RatedFilm
 {
     private $film;

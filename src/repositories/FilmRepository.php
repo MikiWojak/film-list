@@ -118,7 +118,6 @@ class FilmRepository extends Repository
         $stmt->bindValue(':title', $title, PDO::PARAM_STR);
         $stmt->execute();
 
-
         $this->database->disconnect();
 
         $ratedFilms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -175,7 +174,7 @@ class FilmRepository extends Repository
         );
     }
 
-    public function findByIdRated(string $id, string $loggedUserId = null): ?RatedFilm
+    public function findRatedById(string $id, string $loggedUserId = null): ?RatedFilm
     {
         $this->database->connect();
 

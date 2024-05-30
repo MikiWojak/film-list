@@ -34,7 +34,7 @@ class FilmController extends AppController
 
         $id = $_GET["id"];
 
-        $ratedFilm = $this->filmRepository->findByIdRated($id, $loggedUserId);
+        $ratedFilm = $this->filmRepository->findRatedById($id, $loggedUserId);
 
         if (!$ratedFilm) {
             return $this->render('404');
