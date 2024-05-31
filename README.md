@@ -52,7 +52,10 @@ cp config.php.example config.php
 # It might take 5-10 minutes
 docker-compose build
 
-# Run docker containers in the background to load SQL dump
+# Install composer packages
+docker-compose run composer install
+
+# Run docker containers in the background
 docker-compose up -d
 
 # Load SQL Dump (e. g. `db.sql` - schema and basic data)
@@ -100,6 +103,12 @@ docker-compose down
   - Username: **docker**
   - Password: **docker**
 - Now you can manage the database
+
+### Unit tests
+```shell
+# Run unit tests
+docker compose run phpunit
+```
 
 ## Features
 ### Guest
@@ -160,13 +169,3 @@ All User's features, also:
 ![image](screenshots/mobile-admin-films-1.png)
 ### Mobile - Admin add film
 ![image](screenshots/mobile-admin-add-film.png)
-
-## Unit Tests
-### Setup
-```shell
-# Install composer packages
-docker compose run composer install
-
-# Run unit tests
-docker compose run phpunit
-```
