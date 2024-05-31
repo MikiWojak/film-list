@@ -1,22 +1,22 @@
 <?php
 
 class Routing {
-    public static $routes;
+    private static $routes;
 
-    public static function get($url, $controller) {
+    public static function get(string $url, string $controller): void {
         self::$routes[$url] = $controller;
     }
 
-    public static function post($url, $controller) {
+    public static function post(string $url, string $controller): void {
         self::$routes[$url] = $controller;
     }
 
-    public static function run($url) {
+    public static function run(string $url): void {
         $urlParts = explode("/", $url);
         $action = $urlParts[0];
 
         if (!array_key_exists($action, self::$routes)) {
-            $action = 'notFound';
+            $action = 'notfound';
         }
 
         $controller = self::$routes[$action];

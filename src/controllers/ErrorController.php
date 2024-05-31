@@ -9,7 +9,7 @@ class ErrorController extends AppController
         parent::__construct();
     }
 
-    public function notFound() {
+    public function notfound(): void {
         $this->render('404');
     }
 }
