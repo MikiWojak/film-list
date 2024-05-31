@@ -1,9 +1,9 @@
 <?php
 
+use Ramsey\Uuid\Uuid;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\CoversClass;
-use Ramsey\Uuid\Uuid;
 
 require_once 'Database.php';
 require_once 'src/models/Role.php';
@@ -88,8 +88,8 @@ final class UserRepositoryTest extends TestCase
         $this->assertCount(2, $users);
         $this->assertInstanceOf(User::class, $users[0]);
         $this->assertInstanceOf(User::class, $users[1]);
-
-        // @TODO Does array contain proper user
+        $this->assertEquals('john', $users[0]->getUsername());
+        $this->assertEquals('jane', $users[1]->getUsername());
     }
 
     public function testFindAllEmpty(): void
@@ -260,7 +260,12 @@ final class UserRepositoryTest extends TestCase
 
     public function testCreate(): void
     {
-        $user = new User('john', 'john@filmrate.test', $this->roleUser, 'Qwerty123!');
+        $user = new User(
+            'john',
+            'john@filmrate.test',
+            $this->roleUser,
+            password_hash('Qwerty123!', PASSWORD_DEFAULT)
+        );
 
         $stmtMock = $this->createMock(PDOStatement::class);
         $stmtMock->method('execute')->willReturn(true);
@@ -279,7 +284,12 @@ final class UserRepositoryTest extends TestCase
 
     public function testCreateFail(): void
     {
-        $user = new User('john', 'john@filmrate.test', $this->roleUser, 'Qwerty123!');
+        $user = new User(
+            'john',
+            'john@filmrate.test',
+            $this->roleUser,
+            password_hash('Qwerty123!', PASSWORD_DEFAULT)
+        );
 
         $stmtMock = $this->createMock(PDOStatement::class);
         $stmtMock->method('execute')->willThrowException(new PDOException('Insert failed'));
@@ -314,7 +324,7 @@ final class UserRepositoryTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testDeleteNonExistent(): void
+    public function testDeleteFailed(): void
     {
         $stmtMock = $this->createMock(PDOStatement::class);
         $stmtMock->method('execute')->willThrowException(new PDOException('Delete failed'));

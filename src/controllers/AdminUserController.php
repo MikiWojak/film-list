@@ -49,5 +49,4 @@ class AdminUserController extends AppController {
             'messages' => ["User has been deleted."]
         ]);
     }
-
 }

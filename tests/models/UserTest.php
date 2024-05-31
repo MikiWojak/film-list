@@ -9,8 +9,8 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\CoversClass;
 
-include 'src/models/Role.php';
-include 'src/models/User.php';
+require_once 'src/models/Role.php';
+require_once 'src/models/User.php';
 
 #[UsesClass(User::class)]
 #[CoversClass(User::class)]
