@@ -52,11 +52,11 @@ cp config.php.example config.php
 # It might take 5-10 minutes
 docker-compose build
 
-# Run docker containers in the background
-docker-compose up -d
-
 # Install composer packages
 docker-compose run composer install
+
+# Run docker containers in the background
+docker-compose up -d
 
 # Load SQL Dump (e. g. `db.sql` - schema and basic data)
 # On default settings
