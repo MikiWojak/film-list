@@ -107,7 +107,7 @@ docker-compose down
 ### Unit tests
 ```shell
 # Run unit tests
-docker compose run phpunit
+docker-compose run phpunit
 ```
 
 ## Features
