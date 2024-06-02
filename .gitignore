@@ -15,3 +15,5 @@ var/
 composer.lock
 
 .phpunit.cache
+
+.$UML.drawio.bkp
