@@ -57,7 +57,7 @@
 
             <main class="film_list">
                 <?php
-                foreach($ratedFilms as $ratedFilm) {
+                foreach($films as $film) {
                     include __DIR__.'/shared/filmTile.php';
                 }
                 ?>
@@ -72,8 +72,8 @@
 
 <template id="film-template">
     <?php
-    if (isset($ratedFilm)) {
-        unset($ratedFilm);
+    if (isset($film)) {
+        unset($film);
     }
 
     include __DIR__.'/shared/filmTile.php';

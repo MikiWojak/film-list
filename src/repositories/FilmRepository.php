@@ -5,13 +5,28 @@ require_once __DIR__.'/../models/Film.php';
 
 class FilmRepository extends Repository
 {
-    public function findAll(): array {
+    public function findAll(string $loggedUserId = null): array
+    {
         $this->database->connect();
 
-        $stmt = $this->database->getConnection()->prepare('
-            SELECT *
-            FROM "FilmsWithDetails"
-        ');
+        $stmt = null;
+
+        if ($loggedUserId === null) {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT *
+                FROM "FilmsWithDetails"
+            ');
+        } else {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT "fd".*, "f2u"."rate"
+                FROM "FilmsWithDetails" fd
+                LEFT JOIN "Film2User" f2u ON 
+                    "fd".id = "f2u"."filmId" AND 
+                    "f2u"."userId" = :userId
+            ');
+            $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
+        }
+
         $stmt->execute();
 
         $this->database->disconnect();
@@ -28,22 +43,76 @@ class FilmRepository extends Repository
                 $film['releaseDate'],
                 $film['avgRate'],
                 $film['id'],
-                $film['filmCreatedAt']
+                $film['filmCreatedAt'],
+                $film['rate'] ?? null
             );
         }
 
         return $result;
     }
 
+    public function findAllByTitleAndRated(string $title, bool $rated, string $loggedUserId = null): array {
+        $title = '%'.strtolower($title).'%';
+
+        $this->database->connect();
+
+        $stmt = null;
+
+        if ($loggedUserId === null) {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT *
+                FROM "FilmsWithDetails"
+                WHERE
+                    LOWER("title") LIKE :title OR
+                    LOWER("description") LIKE :title
+            ');
+        } else {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT "fd".*, "f2u".*
+                FROM "FilmsWithDetails" fd
+                LEFT JOIN "Film2User" f2u ON 
+                    "fd".id = "f2u"."filmId" AND 
+                    "f2u"."userId" = :userId
+                WHERE (
+                    LOWER("title") LIKE :title OR
+                    LOWER("description") LIKE :title
+                )'
+                . ($loggedUserId && $rated ? ' AND "f2u"."userId" IS NOT NULL' : '')
+            );
+            $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
+        }
+
+        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $this->database->disconnect();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function findById(string $id, string $loggedUserId = null): ?Film
     {
         $this->database->connect();
 
-        $stmt = $this->database->getConnection()->prepare('
-            SELECT *
-            FROM "FilmsWithDetails"
-            WHERE "id" = :id
-        ');
+        $stmt = null;
+
+        if ($loggedUserId === null) {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT *
+                FROM "FilmsWithDetails"
+                WHERE "id" = :id
+            ');
+        } else {
+            $stmt = $this->database->getConnection()->prepare('
+                SELECT "fd".*, "f2u"."rate"
+                FROM "FilmsWithDetails" fd
+                LEFT JOIN "Film2User" f2u ON 
+                    "fd".id = "f2u"."filmId" AND 
+                    "f2u"."userId" = :userId
+                WHERE "id" = :id
+            ');
+            $stmt->bindValue(':userId', $loggedUserId, PDO::PARAM_STR);
+        }
 
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);
         $stmt->execute();
@@ -56,14 +125,15 @@ class FilmRepository extends Repository
             return null;
         }
 
-         return new Film(
+        return new Film(
             $film['title'],
             $film['posterUrl'],
             $film['description'],
             $film['releaseDate'],
             $film['avgRate'],
             $film['id'],
-            $film['filmCreatedAt']
+            $film['filmCreatedAt'],
+            $film['rate'] ?? null
         );
     }
 
@@ -181,7 +251,7 @@ class FilmRepository extends Repository
         }
     }
 
-    public function removeRate(string $filmId, string $userId): void {
+    public function removeRate(string $filmId, $userId): void {
         try {
             $this->database->connect();
 
