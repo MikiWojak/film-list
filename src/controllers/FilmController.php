@@ -3,19 +3,16 @@
 require_once 'AppController.php';
 require_once 'src/models/Film.php';
 require_once __DIR__ .'/../repositories/FilmRepository.php';
-require_once __DIR__ .'/../repositories/RatedFilmRepository.php';
 
 class FilmController extends AppController
 {
     private $filmRepository;
-    private $ratedFilmRepository;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->filmRepository = new FilmRepository();
-        $this->ratedFilmRepository = new RatedFilmRepository();
     }
 
     public function index(): void {
@@ -23,10 +20,10 @@ class FilmController extends AppController
             ? unserialize($_SESSION['loggedUser'])->getId()
             : null;
 
-        $ratedFilms = $this->ratedFilmRepository->findAll($loggedUserId);
+        $films = $this->filmRepository->findAll($loggedUserId);
 
         $this->render('films', [
-            "ratedFilms" => $ratedFilms,
+            "films" => $films,
         ]);
     }
 
@@ -37,16 +34,16 @@ class FilmController extends AppController
 
         $id = $_GET["id"];
 
-        $ratedFilm = $this->ratedFilmRepository->findById($id, $loggedUserId);
+        $film = $this->filmRepository->findById($id, $loggedUserId);
 
-        if (!$ratedFilm) {
+        if (!$film) {
             $this->render('404');
 
             return;
         }
 
         $this->render('single-film', [
-            'ratedFilm' => $ratedFilm
+            'film' => $film
         ]);
     }
 
@@ -59,7 +56,7 @@ class FilmController extends AppController
 
         if($contentType !== "application/json") {
             $this->render('films', [
-                "films" => $this->ratedFilmRepository->findAll($loggedUserId),
+                "films" => $this->filmRepository->findAll($loggedUserId),
             ]);
         }
 
@@ -69,7 +66,7 @@ class FilmController extends AppController
         header('Content-type: application/json');
         http_response_code(200);
 
-        $data = $this->ratedFilmRepository->findAllByTitleAndRated(
+        $data = $this->filmRepository->findAllByTitleAndRated(
             $decoded["search"],
             $decoded["rated"],
             $loggedUserId

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><?= $ratedFilm->getFilm()->getTitle() ?></title>
+        <title><?= $film->getTitle() ?></title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,17 +36,17 @@
                     Back
                 </span>
             </a>
-            
+
             <main>
                 <h2 class="title">
-                    <?= $ratedFilm->getFilm()->getTitle() ?>
+                    <?= $film->getTitle() ?>
                 </h2>
 
                 <section class="film-info">
                     <div class="film-info__poster">
                         <img
                             class="film-info__poster--img"
-                            src="<?= "public/uploads/{$ratedFilm->getFilm()->getPosterUrl()}"  ?>"
+                            src="<?= "public/uploads/{$film->getPosterUrl()}"  ?>"
                             alt="Poster"
                         >
                     </div>
@@ -59,30 +59,30 @@
                                     hotel_class
                                 </span>
 
-                                <span><?= number_format($ratedFilm->getFilm()->getAvgRate(), 2) ?></span>
+                                <span><?= number_format($film->getAvgRate(), 2) ?></span>
                             </div>
-                                <button
-                                    id="rate__btn"
-                                    class="flex-row-center-center btn--reset film__rate"
-                                    data-id="<?= $ratedFilm->getFilm()->getId() ?>"
-                                    data-rate="<?= $ratedFilm->getRate() ?>"
-                                    data-title="<?= $ratedFilm->getFilm()->getTitle() ?>"
-                                >
-                                    <span class="material-symbols-outlined star">
-                                        star
-                                    </span>
+                            <button
+                                id="rate__btn"
+                                class="flex-row-center-center btn--reset film__rate"
+                                data-id="<?= $film->getId() ?>"
+                                data-rate="<?= $film->getRate() ?>"
+                                data-title="<?= $film->getTitle() ?>"
+                            >
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                                    <span class="film__my_rate--inner">
-                                        <?= $ratedFilm->getRate() !== null ? $ratedFilm->getRate() : 'Rate' ?>
-                                    </span>
-                                </button>
+                                <span class="film__my_rate--inner">
+                                    <?= $film->getRate() !== null ? $film->getRate() : 'Rate' ?>
+                                </span>
+                            </button>
                         </div>
 
                         <div class="desktop-only">
                             <div>
                                 Release Date:
                                 <b>
-                                    <?= "{$ratedFilm->getFilm()->getReleaseDate() }" ?>
+                                    <?= "{$film->getReleaseDate() }" ?>
                                 </b>
                             </div>
                         </div>
@@ -93,13 +93,13 @@
                     <p>
                         Release Date:
                         <b>
-                            <?= "{$ratedFilm->getFilm()->getReleaseDate() }" ?>
+                            <?= "{$film->getReleaseDate() }" ?>
                         </b>
                     </p>
                 </section>
 
                 <section class="film_desctiption">
-                    <?= $ratedFilm->getFilm()->getDescription() ?>
+                    <?= $film->getDescription() ?>
                 </section>
             </main>
         </div>
