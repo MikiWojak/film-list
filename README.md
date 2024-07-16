@@ -60,7 +60,7 @@ docker-compose up -d
 
 # Load SQL Dump (e. g. `db.sql` - schema and basic data)
 # On default settings
-docker exec -i film-rate-db-1 psql -U docker db < db.sql
+docker-compose exec -T db psql -U docker db < db.sql
 ```
 
 ## Usage
