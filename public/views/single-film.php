@@ -61,21 +61,21 @@
 
                                 <span><?= number_format($film->getAvgRate(), 2) ?></span>
                             </div>
-                                <button
-                                    id="rate__btn"
-                                    class="flex-row-center-center btn--reset film__rate"
-                                    data-id="<?= $film->getId() ?>"
-                                    data-rate="<?= $film->getRate() ?>"
-                                    data-title="<?= $film->getTitle() ?>"
-                                >
-                                    <span class="material-symbols-outlined star">
-                                        star
-                                    </span>
+                            <button
+                                id="rate__btn"
+                                class="flex-row-center-center btn--reset film__rate"
+                                data-id="<?= $film->getId() ?>"
+                                data-rate="<?= $film->getRate() ?>"
+                                data-title="<?= $film->getTitle() ?>"
+                            >
+                                <span class="material-symbols-outlined star">
+                                    star
+                                </span>
 
-                                    <span class="film__my_rate--inner">
-                                        <?= $film->getRate() !== null ? $film->getRate() : 'Rate' ?>
-                                    </span>
-                                </button>
+                                <span class="film__my_rate--inner">
+                                    <?= $film->getRate() !== null ? $film->getRate() : 'Rate' ?>
+                                </span>
+                            </button>
                         </div>
 
                         <div class="desktop-only">
