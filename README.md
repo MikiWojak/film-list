@@ -53,7 +53,7 @@ cp config.php.example config.php
 docker-compose build
 
 # Install composer packages
-docker-compose run composer install
+docker-compose run --rm composer install
 
 # Run docker containers in the background
 docker-compose up -d
@@ -107,7 +107,7 @@ docker-compose down
 ### Unit tests
 ```shell
 # Run unit tests
-docker-compose run phpunit
+docker-compose run --rm phpunit
 ```
 
 ## Features
