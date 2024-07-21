@@ -53,14 +53,14 @@ cp config.php.example config.php
 docker-compose build
 
 # Install composer packages
-docker-compose run composer install
+docker-compose run --rm composer install
 
 # Run docker containers in the background
 docker-compose up -d
 
 # Load SQL Dump (e. g. `db.sql` - schema and basic data)
 # On default settings
-docker exec -i film-rate-db-1 psql -U docker db < db.sql
+docker-compose exec -T db psql -U docker db < db.sql
 ```
 
 ## Usage
@@ -107,7 +107,7 @@ docker-compose down
 ### Unit tests
 ```shell
 # Run unit tests
-docker-compose run phpunit
+docker-compose run --rm phpunit
 ```
 
 ## Features
