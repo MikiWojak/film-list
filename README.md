@@ -52,12 +52,15 @@ cp config.php.example config.php
 # It might take 5-10 minutes
 docker-compose build
 
-# Run docker containers in the background to load SQL dump
+# Install composer packages
+docker-compose run --rm composer install
+
+# Run docker containers in the background
 docker-compose up -d
 
-# Load SQL Dump (e. g. `db.sql` - schema and basic data)
+# Load SQL dump (e. g. `db.sql` - schema and basic data)
 # On default settings
-docker exec -i film-rate-db-1 psql -U docker db < db.sql
+docker-compose exec -T db psql -U docker db < db.sql
 ```
 
 ## Usage
@@ -100,6 +103,12 @@ docker-compose down
   - Username: **docker**
   - Password: **docker**
 - Now you can manage the database
+
+### Unit tests
+```shell
+# Run unit tests
+docker-compose run --rm phpunit
+```
 
 ## Features
 ### Guest

@@ -23,16 +23,16 @@ class Database {
         $this->password = PASSWORD;
     }
 
-    public static function getInstance()
+    public static function getInstance(): Database
     {
-        if (self::$instance == null) {
+        if (self::$instance === null) {
             self::$instance = new Database();
         }
 
         return self::$instance;
     }
 
-    public function connect()
+    public function connect(): void
     {
         try {
             // Connection string
@@ -55,11 +55,11 @@ class Database {
         }
     }
 
-    public function getConnection() {
+    public function getConnection(): PDO {
         return $this->conn;
     }
 
-    public function disconnect() {
+    public function disconnect(): void {
         $this->conn = null; 
     }
 }

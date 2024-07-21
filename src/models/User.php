@@ -18,7 +18,6 @@ class User
         string $password = null,
         string $id = null,
         string $createdAt = null,
-        string $roleNames = null
     ) {
         $this->username = $username;
         $this->email = $email;
@@ -44,7 +43,7 @@ class User
         return $this->role;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }

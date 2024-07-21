@@ -15,7 +15,7 @@ class FilmController extends AppController
         $this->filmRepository = new FilmRepository();
     }
 
-    public function index() {
+    public function index(): void {
         $loggedUserId = isset($_SESSION['loggedUser'])
             ? unserialize($_SESSION['loggedUser'])->getId()
             : null;
@@ -27,7 +27,7 @@ class FilmController extends AppController
         ]);
     }
 
-    public function film() {
+    public function film(): void {
         $loggedUserId = isset($_SESSION['loggedUser'])
             ? unserialize($_SESSION['loggedUser'])->getId()
             : null;
@@ -37,7 +37,9 @@ class FilmController extends AppController
         $film = $this->filmRepository->findById($id, $loggedUserId);
 
         if (!$film) {
-            return $this->render('404');
+            $this->render('404');
+
+            return;
         }
 
         $this->render('single-film', [
@@ -45,7 +47,7 @@ class FilmController extends AppController
         ]);
     }
 
-    public function search() {
+    public function search(): void {
         $loggedUserId = isset($_SESSION['loggedUser'])
             ? unserialize($_SESSION['loggedUser'])->getId()
             : null;
@@ -64,14 +66,18 @@ class FilmController extends AppController
         header('Content-type: application/json');
         http_response_code(200);
 
-        echo json_encode($this->filmRepository->findAllByTitleAndRated(
+        $data = $this->filmRepository->findAllByTitleAndRated(
             $decoded["search"],
             $decoded["rated"],
             $loggedUserId
-        ));
+        );
+
+        $json = json_encode($data);
+
+        echo $json;
     }
 
-    public function rate(string $id) {
+    public function rate(string $id): void {
         $loggedUser = unserialize($_SESSION['loggedUser']);
         $loggedUserId = $loggedUser->getId();
 
@@ -102,7 +108,7 @@ class FilmController extends AppController
         }
     }
 
-    public function removerate(string $id) {
+    public function removerate(string $id): void {
         $loggedUser = unserialize($_SESSION['loggedUser']);
         $loggedUserId = $loggedUser->getId();
 

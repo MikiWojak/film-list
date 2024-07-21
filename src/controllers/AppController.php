@@ -20,7 +20,7 @@ class AppController {
         return $this->request === 'POST';
     }
 
-    protected function render(string $template = null, array $variables = [])
+    protected function render(string $template = null, array $variables = []): void
     {
         $templatePath = 'public/views/'. $template.'.php';
         $notFoundPath = 'public/views/404.php';
