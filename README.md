@@ -58,7 +58,7 @@ docker-compose run --rm composer install
 # Run docker containers in the background
 docker-compose up -d
 
-# Load SQL Dump (e. g. `db.sql` - schema and basic data)
+# Load SQL dump (e. g. `db.sql` - schema and basic data)
 # On default settings
 docker-compose exec -T db psql -U docker db < db.sql
 ```
