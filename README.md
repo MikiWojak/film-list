@@ -50,30 +50,30 @@ cp config.php.example config.php
 
 # Build docker images
 # It might take 5-10 minutes
-docker-compose build
+docker compose build
 
 # Install composer packages
-docker-compose run --rm composer install
+docker compose run --rm composer install
 
 # Run docker containers in the background
-docker-compose up -d
+docker compose up -d
 
 # Load SQL dump (e. g. `db.sql` - schema and basic data)
 # On default settings
-docker-compose exec -T db psql -U docker db < db.sql
+docker compose exec -T db psql -U docker db < db.sql
 ```
 
 ## Usage
 ### Run web application
 ```shell
 # Run docker containers in the background
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Shut down web application
 ```shell
 # Shut down docker containers
-docker-compose down
+docker compose down
 ```
 
 ### Web application
@@ -107,7 +107,7 @@ docker-compose down
 ### Unit tests
 ```shell
 # Run unit tests
-docker-compose run --rm phpunit
+docker compose run --rm phpunit
 ```
 
 ## Features
